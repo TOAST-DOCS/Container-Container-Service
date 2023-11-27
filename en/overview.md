@@ -13,6 +13,7 @@ You can use this service to run containers without configuring container executi
 * You can monitor the CPU, Memory, network transmission and reception, and storage of containers.
 * Zero-downtime deployment is possible through the rolling update method.
 * You can schedule container execution by setting up a time-based schedule.
+* You can use the files uploaded to Object Storage or confidential data stored in Secure Key Manager by mounting them on container directories.
 
 ## Configuration and Terms
 
@@ -22,7 +23,7 @@ The following image shows an example of NCS service configuration.
 
 ### Template
 
-Define which specification of the container to configure  in `Template`. 
+Define which specification of the container to configure in `Template`. 
 `Template` describes the template name, description, VPC to connect to, and one or more container specifications.
 Container specifications include a registry URL containing the Container image to run, resource specifications such as CPU, GPU, and Memory to be used, the port used by the container, and NAS storage to be connected.
 
