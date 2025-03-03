@@ -1267,6 +1267,7 @@ x-nhn-authorization: {token}
 | workloads.createdAt | Body | String | O | 作成時間(UTC) |
 | workloads.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workloads.available | Body | Integer | O | ワークロード作業実行数 |
+| workloads.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workloads.status | Body | Integer | O | ワークロード状態 |
 | workloads.url | Body | String | X | ワークロードロードバランサーURL |
 | workloads.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
@@ -1407,6 +1408,7 @@ x-nhn-authorization: {token}
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workload.available | Body | Integer | O | ワークロード作業実行数 |
+| workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.status | Body | Integer | O | ワークロード状態 |
 | workload.url | Body | String | X | ワークロードロードバランサーURL |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
@@ -2058,6 +2060,7 @@ x-nhn-authorization: {token}
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | X | ワークロードのテンプレートバージョン(default:最新バージョン) |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
+| workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IP使用有無 |
@@ -2145,6 +2148,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
+| workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
@@ -2255,6 +2259,7 @@ x-nhn-authorization: {token}
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
+| workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IP使用有無 |
@@ -2338,6 +2343,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
+| workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
@@ -2483,6 +2489,7 @@ x-nhn-authorization: {token}
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
+| workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
