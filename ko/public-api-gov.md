@@ -1260,7 +1260,7 @@ x-nhn-authorization: {token}
 | workloads.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workloads.available | Body | Integer | O | 워크로드 작업 실행 수 |
 | workloads.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
-| workloads.status | Body | String | O | 워크로드 상태<ul><li>Pending: 워크로드 생성/변경 진행중</li><li>Running: 워크로드 생성/변경 완료</li><li>Failed: 워크로드 생성/변경 실패</li><li>Terminated: 워크로드 종료</li><li>Paused: 워크로드 중지</li><li>Active: 예약 워크로드 실행중</li><li>Suspend: 예약 워크로드 중지</li></ul> |
+| workloads.status | Body | String | O | 워크로드 상태<ul><li>Pending: 워크로드 생성/변경 진행 중</li><li>Running: 워크로드 생성/변경 완료</li><li>Failed: 워크로드 생성/변경 실패</li><li>Terminated: 워크로드 종료</li><li>Paused: 워크로드 중지</li><li>Active: 예약 워크로드 실행 중</li><li>Suspend: 예약 워크로드 중지</li></ul> |
 | workloads.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
@@ -1401,7 +1401,7 @@ x-nhn-authorization: {token}
 | workload.desired | Body | Integer | O | 워크로드 작업 요청 수 |
 | workload.available | Body | Integer | O | 워크로드 작업 실행 수 |
 | workload.internalLBTimeout | Body | Integer | X | 내부 요청 응답 대기 시간 |
-| workload.status | Body | String | O | 워크로드 상태<ul><li>Pending: 워크로드 생성/변경 진행중</li><li>Running: 워크로드 생성/변경 완료</li><li>Failed: 워크로드 생성/변경 실패</li><li>Terminated: 워크로드 종료</li><li>Paused: 워크로드 중지</li><li>Active: 예약 워크로드 실행중</li><li>Suspend: 예약 워크로드 중지</li></ul> |
+| workload.status | Body | String | O | 워크로드 상태<ul><li>Pending: 워크로드 생성/변경 진행 중</li><li>Running: 워크로드 생성/변경 완료</li><li>Failed: 워크로드 생성/변경 실패</li><li>Terminated: 워크로드 종료</li><li>Paused: 워크로드 중지</li><li>Active: 예약 워크로드 실행 중</li><li>Suspend: 예약 워크로드 중지</li></ul> |
 | workload.url | Body | String | X | 워크로드 로드 밸런서 URL |
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
