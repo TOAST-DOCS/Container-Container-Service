@@ -1268,7 +1268,7 @@ x-nhn-authorization: {token}
 | workloads.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workloads.available | Body | Integer | O | ワークロード作業実行数 |
 | workloads.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
-| workloads.status | Body | Integer | O | ワークロード状態 |
+| workloads.status | Body | String | O | ワークロード状態 <ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
 | workloads.url | Body | String | X | ワークロードロードバランサーURL |
 | workloads.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workloads.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサー使用有無 |
@@ -1409,7 +1409,7 @@ x-nhn-authorization: {token}
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workload.available | Body | Integer | O | ワークロード作業実行数 |
 | workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
-| workload.status | Body | Integer | O | ワークロード状態 |
+| workload.status | String | Integer | O | ワークロード状態 <ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
 | workload.url | Body | String | X | ワークロードロードバランサーURL |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
