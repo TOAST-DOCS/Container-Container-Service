@@ -16,9 +16,9 @@ APIエンドポイントは次のとおりです。
 | 名前 | 種類 | 形式 | 説明 |
 | --- | --- | --- | --- |
 | header | Body | Object | APIレスポンス情報 |
-| header.isSuccessful | Body | Boolean | true:正常<br>false:エラー |
-| header.resultCode | Body | Integer | 200:正常<br>10000以上:エラー |
-| header.resultMessage | Body | String | "SUCCESS":正常<br>その他:エラー原因メッセージ |
+| header.isSuccessful | Body | Boolean | <li>true:正常</li><li>false:エラー</li> |
+| header.resultCode | Body | Integer | <li>200:正常</li><li>10000以上:エラー</li> |
+| header.resultMessage | Body | String | <li>SUCCESS:正常</li><li>その他:エラー原因メッセージ</li> |
 
 <details>
   <summary>例</summary>
@@ -59,7 +59,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | page | Query | Integer | X | 照会するページ番号 |
 | size | Query | Integer | X | 照会するページサイズ(default: 10) |
-| disable\_containers | Query | Boolean | X | true:コンテナは除外して照会 <br>false:コンテナも含めて照会(default) |
+| disable\_containers | Query | Boolean | X | <li>true:コンテナは除外して照会</li><li>false:コンテナも含めて照会(default)</li> |
 
 #### レスポンス
 
@@ -84,15 +84,15 @@ x-nhn-authorization: {token}
 | templates.workloadCount | Body | Integer | O | テンプレートを使用中のワークロード数 |
 | templates.containers | Body | Array | O | テンプレートのコンテナリスト |
 | templates.containers.name | Body | String | O | コンテナ名 |
-| templates.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| templates.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | templates.containers.image | Body | String | O | コンテナイメージ |
 | templates.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | templates.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | templates.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| templates.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| templates.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | templates.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | templates.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| templates.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| templates.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | templates.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | templates.containers.args | Body | String List | X | コンテナが実行される時に使用される引数 |
 | templates.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -103,11 +103,11 @@ x-nhn-authorization: {token}
 | templates.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | templates.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | templates.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| templates.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| templates.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | templates.containers.configs.value | Body | String | O | オブジェクトURL |
 | templates.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | templates.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| templates.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| templates.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | templates.containers.secrets.value | Body | String | O | キーID |
 | templates.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | templates.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -115,7 +115,7 @@ x-nhn-authorization: {token}
 | templates.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | templates.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | templates.containers.probe | Body | List | X | コンテナProbeの設定 |
-| templates.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| templates.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | templates.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | templates.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | templates.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -263,15 +263,15 @@ x-nhn-authorization: {token}
 | template.workloadCount | Body | Integer | O | テンプレートを使用中のワークロード数 |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | template.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -282,11 +282,11 @@ x-nhn-authorization: {token}
 | template.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | template.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | オブジェクトURL |
 | template.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | キーID |
 | template.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -294,7 +294,7 @@ x-nhn-authorization: {token}
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | template.containers.probe | Body | List | X | コンテナProbeの設定 |
-| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -387,7 +387,7 @@ x-nhn-authorization: {token}
 | template.hostAliases.hostnames | Body | String List | O | hostnamesで使用するhost情報 |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | X | コンテナタイプ(default: normal)<br>\* normal:一般<br>\* init:初期化 |
+| template.containers.type | Body | String | X | コンテナタイプ(default: normal)<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.imageRegistryCredentials | Body | Object | X | Privateレジストリにアクセス可能な情報 |
 | template.containers.imageRegistryCredentials.username | Body | String | O | PrivateレジストリID |
@@ -395,10 +395,10 @@ x-nhn-authorization: {token}
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | template.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -409,14 +409,14 @@ x-nhn-authorization: {token}
 | template.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | template.containers.configs | Body | List | X | コンテナで使用するConfigMap情報(最大10個) |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.appKey | Body | String | O | Object Storage AppKey |
 | template.containers.configs.userAccessKeyId | Body | String | O | Object StorageサービスにアクセスするユーザーのUser Access Key |
 | template.containers.configs.secretAccessKey | Body | String | O | Object StorageサービスにアクセスするユーザーのSecret Access Key |
 | template.containers.configs.value | Body | String | O | オブジェクトURL |
 | template.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.secrets | Body | List | X | コンテナで使用するSecret情報(最大10個) |
-| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | キーID |
 | template.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -424,13 +424,13 @@ x-nhn-authorization: {token}
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス(default: /mnt) |
 | template.containers.probe | Body | List | X | コンテナProbeの設定 |
-| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
-| template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔<br>timeoutSecondsより小さい値に設定する必要があります。 |
-| template.containers.probe.timeoutSeconds | Body | Integer | O | Probe実行制限時間<br>periodSecondsより大きい値に設定する必要があります。 |
+| template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔<li>timeoutSecondsより小さい値に設定する必要があります。</li> |
+| template.containers.probe.timeoutSeconds | Body | Integer | O | Probe実行制限時間<li>periodSecondsより大きい値に設定する必要があります。</li> |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
-| template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒)<br>\* 30 \～120 (default:30)|
+| template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒)<ul><li>30 ～120 (default:30)</li></ul>|
 
 
 <details>
@@ -490,15 +490,15 @@ x-nhn-authorization: {token}
 | template.hostAliases.hostnames | Body | String List | O | コンテナに設定されたIPのhostnames |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | template.containers.memoryLimit.hard | Body | Integer | O | コンテナ割り当てるメモリ(MiB) |
-| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -509,11 +509,11 @@ x-nhn-authorization: {token}
 | template.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | template.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | オブジェクトURL |
 | template.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | キーID |
 | template.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -521,7 +521,7 @@ x-nhn-authorization: {token}
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | template.containers.probe | Body | List | X | コンテナProbeの設定 |
-| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -652,15 +652,15 @@ x-nhn-authorization: {token}
 | templates.workloadCount | Body | Integer | O | テンプレートを使用中のワークロード数 |
 | templates.containers | Body | Array | O | テンプレートのコンテナリスト |
 | templates.containers.name | Body | String | O | コンテナ名 |
-| templates.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| templates.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | templates.containers.image | Body | String | O | コンテナイメージ |
 | templates.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | templates.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | templates.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| templates.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| templates.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | templates.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | templates.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| templates.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| templates.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | templates.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | templates.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | templates.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -671,11 +671,11 @@ x-nhn-authorization: {token}
 | templates.containers.preStop | Body | String List | X | コンテナが終了する前に実行されるコマンド |
 | templates.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | templates.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| templates.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| templates.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | templates.containers.configs.value | Body | String | O | オブジェクトURL |
 | templates.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | templates.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| templates.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| templates.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | templates.containers.secrets.value | Body | String | O | キーID |
 | templates.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | templates.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -683,7 +683,7 @@ x-nhn-authorization: {token}
 | templates.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | templates.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | templates.containers.probe | Body | List | X | コンテナProbeの設定 |
-| templates.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| templates.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | templates.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | templates.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | templates.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -862,15 +862,15 @@ x-nhn-authorization: {token}
 | template.workloadCount | Body | Integer | O | テンプレートを使用中のワークロード数 |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | template.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -881,11 +881,11 @@ x-nhn-authorization: {token}
 | template.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | template.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | オブジェクトURL |
 | template.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | キーID |
 | template.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -893,7 +893,7 @@ x-nhn-authorization: {token}
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | template.containers.probe | Body | List | X | コンテナProbeの設定 |
-| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -1008,19 +1008,19 @@ x-nhn-authorization: {token}
 | template.applyImmediately | Body | Boolean | X | true:即時配布使用、false:即時配布使用しない(default:false) |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.imageRegistryCredentials | Body | Object | X | Privateレジストリにアクセス可能な情報 |
-| template.containers.imageRegistryCredentials.changed | Body | Boolean | X | 既存アカウントの使用有無(default:false)<br>\* false:既存アカウントを使用<br>\* true:新規アカウントを使用(username、passwordの送信が必要) |
+| template.containers.imageRegistryCredentials.changed | Body | Boolean | X | 既存アカウントの使用有無(default:false)<ul><li>false:既存アカウントを使用</li><li>true:新規アカウントを使用(username、passwordの送信が必要)</li></ul> |
 | template.containers.imageRegistryCredentials.username | Body | String | O | PrivateレジストリID |
 | template.containers.imageRegistryCredentials.password | Body | String | O | Privateレジストリパスワード |
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | template.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -1031,17 +1031,17 @@ x-nhn-authorization: {token}
 | template.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | template.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | オブジェクトURL |
 | template.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
-| template.containers.configs.changedAppKey | Body | Boolean | X | 既存AppKeyの使用有無(default:false)<br>\* false:既存keyを使用<br>\* true:新規keyを使用(AppKeyの送信が必要) |
+| template.containers.configs.changedAppKey | Body | Boolean | X | 既存AppKeyの使用有無(default:false)<ul><li>false:既存keyを使用</li><li>true:新規keyを使用(AppKeyの送信が必要)</li></ul> |
 | template.containers.configs.appKey | Body | String | X | Object Storage AppKey |
-| template.containers.configs.changedUserAccessKeyId | Body | Boolean | X | 既存UserAccessKeyIdの使用有無(default:false)<br>\* false:既存keyを使用<br>\* true:新規keyを使用(UserAccessKeyIdの送信が必要) |
+| template.containers.configs.changedUserAccessKeyId | Body | Boolean | X | 既存UserAccessKeyIdの使用有無(default:false)<ul><li>false:既存keyを使用</li><li>true:新規keyを使用(UserAccessKeyIdの送信が必要)</li></ul> |
 | template.containers.configs.userAccessKeyId | Body | String | X | Object StorageサービスにアクセスするユーザーのUser Access Key |
-| template.containers.configs.changedSecretAccessKey | Body | Boolean | X | 既存SecretAccessKeyの使用有無(default:false)<br>\* false:既存keyを使用<br>\* true:新規keyを使用(SecretAccessKeyの送信が必要) |
+| template.containers.configs.changedSecretAccessKey | Body | Boolean | X | 既存SecretAccessKeyの使用有無(default:false)<ul><li>false:既存keyを使用</li><li>true:新規keyを使用(SecretAccessKeyの送信が必要)</li></ul> |
 | template.containers.configs.secretAccessKey | Body | String | X | Object StorageサービスにアクセスするユーザーのSecret Access Key |
 | template.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | キーID |
 | template.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -1049,7 +1049,7 @@ x-nhn-authorization: {token}
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | template.containers.probe | Body | List | X | コンテナProbeの設定 |
-| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -1113,15 +1113,15 @@ x-nhn-authorization: {token}
 | template.hostAliases.hostnames | Body | String List | O | コンテナに設定されたIPのhostnames |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | template.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -1132,11 +1132,11 @@ x-nhn-authorization: {token}
 | template.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | template.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | オブジェクトURL |
 | template.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | キーID |
 | template.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -1144,7 +1144,7 @@ x-nhn-authorization: {token}
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | template.containers.probe | Body | List | X | コンテナのProbe設定 |
-| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -1249,7 +1249,7 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-| q | Query | String | X | ワークロード名とテンプレートID、テンプレートバージョンでフィルタリング<br>例：q=templateId=${テンプレートID}<br>       q=${ワークロード名)<br>       q=templateId=${テンプレートID}\&version=${テンプレートバージョン} |
+| q | Query | String | X | ワークロード名とテンプレートID、テンプレートバージョンでフィルタリング<ul>例：<li>q=templateId=${テンプレートID}</li><li>q=${ワークロード名)</li><li>q=templateId=${テンプレートID}\&version=${テンプレートバージョン}</li></ul> |
 | page | Query | Integer | X | 照会するページ番号 |
 | size | Query | Integer | X | 照会するページサイズ(default: 10) |
 
@@ -1261,14 +1261,14 @@ x-nhn-authorization: {token}
 | workloads | Body | Array | O | ワークロードリスト |
 | workloads.id | Body | UUID | O | ワークロードID |
 | workloads.name | Body | String | O | ワークロード名 |
-| workloads.type | Body | String | O | 配布コントローラー<br>\* deployment<br>\* statefulset |
+| workloads.type | Body | String | O | 配布コントローラー<ul><li>deployment</li><li>statefulset</li></ul> |
 | workloads.templateId | Body | String | O | ワークロードのテンプレートID |
 | workloads.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workloads.createdAt | Body | String | O | 作成時間(UTC) |
 | workloads.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workloads.available | Body | Integer | O | ワークロード作業実行数 |
 | workloads.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
-| workloads.status | Body | Integer | O | ワークロード状態 |
+| workloads.status | Body | String | O | ワークロード状態 <ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
 | workloads.url | Body | String | X | ワークロードロードバランサーURL |
 | workloads.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workloads.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサー使用有無 |
@@ -1277,31 +1277,31 @@ x-nhn-authorization: {token}
 | workloads.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workloads.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
 | workloads.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 最大再試行回数 |
-| workloads.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<br>\* GET |
-| workloads.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<br>\* 200<br>\* 200,202<br>\* 200-204 |
+| workloads.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<ul><li>GET</li></ul> |
+| workloads.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workloads.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workloads.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する証明書 |
 | workloads.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する秘密鍵 |
 | workloads.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS使用時のTLSバージョン<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workloads.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<br>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用 |
+| workloads.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<li>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用</li> |
 | workloads.loadBalancing.ipAclGroupsBinding | Body | List | X | ロードバランサーに適用するIPアクセス制御グループリスト |
 | workloads.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IPアクセス制御グループID |
 | workloads.schedule | Body | Object | X | 予約実行設定情報 |
-| workloads.schedule.timeZone | Body | String | O | 予約実行基準時間<br>\* 例：Asia/Seoul, UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workloads.schedule.timeZone | Body | String | O | 予約実行基準時間<ul><li>例：Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workloads.schedule.cron | Body | String | O | 予約実行Cron式 |
 | workloads.schedule.jobsHistoryLimit | Body | Integer | O | 予約実行ヒストリーの保管数 |
-| workloads.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<br>\* Forbid, Replace |
+| workloads.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<ul><li>Forbid</li><li>Replace</li></ul> |
 | workloads.schedule.timeOffset | Body | String | O | 予約実行基準時間Offset |
 | workloads.internalLoadBalancing | Body | Object | X | 内部ロードバランサー情報 |
 | workloads.internalLoadBalancing.enalbed | Body | Boolean | O | 内部ロードバランサーの使用有無 |
-| workloads.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<br>\* dynamic:自動割り当て<br>\* static:IPを指定 |
+| workloads.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<ul><li>dynamic:自動割り当て</li><li>static:IPを指定</li></ul> |
 | workloads.internalLoadBalancing.ip | Body | String | X | 内部ロードバランサーの指定IP |
 | workloads.privateDns | Body | Object | X | Private DNSにワークロード作業IPを登録するかどうかを決定 |
 | workloads.privateDns.ttl | Body | Integer | O | レコードセットのTTL値 |
 | workloads.privateDns.zoneId | Body | String | O | ワークロードで使用するPrivate DNS Zone ID |
 | workloads.privateDns.domain | Body | String | O | Private DNSに登録されたドメイン情報 |
 | workloads.activeDeadline | Body | Object | X | ワークロードの予約終了情報 |
-| workloads.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<br>\* 例：Asia/Seoul、UTC |
+| workloads.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workloads.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workloads.activeDeadline.time | Body | String | O | 予約終了時間 |
 | workloads.autoScaler | Body | Object | X | AutoScalerの設定情報 |
@@ -1310,7 +1310,7 @@ x-nhn-authorization: {token}
 | workloads.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
 | workloads.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 増設後の待機時間 |
 | workloads.autoScaler.scaleOut.condition | Body | List | X | 増設条件 |
-| workloads.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workloads.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 増設条件リソース使用量(1～100) |
 | workloads.autoScaler.scaleOut.condition.duration | Body | Integer | X | 増設条件リソース使用量の維持時間(分) |
 | workloads.autoScaler.scaleIn | Body | Object | X | ScaleIn情報 |
@@ -1318,7 +1318,7 @@ x-nhn-authorization: {token}
 | workloads.autoScaler.scaleIn.minReplicas | Body | Integer | X | オートスケーリングの最小作業数 |
 | workloads.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 縮小後の待機時間 |
 | workloads.autoScaler.scaleIn.condition | Body | List | X | 縮小条件 |
-| workloads.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workloads.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workloads.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 縮小条件リソース使用量(1～100) |
 | workloads.autoScaler.scaleIn.condition.duration | Body | Integer | X | 縮小条件リソース使用量の維持時間(分) |
 | workloads.securityGroups | Body | List | X | SecurityGroups情報 |
@@ -1402,14 +1402,14 @@ x-nhn-authorization: {token}
 | workload | Body | Array | O | ワークロード情報 |
 | workload.id | Body | UUID | O | ワークロードID |
 | workload.name | Body | String | O | ワークロード名 |
-| workload.type | Body | String | O | 配布コントローラー<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | O | 配布コントローラー<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workload.available | Body | Integer | O | ワークロード作業実行数 |
 | workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
-| workload.status | Body | Integer | O | ワークロード状態 |
+| workload.status | String | Integer | O | ワークロード状態 <ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
 | workload.url | Body | String | X | ワークロードロードバランサーURL |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
@@ -1418,31 +1418,31 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 最大再試行回数 |
-| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<br>\* GET |
-| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<br>\* 200<br>\* 200,202<br>\* 200-204 |
+| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<ul><li>GET</li></ul> |
+| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する証明書 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する秘密鍵 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS使用時のTLSバージョン<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<br>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用 |
+| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<li>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用</li> |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | ロードバランサーに適用するIPアクセス制御グループリスト |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IPアクセス制御グループID |
 | workload.schedule | Body | Object | X | 予約実行設定情報 |
-| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<br>\* 例：Asia/Seoul、UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<ul><li>例：Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | 予約実行Cron式 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 予約実行ヒストリーの保管数 |
-| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<br>\* Forbid, Replace |
+| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.schedule.timeOffset | Body | String | O | 予約実行基準時間Offset |
 | workload.internalLoadBalancing | Body | Object | X | 内部ロードバランサー情報 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 内部ロードバランサーの使用有無 |
-| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<br>\* dynamic:自動割り当て<br>\* static:IP指定 |
+| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<ul><li>dynamic:自動割り当て</li><li>static:IPを指定</li></ul> |
 | workload.internalLoadBalancing.ip | Body | String | X | 内部ロードバランサーの指定IP |
 | workload.privateDns | Body | Object | X | Private DNSにワークロード作業IPを登録するかどうかを決定 |
 | workload.privateDns.ttl | Body | Integer | O | レコードセットのTTL値 |
 | workload.privateDns.zoneId | Body | String | O | ワークロードで使用するPrivate DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNSに登録されたドメイン情報 |
 | workload.activeDeadline | Body | Object | X | ワークロード予約終了情報 |
-| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<br>\* 例：Asia/Seoul、UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workload.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workload.activeDeadline.time | Body | String | O | 予約終了時間 |
 | workload.autoScaler | Body | Object | X | AutoScaler設定情報 |
@@ -1451,7 +1451,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 増設後の待機時間 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 増設条件 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 増設条件リソース使用量(1～100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 増設条件リソース使用量の維持時間(分) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn情報 |
@@ -1459,7 +1459,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | オートスケーリングの最小作業数 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 縮小後の待機時間 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 縮小条件 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 縮小条件リソース使用量(1～100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 縮小条件リソース使用量の維持時間(分) |
 | workload.securityGroups | Body | List | X | SecurityGroups情報 |
@@ -1468,7 +1468,7 @@ x-nhn-authorization: {token}
 | workload.tasks.id | Body | UUID | O | 作業ID |
 | workload.tasks.containers | Body | Array | O | 作業のコンテナリスト |
 | workload.tasks.containers.name | Body | String | O | コンテナ名 |
-| workload.tasks.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| workload.tasks.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | workload.tasks.containers.image | Body | String | O | コンテナイメージ |
 | workload.tasks.containers.ip | Body | String | X | コンテナIP |
 | workload.tasks.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
@@ -1488,11 +1488,11 @@ x-nhn-authorization: {token}
 | workload.tasks.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | workload.tasks.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | workload.tasks.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| workload.tasks.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| workload.tasks.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | workload.tasks.containers.configs.value | Body | String | O | オブジェクトURL |
 | workload.tasks.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | workload.tasks.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| workload.tasks.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| workload.tasks..containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | workload.tasks.containers.secrets.value | Body | String | O | キーID |
 | workload.tasks.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | workload.tasks.containers.volumes | Body | Array | X | コンテナで使用するストレージ情報 |
@@ -1500,7 +1500,7 @@ x-nhn-authorization: {token}
 | workload.tasks.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | workload.tasks.containers.volumes.mountPath | body | String | X | コンテナの接続パス(default: /mnt) |
 | workload.tasks.containers.probe | Body | List | X | コンテナProbeの設定 |
-| workload.tasks.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| workload.tasks.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | workload.tasks.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | workload.tasks.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | workload.tasks.containers.probe.periodSeconds | Body | String | O | Probeの実行間隔 |
@@ -1644,8 +1644,8 @@ x-nhn-authorization: {token}
 | taskId | URL | String | O | 作業ID |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | containerName | Query | String | O | コンテナ名 |
-| from | Query | String | X | ログ開始時間<br>default:現在から5分前 |
-| to | Query | String | X | ログ終了時間<br>default:現在時間 |
+| from | Query | String | X | ログ開始時間(default:現在から5分前) |
+| to | Query | String | X | ログ終了時間(default:現在時間) |
 | page | Query | String | X | 照会するページ |
 | size | Query | String | X | 照会するページサイズ(default:100) |
 
@@ -1701,19 +1701,19 @@ x-nhn-authorization: {token}
 | workloadId | URL | String | O | ワークロードID |
 | taskId | URL | String | O | 作業ID |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-| type | Query | Integer | X | イベントタイプ<br>Normal<br>Warning |
+| type | Query | Integer | X | イベントタイプ<ul><li>Normal</li><li>Warning</li></ul> |
 | q | Query | String | X | イベント内容フィルタリング |
 | page | Query | String | X | 照会するページ |
 | size | Query | String | X | 照会するページサイズ(default: 10) |
-| from | Query | String | X | イベントの最後の発生日時開始時間<br>default:現在から1時間前 |
-| to | Query | String | X | イベントの最後の発生日時終了時間<br>default:現在時間 |
+| from | Query | String | X | イベントの最後の発生日時開始時間(default:現在から1時間前) |
+| to | Query | String | X | イベントの最後の発生日時終了時間(default:現在時間) |
 
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | events | Body | Array | O | イベントリスト |
-| type | Body | String | O | イベントタイプ<br>Normal<br>Warning |
+| type | Body | String | O | イベントタイプ<ul><li>Normal</li><li>Warning</li></ul> |
 | reason | Body | String | O | イベント発生原因 |
 | message | Body | String | O | イベント内容 |
 | createTimestamp | Body | String | O | イベントの最初の発生日時(UTC) |
@@ -1778,7 +1778,7 @@ x-nhn-authorization: {token}
 | history.templateId | Body | UUID | O | ワークロードが使用したテンプレートID |
 | history.templateVersion | Body | UUID | O | ワークロードが使用したテンプレートバージョン |
 | history.name | Body | String | O | テンプレート名 |
-| history.status | Body | String | O | 状態<br>Succeeded<br>Terminated<br>Pending |
+| history.status | Body | String | O | 状態<ul><li>Succeeded</li><li>Terminated</li><li>Pending</li></ul> |
 
 <details>
   <summary>例</summary>
@@ -1837,7 +1837,7 @@ x-nhn-authorization: {token}
 | history.deletedAt | Body | String | O | 終了時間 |
 | history.templateId | Body | UUID | O | ワークロードが使用したテンプレートID |
 | history.name | Body | String | O | ワークロードが使用したテンプレート名 |
-| history.status | Body | String | O | 状態<br>Succeeded<br>Terminated<br>Pending |
+| history.status | Body | String | O | 状態<ul><li>Succeeded</li><li>Terminated</li><li>Pending</li></ul> |
 | template | Body | Object | O | テンプレート情報 |
 | template.id | Body | UUID | O | テンプレートID |
 | template.version | Body | String | O | テンプレートバージョン |
@@ -1854,15 +1854,15 @@ x-nhn-authorization: {token}
 | template.hostAliases.hostnames | Body | String List | O | コンテナに設定されたIPのhostnames |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | O | コンテナタイプ<br>\* normal:一般<br>\* init:初期化 |
+| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
 | template.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
-| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<br>\* ncs1.g1m5<br>\* ncs1.g2m10 |
+| template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<br>\* TCP<br>\* UDP<br>\* HTTP<br>\* HTTPS<br>\* TERMINATED\_HTTPS |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に 実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -1873,11 +1873,11 @@ x-nhn-authorization: {token}
 | template.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | template.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
-| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<br>obs: Object Storage |
+| template.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | オブジェクトURL |
 | template.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<br>skm: Secure Key Manager |
+| template.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | キーID |
 | template.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | template.containers.volumes | Body | Array | X | コンテナで使用するNASストレージ情報 |
@@ -1885,7 +1885,7 @@ x-nhn-authorization: {token}
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
 | template.containers.probe | Body | List | X | コンテナProbeの設定 |
-| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<br>\* startup<br>\* liveness |
+| template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probeの実行間隔 |
@@ -2012,7 +2012,7 @@ x-nhn-authorization: {token}
 | schedulehistory.id | Body | String | O | 作業ID |
 | schedulehistory.createdAt | Body | String | O | 開始時間 |
 | schedulehistory.finishedAt | Body | Object | O | 終了時間 |
-| schedulehistory.status | Body | String | O | 予約タスク状態<br>\* Error<br>\* Completed <br>\* Waiting <br>\* Running |
+| schedulehistory.status | Body | String | O | 予約タスク状態<ul><li>Error</li><li>Completed</li><li>Waiting</li><li>Running</li></ul> |
 
 <details>
   <summary>例</summary>
@@ -2056,7 +2056,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | workload | Body | Object | O | ワークロード情報 |
 | workload.name | Body | String | O | ワークロード名 |
-| workload.type | Body | String | X | 配布コントローラー(default:deployment)<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | X | 配布コントローラー(default:deployment)<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | X | ワークロードのテンプレートバージョン(default:最新バージョン) |
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
@@ -2068,30 +2068,30 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 最大再試行回数 |
-| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<br>\* GET |
-| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<br>\* 200<br>\* 200,202<br>\* 200-204 |
+| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<ul><li>GET</li></ul> |
+| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する証明書 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する秘密鍵 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS使用時のTLSバージョン<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<br>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用 |
+| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<li>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用</li> |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | ロードバランサーに適用するIPアクセス制御グループリスト |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IPアクセス制御グループID |
 | workload.schedule | Body | Object | X | 予約実行設定情報 |
-| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<br>\* 例：Asia/Seoul、UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<ul><li>例：Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | 予約実行Cron式 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 予約実行ヒストリーの保管数 |
-| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<br>\* Forbid, Replace |
+| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.internalLoadBalancing | Body | Object | X | 内部ロードバランサー情報 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 内部ロードバランサーの使用有無 |
-| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<br>\* dynamic:自動割り当て<br>\* static:IP指定 |
+| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<ul><li>dynamic:自動割り当て</li><li>static:IPを指定</li></ul> |
 | workload.internalLoadBalancing.ip | Body | String | X | 内部ロードバランサーの指定IP |
 | workload.privateDns | Body | Object | X | Private DNSにワークロード作業IPを登録するかどうかを決定 |
 | workload.privateDns.ttl | Body | Integer | O | レコードセットのTTL値 |
 | workload.privateDns.zoneId | Body | String | O | ワークロードで使用するPrivate DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNSに登録されたドメイン情報 |
 | workload.activeDeadline | Body | Object | X | ワークロード予約終了情報 |
-| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<br>\* 例：Asia/Seoul、UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workload.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workload.activeDeadline.time | Body | String | O | 予約終了時間 |
 | workload.autoScaler | Body | Object | X | AutoScaler設定情報 |
@@ -2100,7 +2100,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 増設後の待機時間 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 増設条件 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 増設条件リソース使用量(1～100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 増設条件リソース使用量の維持時間(分) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn情報 |
@@ -2108,7 +2108,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | オートスケーリングの最小作業数 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 縮小後の待機時間 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 縮小条件 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 縮小条件リソース使用量(1～100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 縮小条件リソース使用量の維持時間(分) |
 | workload.securityGroups | Body | List | X | SecurityGroups情報 |
@@ -2143,7 +2143,7 @@ x-nhn-authorization: {token}
 | workload | Body | Object | O | ワークロード情報 |
 | workload.id | Body | UUID | O | ワークロードID |
 | workload.name | Body | String | O | ワークロード名 |
-| workload.type | Body | String | X | 配布コントローラー<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | X | 配布コントローラー<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
@@ -2156,31 +2156,31 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 最大再試行回数 |
-| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<br>\* GET |
-| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<br>\* 200<br>\* 200,202<br>\* 200-204 |
+| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<ul><li>GET</li></ul> |
+| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する証明書 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する秘密鍵 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS使用時のTLSバージョン<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<br>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用 |
+| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<li>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用</li> |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | ロードバランサーに適用するIPアクセス制御グループリスト |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IPアクセス制御グループID |
 | workload.schedule | Body | Object | X | 予約実行設定情報 |
-| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<br>\* 例：Asia/Seoul、UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<ul><li>例：Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | 予約実行Cron式 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 予約実行ヒストリーの保管数 |
-| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<br>\* Forbid, Replace |
+| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.schedule.timeOffset | Body | String | O | 予約実行基準時間Offset |
 | workload.internalLoadBalancing | Body | Object | X | 内部ロードバランサー情報 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 内部ロードバランサーの使用有無 |
-| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<br>\* dynamic:自動割り当て<br>\* static:IP指定 |
+| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<ul><li>dynamic:自動割り当て</li><li>static:IPを指定</li></ul> |
 | workload.internalLoadBalancing.ip | Body | String | X | 内部ロードバランサーの指定IP |
 | workload.privateDns | Body | Object | X | Private DNSにワークロード作業IPを登録するかどうかを決定 |
 | workload.privateDns.ttl | Body | Integer | O | レコードセットのTTL値 |
 | workload.privateDns.zoneId | Body | String | O | ワークロードで使用するPrivate DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNSに登録されたドメイン情報 |
 | workload.activeDeadline | Body | Object | X | ワークロード予約終了情報 |
-| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<br>\* 例：Asia/Seoul、UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workload.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workload.activeDeadline.time | Body | String | O | 予約終了時間 |
 | workload.autoScaler | Body | Object | X | AutoScaler設定情報 |
@@ -2189,7 +2189,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 増設後の待機時間 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 増設条件 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 増設条件リソース使用量(1～100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 増設条件リソース使用量の維持時間(分) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn情報 |
@@ -2197,7 +2197,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | オートスケーリングの最小作業数 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 縮小後の待機時間 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 縮小条件 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 縮小条件リソース使用量(1～100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 縮小条件リソース使用量の維持時間(分) |
 | workload.securityGroups | Body | List | X | SecurityGroups情報 |
@@ -2267,26 +2267,26 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 最大再試行回数 |
-| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<br>\* GET |
-| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<br>\* 200<br>\* 200,202<br>\* 200-204 |
+| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<ul><li>GET</li></ul> |
+| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する証明書 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する秘密鍵 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS使用時のTLSバージョン<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<br>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用 |
+| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<li>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用</li> |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | ロードバランサーに適用するIPアクセス制御グループリスト |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IPアクセス制御グループID |
 | workload.schedule | Body | Object | X | 予約実行設定情報 |
-| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<br>\* 例：Asia/Seoul、UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<ul><li>例：Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | 予約実行Cron式 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 予約実行ヒストリーの保管数 |
-| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<br>\* Forbid, Replace |
+| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.internalLoadBalancing | Body | Object | X | 内部ロードバランサー情報 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 内部ロードバランサーの使用有無 |
-| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<br>\* dynamic；自動 割り当て<br>\* static:IP指定 |
+| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<ul><li>dynamic:自動割り当て</li><li>static:IPを指定</li></ul> |
 | workload.internalLoadBalancing.ip | Body | String | X | 内部ロードバランサーの指定IP |
 | workload.activeDeadline | Body | Object | X | ワークロード予約終了情報 |
-| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<br>\* 例：Asia/Seoul、UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workload.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workload.activeDeadline.time | Body | String | O | 予約終了時間 |
 | workload.autoScaler | Body | Object | X | AutoScaler設定情報 |
@@ -2295,7 +2295,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 増設後の待機時間 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 増設条件 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 増設条件リソース使用量(1～100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 増設条件リソース使用量の維持時間(分) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn情報 |
@@ -2303,7 +2303,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | オートスケーリングの最小作業数 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 縮小後の待機時間 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 縮小条件 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 縮小条件リソース使用量(1～100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 縮小条件リソース使用量の維持時間(分) |
 | workload.securityGroups | Body | List | X | SecurityGroups情報 |
@@ -2338,7 +2338,7 @@ x-nhn-authorization: {token}
 | workloads | Body | Object | O | ワークロード情報 |
 | workload.id | Body | UUID | O | ワークロードID |
 | workload.name | Body | String | O | ワークロード名 |
-| workload.type | Body | String | O | 配布コントローラー<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | O | 配布コントローラー<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
@@ -2351,31 +2351,31 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | 最大再試行回数 |
-| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<br>\* GET |
-| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<br>\* 200<br>\* 200,202<br>\* 200-204 |
+| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<ul><li>GET</li></ul> |
+| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する証明書 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する秘密鍵 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS使用時のTLSバージョン<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<br>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用 |
+| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<li>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用</li> |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | ロードバランサーに適用するIPアクセス制御グループリスト |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IPアクセス制御グループID |
 | workload.schedule | Body | Object | X | 予約実行設定情報 |
-| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<br>\* 例：Asia/Seoul、UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<ul><li>例：Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | 予約実行Cron式 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 予約実行ヒストリーの保管数 |
-| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<br>\* Forbid, Replace |
+| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.schedule.timeOffset | Body | String | O | 予約実行基準時間Offset |
 | workload.internalLoadBalancing | Body | Object | X | 内部ロードバランサー情報 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 内部ロードバランサーの使用有無 |
-| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<br>\* dynamic:自動 割り当て<br>\* static:IP指定 |
+| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<ul><li>dynamic:自動割り当て</li><li>static:IPを指定</li></ul> |
 | workload.internalLoadBalancing.ip | Body | String | X | 内部ロードバランサーの指定IP |
 | workload.privateDns | Body | Object | X | Private DNSにワークロード作業IPを登録するかどうかを決定 |
 | workload.privateDns.ttl | Body | Integer | O | レコードセットのTTL値 |
 | workload.privateDns.zoneId | Body | String | O | ワークロードで使用するPrivate DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNSに登録されたドメイン情報 |
 | workload.activeDeadline | Body | Object | X | ワークロード予約終了情報 |
-| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<br>\* 例：Asia/Seoul、UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workload.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workload.activeDeadline.time | Body | String | O | 予約終了時間 |
 | workload.autoScaler | Body | Object | X | AutoScaler設定情報 |
@@ -2384,7 +2384,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 増設後の待機時間 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 増設条件 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 増設条件リソース使用量(1～100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 増設条件リソース使用量の維持時間(分) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn情報 |
@@ -2392,7 +2392,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | オートスケーリングの最小作業数 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 縮小後の待機時間 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 縮小条件 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 縮小条件リソース使用量(1～100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 縮小条件リソース使用量の維持時間(分) |
 | workload.securityGroups | Body | List | X | SecurityGroups情報 |
@@ -2457,7 +2457,7 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-| op | Body | String | O | Operation<br>\* Add<br>\* Remove<br>\* Replace<br>\* Copy<br>\* Move<br>\* Test |
+| op | Body | String | O | Operation<ul><li>Add</li><li>Remove</li><li>Replace</li><li>Copy</li><li>Move</li><li>Test</li></ul> |
 | path | Body | String | O | 変更するデータパス |
 | value | Body | String | X | 変更値 |
 | from | Body | String | X | 既存データパス |
@@ -2484,7 +2484,7 @@ x-nhn-authorization: {token}
 | workloads | Body | Object | O | ワークロード情報 |
 | workload.id | Body | UUID | O | ワークロードID |
 | workload.name | Body | String | O | ワークロード名 |
-| workload.type | Body | String | O | 配布コントローラー<br>\* deployment<br>\* statefulset |
+| workload.type | Body | String | O | 配布コントローラー<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
@@ -2497,31 +2497,31 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | X | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 最大レスポンス待機時間 |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | X | 最大再試行回数 |
-| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<br>\* GET |
-| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<br>\* 200<br>\* 200,202<br>\* 200-204 |
+| workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTPメソッド<ul><li>GET</li></ul> |
+| workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTPステータスコード<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
 | workload.loadBalancing.certificate | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する証明書 |
 | workload.loadBalancing.privateKey | Body | String | X | TERMINATED\_HTTPS使用時にロードバランサーで使用する秘密鍵 |
 | workload.loadBalancing.tlsVersion | Body | String | X | TERMINATED\_HTTPS使用時のTLSバージョン<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<br>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用 |
+| workload.loadBalancing.containerHref | Body | String | X | シークレットコンテナID<li>Load Balancer APIを利用し、TERMINATED\_HTTPSで使用する証明書、秘密鍵を別途で登録した場合に使用</li> |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | ロードバランサーに適用するIPアクセス制御グループリスト |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IPアクセス制御グループID |
 | workload.schedule | Body | Object | X | 予約実行設定情報 |
-| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<br>\* 例：Asia/Seoul、UTC<br>\* [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) |
+| workload.schedule.timeZone | Body | String | O | 予約実行基準時間<ul><li>例：Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | 予約実行Cron式 |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | 予約実行ヒストリーの保管数 |
-| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<br>\* Forbid, Replace |
+| workload.schedule.concurrencyPolicy | Body | String | O | 同時実行ポリシー<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.schedule.timeOffset | Body | String | O | 予約実行基準時間Offset |
 | workload.internalLoadBalancing | Body | Object | X | 内部ロードバランサー情報 |
 | workload.internalLoadBalancing.enalbed | Body | Boolean | O | 内部ロードバランサーの使用有無 |
-| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<br>\* dynamic:自動割り当て<br>\* static:IP指定 |
+| workload.internalLoadBalancing.type | Body | String | X | 内部ロードバランサーのIP割り当て方法<ul><li>dynamic:自動割り当て</li><li>static:IPを指定</li></ul> |
 | workload.internalLoadBalancing.ip | Body | String | X | 内部ロードバランサーの指定IP |
 | workload.privateDns | Body | Object | X | Private DNSにワークロード作業IPを登録するかどうかを決定 |
 | workload.privateDns.ttl | Body | Integer | O | レコードセットのTTL値 |
 | workload.privateDns.zoneId | Body | String | O | ワークロードで使用するPrivate DNS Zone ID |
 | workload.privateDns.domain | Body | String | O | Private DNSに登録されたドメイン情報 |
 | workload.activeDeadline | Body | Object | X | ワークロード予約終了情報 |
-| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<br>\* 例：Asia/Seoul、UTC |
+| workload.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workload.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workload.activeDeadline.time | Body | String | O | 予約終了時間 |
 | workload.autoScaler | Body | Object | X | AutoScaler設定情報 |
@@ -2530,7 +2530,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 増設後の待機時間 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 増設条件 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 増設条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 増設条件リソース使用量(1～100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 増設条件リソース使用量の維持時間(分) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn情報 |
@@ -2538,7 +2538,7 @@ x-nhn-authorization: {token}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | オートスケーリングの最小作業数 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 縮小後の待機時間 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 縮小条件 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<br>* cpu<br>* memory<br>* gpu<br>* gpu-memory |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 縮小条件基準リソース<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 縮小条件リソース使用量(1～100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 縮小条件リソース使用量の維持時間(分) |
 | workload.securityGroups | Body | List | X | SecurityGroups情報 |
