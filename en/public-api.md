@@ -1268,7 +1268,7 @@ This API does not require a request body.
 | workloads.desired | Body | Integer | O | Number of workload tasks requested |
 | workloads.available | Body | Integer | O | Number of workload tasks executed |
 | workloads.internalLBTimeout | Body | Integer | X | Internal request response latency |
-| workloads.status | Body | Integer | O | Workload status |
+| workloads.status | Body | String | O | Workload status<ul><li>Pending: Workload creation/change in progress</li><li>Running: Workload creation/change completed</li><li>Failed: Workload creation/change failed</li><li>Terminated: Workload has been terminated</li><li>Paused: Workload is paused</li><li>Active: Scheduled workload is running</li><li>Suspend: Scheduled workload is suspended</li></ul> |
 | workloads.url | Body | String | X | URL of workload load balancer |
 | workloads.loadBalancing | Body | Object | O | Information on workload load balancer |
 | workloads.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
@@ -1409,7 +1409,7 @@ This API does not require a request body.
 | workload.desired | Body | Integer | O | Number of workload tasks requested |
 | workload.available | Body | Integer | O | Number of workload tasks executed |
 | workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
-| workload.status | Body | Integer | O | Workload status |
+| workload.status | Body | String | O | Workload status<ul><li>Pending: Workload creation/change in progress</li><li>Running: Workload creation/change completed</li><li>Failed: Workload creation/change failed</li><li>Terminated: Workload has been terminated</li><li>Paused: Workload is paused</li><li>Active: Scheduled workload is running</li><li>Suspend: Scheduled workload is suspended</li></ul> |
 | workload.url | Body | String | X | URL of workload load balancer |
 | workload.loadBalancing | Body | Object | O | Information on workload load balancer |
 | workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
