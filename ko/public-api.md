@@ -2693,7 +2693,7 @@ x-nhn-authorization: {token}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
-| enabled | Body | String | O | 악성 코드 검사 설정 결과<ul><li>true: 사용</li><li>false: 사용 안함</li></ul>|
+| enabled | Body | String | O | 악성 코드 검사 설정 결과<ul><li>true: 사용</li><li>false: 사용 안 함</li></ul>|
 
 <details>
   <summary>예시</summary>
@@ -2723,7 +2723,7 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-| enabled | Body | String | O | 악성 코드 검사 설정<ul><li>true: 사용</li><li>false: 사용 안함</li></ul>|
+| enabled | Body | String | O | 악성 코드 검사 설정<ul><li>true: 사용</li><li>false: 사용 안 함</li></ul>|
 
 <details>
   <summary>예시</summary>
@@ -2739,7 +2739,7 @@ x-nhn-authorization: {token}
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
-| enabled | Body | String | O | 악성 코드 검사 설정 결과<ul><li>true: 사용</li><li>false: 사용 안함</li></ul>|
+| enabled | Body | String | O | 악성 코드 검사 설정 결과<ul><li>true: 사용</li><li>false: 사용 안 함</li></ul>|
 
 <details>
   <summary>예시</summary>
@@ -2783,7 +2783,7 @@ x-nhn-authorization: {token}
 | X-Total-Count | Header | Integer | O | 워크로드 스캔 결과 개수 |
 | scannedAt | Body | String | X | 스캔 완료 시간 |
 | infectedFiles | Body | String | X | 검출된 악성코드 개수 |
-| scannedDirectories | Body | String | X | 스캔 디렉토리 수 |
+| scannedDirectories | Body | String | X | 스캔 디렉터리 수 |
 | scannedFiles | Body | String | X | 스캔 파일 수 |
 | reports | Body | Array | X | 리포트 개수 |
 | reports.image | Body | String | O | 이미지 이름:태그 |
