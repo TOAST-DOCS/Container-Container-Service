@@ -2671,6 +2671,195 @@ x-nhn-authorization: {token}
 
 このAPIは共通情報のみレスポンスします。
 
+### マルウェア検査設定の照会
+設定されているマルウェア検査の設定を照会します。
+
+```bash
+GET /ncs/v1.0/appkeys/{appKey}/malware/config
+x-nhn-authorization: {token}
+```
+
+#### リクエスト
+
+このAPIはリクエストボディを要求しません。
+
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| appKey | URL | String | O | サービスAppkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+
+
+#### レスポンス
+
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| enabled | Body | String | O | マルウェア検査の設定結果<ul><li>true: 使用</li><li>false: 使用しない</li></ul>|
+
+<details>
+  <summary>例</summary>
+
+```json
+{
+  "header": {
+    "resultCode": 200,
+    "resultMessage": "SUCCESS",
+    "isSuccessful": true
+  },
+  "enabled": true 
+}
+```
+</details>
+
+### マルウェア検査設定
+マルウェア検査を設定します。
+
+```bash
+POST /ncs/v1.0/appkeys/{appKey}/malware/config
+x-nhn-authorization: {token}
+```
+
+#### リクエスト
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| appKey | URL | String | O | サービスAppkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| enabled | Body | String | O | マルウェア検査設定<ul><li>true: 使用</li><li>false: 使用しない</li></ul>|
+
+<details>
+  <summary>例</summary>
+
+```json
+{
+  "enabled": true 
+}
+```
+</details>
+
+#### レスポンス
+
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| enabled | Body | String | O | マルウェア検査の設定結果<ul><li>true: 使用</li><li>false: 使用しない</li></ul>|
+
+<details>
+  <summary>例</summary>
+
+```json
+{
+  "header": {
+    "resultCode": 200,
+    "resultMessage": "SUCCESS",
+    "isSuccessful": true
+  },
+  "enabled": true 
+}
+```
+</details>
+
+### マルウェア検査結果の照会
+
+マルウェア検査の結果を照会します。
+
+```bash
+GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}/malware
+x-nhn-authorization: {token}
+```
+
+#### リクエスト
+
+このAPIはリクエストボディを要求しません。
+
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| appKey | URL | String | O | サービスAppkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| workloadId | URL | String | O | ワークロードID |
+
+
+#### レスポンス
+
+| 名前 | 種類 | 形式 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| X-Total-Count | Header | Integer | O | ワークロードスキャン結果の件数 |
+| scannedAt | Body | String | X | スキャン完了時間 |
+| infectedFiles | Body | String | X | 検出されたマルウェアの数 |
+| scannedDirectories | Body | String | X | スキャンしたディレクトリ数 |
+| scannedFiles | Body | String | X | スキャンしたファイル数 |
+| reports | Body | Array | X | レポート数 |
+| reports.image | Body | String | O | イメージ名:タグ |
+| reports.digest | Body | String | O | イメージダイジェスト |
+| reports.layer | Body | String | O | イメージレイヤー |
+| reports.detection | Body | String | O | 検出項目 |
+| reports.result | Body | String | O | 結果<br><ul><li>Clean</li><li>Infected</li></ul> |
+
+<details>
+  <summary>例</summary>
+
+```json
+{
+  "header": {
+    "resultCode": 200,
+    "resultMessage": "SUCCESS",
+    "isSuccessful": true
+  },
+  "scannedAt": "2025-10-28T00:00:00Z",
+  "infectedFiles": 0,
+  "scannedDirectories": 689,
+  "scannedFiles": 4210,
+  "reports": [
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:36f5f951f60a9fa1d51878e76fc16ba7b752f4d464a21b758a8ac88f0992c488",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:c855abf10cdcf792853d61ec842e41c85cb82a5cb926c86217a7fa632dfc56c4",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:8e7d6b51107830934d3dcdcf0883f193250d22b3d0dc7a2d7d57e4403d1a3489",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:50da593f622278859c89ed290484a8cafa3ddb1fef0090530fff63c9de06845f",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:72fa904a482c9806187aeb804837f58f54da8aeb564f0ce4ef01426e08f68a01",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:7d95a4a72e110d4fe6bab4059f2d2968058c8006d0f3976ea7065186acc49fbd",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:3ce214e9ebc59367731dc352744c8392822aceddcee0a3806537dfd9fa984268",
+      "detection": "-",
+      "result": "Clean"
+    }
+  ]
+}
+```
+</details>
 
 ## レスポンスコード
 | resultCode | resultMessage | 説明 |
