@@ -380,6 +380,22 @@ If you restart a workload, load balancer IP is changed.
 
 Select a workload you want to delete and click **Delete Workload** button to proceed with the deletion.
 
+### Malware Scan
+Click **Malware Scan** to perform a malware scan on the container images used by workloads.
+Malware scans are performed when creating a workload, changing a workload template, or restarting a workload. If malware is detected, workload creation is halted or the previous template is restored.
+You can check the malware scan results by clicking the **Malware Scan Results** button in the **Run History** tab.
+
+| Item | Description |
+| --- | --- |
+| Image | Container image name and tag |
+| Digest | Container image digest |
+| Layer | Container image layer that has been scanned for malware |
+| Detection items | Detected malware items |
+| Result | Scan result for container image layer<ul><li>Infected: detected</li><li>Clean: note detected</li></ul> |
+
+> [Caution]
+> The malware scan feature is provided free of charge, and NHN Cloud is not responsible for security incidents resulting from failure to detect or take follow-up measures.
+
 ## Roles for NCS
 You can set roles to control which roles can access NCS service and resources.
 

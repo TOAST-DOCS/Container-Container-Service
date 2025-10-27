@@ -2671,6 +2671,195 @@ x-nhn-authorization: {token}
 
 이 API는 공통 정보만 응답합니다.
 
+### 악성 코드 검사 설정 조회
+설정되어 있는 악성 코드 검사 설정을 조회합니다.
+
+```bash
+GET /ncs/v1.0/appkeys/{appKey}/malware/config
+x-nhn-authorization: {token}
+```
+
+#### 요청
+
+이 API는 요청 본문을 요구하지 않습니다.
+
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+| --- | --- | --- | --- | --- |
+| appKey | URL | String | O | 서비스 Appkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+
+
+#### 응답
+
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+| --- | --- | --- | --- | --- |
+| enabled | Body | String | O | 악성 코드 검사 설정 결과<ul><li>true: 사용</li><li>false: 사용 안 함</li></ul>|
+
+<details>
+  <summary>예시</summary>
+
+```json
+{
+  "header": {
+    "resultCode": 200,
+    "resultMessage": "SUCCESS",
+    "isSuccessful": true
+  },
+  "enabled": true 
+}
+```
+</details>
+
+### 악성코드 검사 설정
+악성 코드 검사 설정을 합니다.
+
+```bash
+POST /ncs/v1.0/appkeys/{appKey}/malware/config
+x-nhn-authorization: {token}
+```
+
+#### 요청
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+| --- | --- | --- | --- | --- |
+| appKey | URL | String | O | 서비스 Appkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| enabled | Body | String | O | 악성 코드 검사 설정<ul><li>true: 사용</li><li>false: 사용 안 함</li></ul>|
+
+<details>
+  <summary>예시</summary>
+
+```json
+{
+  "enabled": true 
+}
+```
+</details>
+
+#### 응답
+
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+| --- | --- | --- | --- | --- |
+| enabled | Body | String | O | 악성 코드 검사 설정 결과<ul><li>true: 사용</li><li>false: 사용 안 함</li></ul>|
+
+<details>
+  <summary>예시</summary>
+
+```json
+{
+  "header": {
+    "resultCode": 200,
+    "resultMessage": "SUCCESS",
+    "isSuccessful": true
+  },
+  "enabled": true 
+}
+```
+</details>
+
+### 악성코드 검사 결과 조회
+
+악성 코드 검사 결과를 조회합니다.
+
+```bash
+GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}/malware
+x-nhn-authorization: {token}
+```
+
+#### 요청
+
+이 API는 요청 본문을 요구하지 않습니다.
+
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+| --- | --- | --- | --- | --- |
+| appKey | URL | String | O | 서비스 Appkey |
+| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| workloadId | URL | String | O | 워크로드 ID |
+
+
+#### 응답
+
+| 이름 | 종류 | 형식 | 필수 | 설명 |
+| --- | --- | --- | --- | --- |
+| X-Total-Count | Header | Integer | O | 워크로드 스캔 결과 개수 |
+| scannedAt | Body | String | X | 스캔 완료 시간 |
+| infectedFiles | Body | String | X | 검출된 악성코드 개수 |
+| scannedDirectories | Body | String | X | 스캔 디렉터리 수 |
+| scannedFiles | Body | String | X | 스캔 파일 수 |
+| reports | Body | Array | X | 리포트 개수 |
+| reports.image | Body | String | O | 이미지 이름:태그 |
+| reports.digest | Body | String | O | 이미지 다이제스트 |
+| reports.layer | Body | String | O | 이미지 레이어 |
+| reports.detection | Body | String | O | 탐지 항목 |
+| reports.result | Body | String | O | 결과<br><ul><li>Clean</li><li>Infected</li></ul> |
+
+<details>
+  <summary>예시</summary>
+
+```json
+{
+  "header": {
+    "resultCode": 200,
+    "resultMessage": "SUCCESS",
+    "isSuccessful": true
+  },
+  "scannedAt": "2025-10-28T00:00:00Z",
+  "infectedFiles": 0,
+  "scannedDirectories": 689,
+  "scannedFiles": 4210,
+  "reports": [
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:36f5f951f60a9fa1d51878e76fc16ba7b752f4d464a21b758a8ac88f0992c488",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:c855abf10cdcf792853d61ec842e41c85cb82a5cb926c86217a7fa632dfc56c4",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:8e7d6b51107830934d3dcdcf0883f193250d22b3d0dc7a2d7d57e4403d1a3489",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:50da593f622278859c89ed290484a8cafa3ddb1fef0090530fff63c9de06845f",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:72fa904a482c9806187aeb804837f58f54da8aeb564f0ce4ef01426e08f68a01",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:7d95a4a72e110d4fe6bab4059f2d2968058c8006d0f3976ea7065186acc49fbd",
+      "detection": "-",
+      "result": "Clean"
+    },
+    {
+      "image": "nginx:latest",
+      "digest": "sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e",
+      "layer": "sha256:3ce214e9ebc59367731dc352744c8392822aceddcee0a3806537dfd9fa984268",
+      "detection": "-",
+      "result": "Clean"
+    }
+  ]
+}
+```
+</details>
 
 ## 응답 코드
 | resultCode | resultMessage | 설명 |

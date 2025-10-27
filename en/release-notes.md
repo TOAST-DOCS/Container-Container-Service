@@ -1,4 +1,8 @@
 ## Container > NHN Container Service(NCS) > Release Notes
+### October 28, 2025
+#### Added Features
+* Added the feature to perform malware scans for container images used on workloads.
+
 ### March 4, 2025
 #### Added Features
 * Added an internal request response latency item when creating workloads. The Internal Request Response Latency setting allows you to enforce a timeout on communication requests to the internal load balancer VIP from other workloads.
