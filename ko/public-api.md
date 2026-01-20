@@ -8,6 +8,7 @@ API 엔드포인트는 다음과 같습니다.
 | 리전 | 도메인 |
 | --- | --- |
 | 한국(판교) 리전 | https://kr1-ncs.api.nhncloudservice.com |
+| 한국(광주) 리전 | https://kr3-ncs.api.nhncloudservice.com |
 
 ### API 응답 공통 정보
 

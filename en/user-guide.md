@@ -444,7 +444,7 @@ Infrastructure NCS ADMIN permissions alone are only for viewing.
 
 ### Region
 
-* NCS service is only available in Korea (Pangyo) region.
+* NCS service is only available in Korea (Pangyo) and Korea (Gwangju) region.
 
 ### Resource Provision Policy
 * Refer to [ NHN Container Service Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs).
