@@ -445,7 +445,7 @@ NCSサービスを利用するためには、次のロールが必要です。
 
 ### リージョン
 
-* NCSは韓国(パンギョ)リージョンでのみ使用できます。
+* NCSサービスは韓国(パンギョ)、韓国(光州)リージョンでのみ使用できます。
 
 ### リソース提供ポリシー
 * [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#nhn-container-servicencs)を参照してください。

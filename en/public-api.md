@@ -8,6 +8,7 @@ The API domain is as follows.
 | Region | Domain |
 | --- | --- |
 | Korea (Pangyo) region | https://kr1-ncs.api.nhncloudservice.com |
+| Korea (Gwangju) region | https://kr3-ncs.api.nhncloudservice.com |
 
 ### API Common Response Information
 
