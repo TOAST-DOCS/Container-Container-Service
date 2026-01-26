@@ -1,9 +1,11 @@
 ## Container > NHN Container Service(NCS) > User Guide
 
+<a id="template"></a>
 ## Template
 
 Template is a service that defines resources, such as Containers, Networks, etc., which needed to run Workload.
 
+<a id="template-create"></a>
 ### Create Template
 
 You have to create Template before you can use NHN Container Service (NCS). Go to **Container > NHN Container Service (NCS)** page, click **Template** tab, and then click **Create Template** button. The following items are required to create Template.
@@ -66,10 +68,12 @@ Temporary shared storage between containers is provided` in the path /var/${work
 > Init containers cannot use lifecycle hooks, health checks.
 > Init containers are not included in load balancers.
 
+<a id="template-retrieve"></a>
 ### Retrieve Template
 
 You can retrieve Templates you created on **Template** tab of page **Container > NHN Container Service (NCS)**. List of Templates displays the number of workloads in use, the latest template version, and the number of template versions.
 
+<a id="template-basic-information"></a>
 #### Basic Information
 
 You can check specific Template to view details from **Basic Information** tab.
@@ -90,10 +94,12 @@ You can check specific Template to view details from **Basic Information** tab.
 | Number of template versions | Number of versions created for the template |
 | Number of workloads in use | Number of workloads using the template |
 
+<a id="template-workload-in-use"></a>
 #### Workloads in use
 
 You can see a list of workloads that are using the template by clicking a specific template and then going to the **Workload in use** tab.
 
+<a id="template-delete"></a>
 ### Delete Template
 
 Select the template you want to delete and click **Delete Template** button to delete it.
@@ -101,6 +107,7 @@ Select the template you want to delete and click **Delete Template** button to d
 > [Note]
 You cannot delete Template if there is a workload using the template.
 
+<a id="version-create"></a>
 ### Create Version
 
 In the list of templates, click **View Version**, and then click **Create Version**. The differences between creating a template and creating a version are shown below.
@@ -112,13 +119,16 @@ In the list of templates, click **View Version**, and then click **Create Versio
 | Immediate deployment | You can choose whether to apply the new version of the template immediately to workloads that are using the baseline template version. If you enable immediate deployment, the template on the workload changes on a rolling update basis. |
 | Network | You can't select the subnet to connect to your workload in Create Version; it uses the subnet you selected in Create Template. |
 
+<a id="version-retrieve"></a>
 ### View Version
 
 You can view the version list by clicking **View Version**in the template list. The version list shows the total number of container resources.
 
+<a id="version-basic-information"></a>
 #### Basic Information
 You can click a specific version to view details from the **Basic Information** tab.
 
+<a id="version-container"></a>
 #### Container
 
 After clicking a specific version, you can go to **Container** tab to check the list of Containers have added to the version. You can select a specific container from the container list to check its details.
@@ -142,10 +152,12 @@ After clicking a specific version, you can go to **Container** tab to check the 
 | Secret | Confidential data associated with a container and its mount path |
 | Health Check | Check on the health of a container |
 
+<a id="version-workload-in-use"></a>
 #### Workloads in use
 
 You can click a specific version and then go to the **Workload in Use** tab to see a list of workloads that are using that version.
 
+<a id="version-delete"></a>
 ### Delete Version
 
 Select the version you want to delete and click **Delete Version** button to delete it.
@@ -153,10 +165,12 @@ Select the version you want to delete and click **Delete Version** button to del
 > [Note]
 > You cannot delete a version if there is a workload using the version.
 
+<a id="workload"></a>
 ## Workload
 
 Service that executes containers using the Template that you defined.
 
+<a id="workload-create"></a>
 ### Create Workload
 
 Go to **Container > NHN Container Service (NCS)** page, click **Workload** tab, and then click **Create Workload** button. The following items are required to create workloads.
@@ -196,10 +210,12 @@ Local communication to the internal load balancer IP is not possible.
 > [Caution]
 If you delete a Private DNS Zone or Private DNS record set that is being used by a workload, domain association will not work within the VPC.
 
+<a id="workload-retrieve"></a>
 ### Retrieve Workload
 
 You can check Workloads you create on **Workloads** tab on **Container > NHN Container Service (NCS)**.
 
+<a id="workload-basic-information"></a>
 #### Basic Information
 
 You can click on specific Workload to view details from the **Basic Information** tab.
@@ -224,6 +240,7 @@ You can click on specific Workload to view details from the **Basic Information*
 > [Note]
 > Workload status is determined by considering condition of all Containers and Load Balancers included. You can see the status of individual Containers on **Running Container** tab.
 
+<a id="workload-running-container"></a>
 #### Running Container
 
 You can view Container details by clicking a specific workload and then clicking **View Details** on the **Running Container** tab.
@@ -251,6 +268,7 @@ You can view Container details by clicking a specific workload and then clicking
 | Health Check | Check on the health of a container |
 | Date of Restart | Date Container restarted |
 
+<a id="workload-restart-task"></a>
 #### Restart Task
 
 You can restart a specific task in a workload by clicking the specific workload and then clicking **Restart Task** on the **Running Container** tab.
@@ -259,6 +277,7 @@ You can restart a specific task in a workload by clicking the specific workload 
 > When a task is restarted, the task's monitoring, event, and log information is deleted and unavailable for viewing.
 > The task is unavailable during the restart.
 
+<a id="workload-access-container"></a>
 #### Access Container
 You can access a container by clicking a specific workload and then clicking **Access Container** on the **Running Container** tab.
 To access a container, you must have a shell, such as bash or sh, installed on the image.
@@ -271,6 +290,7 @@ Depending on the locale setting of the container, other languages may not be ent
 > [Caution]
 > This feature is provided as a service for your convenience. You are responsible for all commands you execute by accessing the console and their consequences.
 
+<a id="workload-monitoring"></a>
 #### Monitoring
 
 After clicking a specific workload, you can find the resource usage of containers on the **Monitoring** tab. Container metrics are collected every 15 seconds and kept for up to 1 year.
@@ -289,6 +309,7 @@ Items provided with monitoring are as follows.
 | GPU Power Usage | mW | GPU power usage allocated to containers is provided. |
 | GPU Temperature | ℃ | GPU temperature assigned to the container is provided. |
 
+<a id="workload-event"></a>
 #### Event
 
 After clicking on specific Workload, you can view Event information from Container on **Event** tab. You can view events by status of Events by clicking Select Event Status.
@@ -306,6 +327,7 @@ After clicking on specific Workload, you can view Event information from Contain
 > Events are only kept for maximum 30 days, so information older than 30 days cannot be checked.
 > Detailed reasons for the current and last state of the container can also be found in the events.
 
+<a id="workload-log"></a>
 #### Log
 
 After clicking a specific workload, you can view logs in Container from **Log** tab. If you do not specify time, the log is retrieved 5 minutes before the current time.
@@ -314,6 +336,7 @@ If a lot of logs occurred during the time you want to view, you might only see s
 > [Note]
 > Logs are kept for 2 months.
 
+<a id="workload-execution-history"></a>
 #### Workload Execution History
 
 You can check the progress and history of changes to the workload template in the **Workload Execution History** tab by selecting the workload for which you want to view the workload execution history.
@@ -332,6 +355,7 @@ The history of the running workload does not show a termination time and the sta
 > [Caution]
 You cannot check the workload execution history after deleting the workload.
 
+<a id="workload-scheduled-execution-history"></a>
 #### Scheduled Execution History
 You can check the list of executed tasks in the **Scheduled Execution History** tab by selecting the workload for which you want to view the scheduled execution history.
 
@@ -342,6 +366,7 @@ You can check the list of executed tasks in the **Scheduled Execution History** 
 | Termination Time | Termination time for scheduled task |
 | Status | Scheduled task status<br>waiting: Preparing schedule<br>running: Scheduled task running<br>completed: Scheduled task normally terminated<br>error: Scheduled task abnormally terminated |
 
+<a id="workload-change"></a>
 ### Change Workload
 
 You can change the running workload by selecting a workload to change and clicking **Change** at the **Basic Information** tab.
@@ -364,6 +389,7 @@ If you use a load balancer to make changes to the template while the workload is
 > If a workload is in the Pending, Suspended, or Terminated state, you cannot make changes to the load balancer.
 > If the workload change fails (for example, an image error), the change attempt is terminated and no job replacement occurs.
 
+<a id="workload-stop-restart"></a>
 ### Stop/Restart Workload
 If you stop a workload, all tasks in the workload will be terminated.
 
@@ -376,10 +402,12 @@ If you restart a workload, load balancer IP is changed.
 > Logs, events, and ephemeral storage are initialized when the workload is stopped.
 > Even if you stop the workload, the scheduled execution history is deleted during the task repeat cycle.
 
+<a id="workload-delete"></a>
 ### Delete Workload
 
 Select a workload you want to delete and click **Delete Workload** button to proceed with the deletion.
 
+<a id="workload-malware-scan"></a>
 ### Malware Scan
 Click **Malware Scan** to perform a malware scan on the container images used by workloads.
 Malware scans are performed when creating a workload, changing a workload template, or restarting a workload. If malware is detected, workload creation is halted or the previous template is restored.
@@ -396,9 +424,11 @@ You can check the malware scan results by clicking the **Malware Scan Results** 
 > [Caution]
 > The malware scan feature is provided free of charge, and NHN Cloud is not responsible for security incidents resulting from failure to detect or take follow-up measures.
 
+<a id="role"></a>
 ## Roles for NCS
 You can set roles to control which roles can access NCS service and resources.
 
+<a id="role-assign"></a>
 ### Modify NCS Roles
 Set the role to execute NCS in the NHN Cloud Console screen.
 1. Select **Manage Member** in the **Project** screen.
@@ -409,6 +439,7 @@ Set the role to execute NCS in the NHN Cloud Console screen.
 
 For more information about roles, see [Manage members](/nhncloud/en/console-guide/#_22).
 
+<a id="role-details"></a>
 ### Details of Roles
 To use NCS, you need the following roles.
 
@@ -424,6 +455,7 @@ The Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, and Infrastruc
 Infrastructure ADMIN includes all roles in the underlying infrastructure services. 
 
 
+<a id="role-minimum"></a>
 ### Assign Minimum Roles for NCS
 In a production environment, it is recommended to add only the roles you need. **The minimum roles** to use the NCS service are as follows.
 
@@ -440,15 +472,19 @@ In a production environment, it is recommended to add only the roles you need. *
 Infrastructure NCS ADMIN and Infrastructure Security Group ADMIN permissions are required to create templates.
 Infrastructure NCS ADMIN permissions alone are only for viewing.
 
+<a id="considerations"></a>
 ## Other considerations
 
+<a id="considerations-region"></a>
 ### Region
 
 * NCS service is only available in Korea (Pangyo) and Korea (Gwangju) region.
 
+<a id="considerations-resource-provision-policy"></a>
 ### Resource Provision Policy
 * Refer to [ NHN Container Service Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs).
 
+<a id="considerations-template-container"></a>
 ### Template/Container
 
 * Containers described in Template must be configured to use different container ports.
@@ -470,6 +506,7 @@ Infrastructure NCS ADMIN permissions alone are only for viewing.
 * Configmaps and secrets use the information from when the template was created. If the original file or confidential data is modified, the information in the already created template is not affected.
     * To update the contents of Configmaps and secrets and reflect those changes, you need to create a new template or version and run the workload.
 
+<a id="considerations-gpu"></a>
 ### GPU
 
 * Provides MIG(Multi Instance GPU of A100 40GB Card.
@@ -486,10 +523,12 @@ Infrastructure NCS ADMIN permissions alone are only for viewing.
 | Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
 | Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
+<a id="problem-solving"></a>
 ## Guide to Problem Solving
 
 Explain how to solve various problems that may occur while using the NCS service
 
+<a id="problem-solving-workload"></a>
 ### Workload
 
 * A container event with **FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs** type occurs when the workload is created normally, and the container is running properly
@@ -505,8 +544,10 @@ Explain how to solve various problems that may occur while using the NCS service
 | {{.Resource}} Could not create a workload due to insufficient resources. | Could not create a workload due to insufficient resources for NCS environment.<br>Try again after a while or contact the Customer Center. |
 | Exceeded the number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | Exceeded the NCS quota for the project.<br>For more details, refer to [NHN Container Service(NCS) Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs). |
 
+<a id="integrate-with-nhncloud-service"></a>
 ## Integrate with NHN Cloud Service
 
+<a id="integrate-with-logandcrash"></a>
 ### Integrate with Log & Crash Search Service
 
 When workloads are deleted or restarted, logs are deleted and cannot be viewed. To back up important logs or to search and view specific logs, you can integrate with the Log & Crash Search (L&C) service.
@@ -521,6 +562,7 @@ To learn how to use Log & Crash Search, see the [Log & Crash Search Console User
 > We've described how to create logs as a file on temporary shared storage between containers.
 > If you generate container logs as files, you cannot view them in the Logs tab of the workload.
 
+<a id="integration-through-fluentbit"></a>
 #### Integration through FluentBit
 
 * In order for FluentBit to work with L&C, you need to create a configuration file. Create a configuration file as shown below and upload it to Object Storage.
@@ -573,6 +615,7 @@ To learn how to use Log & Crash Search, see the [Log & Crash Search Console User
 
 * When you create a workload with that template, the logs generated by alpine can be searched and viewed in L&C.
 
+<a id="integration-through-logstash"></a>
 #### Integration through Logstash
 
 * In order for Logstash to work with L&C, you need to create a configuration file. Create a configuration file as shown below and upload it to Object Storage.
