@@ -617,7 +617,7 @@ Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드]
 
 * 해당 템플릿으로 워크로드를 생성하면 alpine에서 생성한 로그를 L&C에서 검색하고 조회할 수 있습니다.
 
-<a id="integration-through-"></a>
+<a id="integration-through-logstash"></a>
 #### Logstash를 이용하여 연동
 
 * Logstash에서 L&C와 연동하기 위해서는 설정 파일 작성이 필요합니다. 아래와 같이 설정 파일을 작성하여 Object Storage에 업로드합니다.
