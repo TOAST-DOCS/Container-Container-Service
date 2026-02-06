@@ -1,39 +1,60 @@
-## Container > NHN Container Service(NCS) > API Guide
+# NHN Container Service(NCS) API 가이드
 
-This document explains the APIs required for configuring workloads and templates.
-To use the APIs, you need an API endpoint and a token. See [API Call and Authentication](/nhncloud/en/public-api/api-authentication)to prepare a token to use the API.
+**Container > NHN Container Service(NCS) > API Guide**
 
-The API domain is as follows.
+### NCS API Common Information
+
+### API Endpoint
 
 | Region | Domain |
 | --- | --- |
 | Korea (Pangyo) region | https://kr1-ncs.api.nhncloudservice.com |
 
-### API Common Response Information
+### Authentication and Permission
+NCS uses User Access Key tokens for authentication and authorization when making API calls. The User Access Key token is a temporary, Bearer-type access token issued from a User Access Key. For more information on issuing and using User Access Key tokens, please refer to the {[User Access Key Token](docs.nhncloud.com/en/nhncloud/en/public-api/user-access-key-token)}.
+
+### Common Response Information
 
 Returns <strong>200 OK<strong> for all API requests. For more information on the response results, see Response Body Header.
 
-| Name | Type | Format | Description |
-| --- | --- | --- | --- |
-| header | Body | Object | API response information |
-| header.isSuccessful | Body | Boolean | <li>true: normal</li><li>false: error</li> |
-| header.resultCode | Body | Integer | <li>200: normal</li><li>10000 or higher: error</li> |
-| header.resultMessage | Body | String | <li>SUCCESS: Normal</li><li>others: error cause message</li> |
+<details>
+  <summary><strong>Success Response</strong></summary>
+
+```
+{
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 200,
+    "resultMessage": "SUCCESS"
+  }
+}
+
+```
+
+</details>
 
 <details>
-  <summary>Example</summary>
+  <summary><strong>Failure Response</strong></summary>
 
-```json
+```
 {
-    "header": {
-        "isSuccessful": true,
-        "resultCode": 200,
-        "resultMessage": "SUCCESS"
-    }
+  "header": {
+    "isSuccessful": false,
+    "resultCode": 10002,
+    "resultMessage": "Bad Request."
+  }
 }
 ```
 
 </details>
+
+| Name | Type | Description |
+| --- | --- | --- |
+| header | Object | API response information |
+| header.isSuccessful | Boolean | <li>true: normal</li><li>false: error</li> |
+| header.resultCode | Integer | <li>200: normal</li><li>10000 or higher: error</li> |
+| header.resultMessage | String | <li>SUCCESS: Normal</li><li>others: error cause message</li> |
+
 
 > [Caution]
 > In each API response, you may find fields that are not specified within this guide. Those fields are for NHN Cloud internal usage, and as such refrain from using them since they may be changed without prior notice.

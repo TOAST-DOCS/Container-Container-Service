@@ -1,29 +1,27 @@
-## Container > NHN Container Service(NCS) > APIガイド
+# NCSAPIガイド
 
-ワークロードとテンプレートを構成するためのAPIを記述します。
-APIを使用するにはAPIエンドポイントとトークンが必要です。[APIの呼び出しおよび認証](/nhncloud/ja/public-api/api-authentication)を参照して、API使用のためのトークンを準備してください。
+**Container > NHN Container Service(NCS) > APIガイド**
 
-APIエンドポイントは次のとおりです。
+### NCSAPI共通情報
+
+### APIエンドポイント
 
 | リージョン | ドメイン |
 | --- | --- |
 | 韓国(パンギョ)リージョン | [https://kr1-ncs.api.nhncloudservice.com](https://kr1-ncs.api.nhncloudservice.com) |
 
-### APIレスポンス共通情報
+## 認証及び権限
+
+NCSは、API呼び出し時の認証/認可のためにUser Access Keyトークンを使用します。User Access Keyトークンは、User Access Keyに基づいて発行されるBearerタイプの一時的なアクセストークンです。User Access Keyトークンの発行及び使用に関する詳細は、{[User Access Keyトークン](docs.nhncloud.com/ja/nhncloud/ja/public-api/user-access-key-token)}を参照してください。
+
+### レスポンス共通情報
 
 すべてのAPIリクエストに <strong>200 OK</strong>でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
 
-| 名前 | 種類 | 形式 | 説明 |
-| --- | --- | --- | --- |
-| header | Body | Object | APIレスポンス情報 |
-| header.isSuccessful | Body | Boolean | <li>true:正常</li><li>false:エラー</li> |
-| header.resultCode | Body | Integer | <li>200:正常</li><li>10000以上:エラー</li> |
-| header.resultMessage | Body | String | <li>SUCCESS:正常</li><li>その他:エラー原因メッセージ</li> |
-
 <details>
-  <summary>例</summary>
+  <summary><strong>成功レスポンス</strong></summary>
 
-```json
+```
 {
   "header": {
     "isSuccessful": true,
@@ -34,6 +32,30 @@ APIエンドポイントは次のとおりです。
 ```
 
 </details>
+
+<details>
+  <summary><strong>失敗レスポンス</strong></summary>
+
+```
+{
+  "header": {
+    "isSuccessful": false,
+    "resultCode": 10002,
+    "resultMessage": "Bad Request."
+  }
+}
+```
+
+</details>
+
+
+| 名前 | 種類 | 説明 |
+| --- | --- | --- |
+| header | Object | APIレスポンス情報 |
+| header.isSuccessful | Boolean | <li>true:正常</li><li>false:エラー</li> |
+| header.resultCode | Integer | <li>200:正常</li><li>10000以上:エラー</li> |
+| header.resultMessage | String | <li>SUCCESS:正常</li><li>その他:エラー原因メッセージ</li> |
+
 
 > [注意]
 > APIレスポンスにガイドに記載されていないフィールドが表示される場合があります。このようなフィールドはNHN Cloud内部用途で使用され、予告なしに変更される可能性があるため、使用しないでください。
