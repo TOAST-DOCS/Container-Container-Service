@@ -454,7 +454,6 @@ To use NCS, you need the following roles.
 The Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, and Infrastructure Security Group ADMIN roles include the Infrastructure MEMBER role.
 Infrastructure ADMIN includes all roles in the underlying infrastructure services. 
 
-
 <a id="role-minimum"></a>
 ### Assign Minimum Roles for NCS
 In a production environment, it is recommended to add only the roles you need. **The minimum roles** to use the NCS service are as follows.

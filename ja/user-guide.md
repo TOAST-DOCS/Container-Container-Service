@@ -457,7 +457,6 @@ NCSサービスを利用するためには、次のロールが必要です。
 > Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, Infrastructure Security Group ADMIN役割はInfrastructure MEMBERロールを含みます。
 > Infrastructure ADMINは基本インフラサービスの全てのロールを含みます。
 
-
 <a id="role-minimum"></a>
 ### NCS最小ロール付与
 本番環境では必要なロールのみ追加することを推奨します。NCS機能を利用するための**最低限のロール**は以下の通りです。

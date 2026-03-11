@@ -455,7 +455,6 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 > Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, Infrastructure Security Group ADMIN 역할은 Infrastructure MEMBER 역할을 포함합니다.
 > Infrastructure ADMIN은 기본 인프라 서비스의 모든 역할을 포함합니다. 
 
-
 <a id="role-minimum"></a>
 ### NCS 최소 역할 부여
 프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 기능을 이용하기 위한 **최소 역할들**은 다음과 같습니다.
@@ -544,7 +543,6 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 | --- | --- |
 | {{.Resource}} 리소스가 부족하여 워크로드를 생성할 수 없습니다. | NCS 환경의 리소스가 부족하여 워크로드를 생성할 수 없습니다.<br>잠시 후 다시 시도하거나 고객 센터에 문의하세요. |
 | 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요. |
-
 
 <a id="integrate-with-nhncloud-service"></a>
 ## NHN Cloud 서비스 연동

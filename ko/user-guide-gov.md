@@ -444,7 +444,6 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 > Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, Infrastructure Security Group ADMIN 역할은 Infrastructure MEMBER 역할을 포함합니다.
 > Infrastructure ADMIN은 기본 인프라 서비스의 모든 역할을 포함합니다. 
 
-
 <a id="role-minimum"></a>
 ### NCS 최소 역할 부여
 프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 기능을 이용하기 위한 **최소 역할들**은 다음과 같습니다.

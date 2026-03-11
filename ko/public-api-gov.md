@@ -1,29 +1,27 @@
-## Container > NHN Container Service(NCS) > API 가이드
+# NCS API 가이드
 
-워크로드와 템플릿을 구성하기 위한 API를 기술합니다.
-API를 사용하려면 API 엔드포인트와 토큰이 필요합니다. [API 호출 및 인증](/nhncloud/ko/public-api/api-authentication-gov)을 참고하여 API 사용에 토큰을 준비합니다.
+**Container > NHN Container Service(NCS) > API 가이드**
 
-API 엔드포인트는 다음과 같습니다.
+## NCS API 공통 정보
+
+### API 엔드포인트
 
 | 리전 | 도메인 |
 | --- | --- |
 | 한국(판교) 리전 | https://kr1-ncs.api.gov-nhncloudservice.com |
 
-### API 응답 공통 정보
+### 인증 및 권한
+
+NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용합니다. User Access Key 토큰은 User Access Key를 기반으로 발급되는 Bearer 타입의 일시적 액세스 토큰입니다. User Access Key 토큰 발급 및 사용에 대한 자세한 내용은 [User Access Key 토큰](/nhncloud/ko/public-api/user-access-key-token-gov)을 참고하세요.
+
+### 응답 공통 정보
 
 모든 API 요청에 <strong>200 OK</strong>로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
 
-| 이름 | 종류 | 형식 | 설명 |
-| --- | --- | --- | --- |
-| header | Body | Object | API 응답 정보 |
-| header.isSuccessful | Body | Boolean | <li>true: 정상</li><li>false: 오류</li> |
-| header.resultCode | Body | Integer | <li>200: 정상</li><li>10000 이상: 오류</li> |
-| header.resultMessage | Body | String | <li>SUCCESS: 정상</li><li>그 외: 오류 원인 메시지</li> |
-
 <details>
-  <summary>예시</summary>
+  <summary><strong>성공 응답</strong></summary>
 
-```json
+```
 {
   "header": {
     "isSuccessful": true,
@@ -31,9 +29,34 @@ API 엔드포인트는 다음과 같습니다.
     "resultMessage": "SUCCESS"
   }
 }
+
 ```
 
 </details>
+
+<details>
+  <summary><strong>실패 응답</strong></summary>
+
+```
+{
+  "header": {
+    "isSuccessful": false,
+    "resultCode": 10002,
+    "resultMessage": "Bad Request."
+  }
+}
+```
+
+</details>
+
+| 이름 | 타입 | 설명 |
+| --- | --- | --- |
+| header | Object | API 응답 정보 |
+| header.isSuccessful | Boolean | <li>true: 정상</li><li>false: 오류</li> |
+| header.resultCode | Integer | <li>200: 정상</li><li>10000 이상: 오류</li> |
+| header.resultMessage | String | <li>SUCCESS: 정상</li><li>그 외: 오류 원인 메시지</li> |
+
+---
 
 > [주의]
 > API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
