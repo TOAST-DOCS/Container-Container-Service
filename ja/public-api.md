@@ -9,6 +9,7 @@
 | リージョン | ドメイン |
 | --- | --- |
 | 韓国(パンギョ)リージョン | [https://kr1-ncs.api.nhncloudservice.com](https://kr1-ncs.api.nhncloudservice.com) |
+| 韓国(光州)リージョン | [https://kr3-ncs.api.nhncloudservice.com](https://kr3-ncs.api.nhncloudservice.com) |
 
 ## 認証及び権限
 
