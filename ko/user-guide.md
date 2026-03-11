@@ -126,6 +126,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 
 <a id="version-basic-information"></a>
 #### 기본 정보
+
 특정 버전을 클릭하여 **기본 정보** 탭에서 상세 정보를 확인할 수 있습니다.
 
 <a id="version-container"></a>

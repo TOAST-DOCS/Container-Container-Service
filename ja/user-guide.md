@@ -124,6 +124,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 
 <a id="version-basic-information"></a>
 #### 基本情報
+
 特定バージョンをクリックして**基本情報**タブで詳細情報を確認できます。
 
 <a id="version-container"></a>

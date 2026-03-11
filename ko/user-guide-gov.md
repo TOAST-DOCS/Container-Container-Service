@@ -467,7 +467,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 <a id="considerations-region"></a>
 ### 리전
 
-* NCS 서비스는 한국(판교), 한국(광주) 리전에서만 사용할 수 있습니다.
+* NCS 서비스는 한국(판교) 리전에서만 사용할 수 있습니다.
 
 <a id="considerations-resource-provision-policy"></a>
 ### 리소스 제공 정책
