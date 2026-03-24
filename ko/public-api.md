@@ -9,6 +9,7 @@
 | 리전 | 도메인 |
 | --- | --- |
 | 한국(판교) 리전 | https://kr1-ncs.api.nhncloudservice.com |
+| 한국(광주) 리전 | https://kr3-ncs.api.nhncloudservice.com |
 
 ### 인증 및 권한
 
