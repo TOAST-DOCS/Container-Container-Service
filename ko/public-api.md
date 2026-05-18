@@ -198,7 +198,6 @@ x-nhn-authorization: {token}
       ],
       "versionCount": 2,
       "version": "second",
-      "sourceVersion": "first"
     },
     {
       "createdAt": "2024-10-24T05:44:25.292Z",
@@ -376,7 +375,6 @@ x-nhn-authorization: {token}
     ],
     "versionCount": 2,
     "version": "second",
-    "sourceVersion": "first"
   }
 }
 ```
@@ -660,7 +658,6 @@ x-nhn-authorization: {token}
 | templates | Body | Array | O | 템플릿 버전 목록 |
 | templates.id | Body | UUID | O | 템플릿 ID |
 | templates.version | Body | String | O | 템플릿 버전 |
-| templates.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | templates.name | Body | String | O | 템플릿 이름 |
 | templates.createdAt | Body | String | O | 생성 시간(UTC) |
 | templates.description | Body | String | X | 템플릿 설명 |
@@ -833,7 +830,6 @@ x-nhn-authorization: {token}
       ],
       "versionCount": 2,
       "version": "second",
-      "sourceVersion": "first"
     }
   ]
 }
@@ -870,7 +866,6 @@ x-nhn-authorization: {token}
 | template | Body | Object | O | 템플릿 버전 정보 |
 | template.id | Body | UUID | O | 템플릿 ID |
 | template.version | Body | String | O | 템플릿 버전 |
-| template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | template.name | Body | String | O | 템플릿 이름 |
 | template.createdAt | Body | String | O | 생성 시간(UTC) |
 | template.description | Body | String | X | 템플릿 설명 |
@@ -1022,7 +1017,6 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Object | O | 템플릿 버전 정보 |
 | template.version | Body | String | O | 템플릿 버전 |
-| template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | template.name | Body | String | O | 템플릿 이름 |
 | template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
@@ -1108,7 +1102,6 @@ x-nhn-authorization: {token}
     ],
     "description": "new version",
     "name": "nginx-template",
-    "sourceVersion": "first",
     "version": "v3"
   }
 }
@@ -1123,7 +1116,6 @@ x-nhn-authorization: {token}
 | template | Body | Object | O | 템플릿 정보 |
 | template.id | Body | UUID | O | 템플릿 ID |
 | template.version | Body | String | O | 템플릿 버전 |
-| template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | template.name | Body | String | O | 템플릿 이름 |
 | template.createdAt | Body | String | O | 생성 시간(UTC) |
 | template.description | Body | String | X | 템플릿 설명 |
@@ -1225,7 +1217,6 @@ x-nhn-authorization: {token}
       "211.50.32.6"
     ],
     "version": "v3",
-    "sourceVersion": "first"
   }
 }
 ```
