@@ -196,7 +196,6 @@ This API does not require a request body.
       ],
       "versionCount": 2,
       "version": "second",
-      "sourceVersion": "first"
     },
     {
       "createdAt": "2024-10-24T05:44:25.292Z",
@@ -374,7 +373,6 @@ This API does not require a request body.
     ],
     "versionCount": 2,
     "version": "second",
-    "sourceVersion": "first"
   }
 }
 ```
@@ -658,7 +656,6 @@ This API does not require a request body.
 | templates | Body | Array | O | Template version list |
 | templates.id | Body | UUID | O | Template ID |
 | templates.version | Body | String | O | Template version |
-| templates.sourceVersion | Body | String | O | Template base version |
 | templates.name | Body | String | O | Template name |
 | templates.createdAt | Body | String | O | Created time (UTC) |
 | templates.description | Body | String | X | Template description |
@@ -831,7 +828,6 @@ This API does not require a request body.
       ],
       "versionCount": 2,
       "version": "second",
-      "sourceVersion": "first"
     }
   ]
 }
@@ -868,7 +864,6 @@ This API does not require a request body.
 | template | Body | Object | O | Template version information |
 | template.id | Body | UUID | O | Template ID |
 | template.version | Body | String | O | Template version |
-| template.sourceVersion | Body | String | O | Template base version |
 | template.name | Body | String | O | Template name |
 | template.createdAt | Body | String | O | Created time (UTC) |
 | template.description | Body | String | X | Template description |
@@ -1020,7 +1015,6 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Object | O | Template version information |
 | template.version | Body | String | O | Template version |
-| template.sourceVersion | Body | String | O | Template base version |
 | template.name | Body | String | O | Template name |
 | template.versionDescription | Body | String | X | Template version description |
 | template.dnsConfig | Body | String List | X | DNS server information set up in the container |
@@ -1106,7 +1100,6 @@ x-nhn-authorization: {token}
     ],
     "description": "new version",
     "name": "nginx-template",
-    "sourceVersion": "first",
     "version": "v3"
   }
 }
@@ -1121,7 +1114,6 @@ x-nhn-authorization: {token}
 | template | Body | Object | O | Template information |
 | template.id | Body | UUID | O | Template ID |
 | template.version | Body | String | O | Template version |
-| template.sourceVersion | Body | String | O | Template base version |
 | template.name | Body | String | O | Template name |
 | template.createdAt | Body | String | O | Created time (UTC) |
 | template.description | Body | String | X | Template description |
@@ -1223,7 +1215,6 @@ x-nhn-authorization: {token}
       "211.50.32.6"
     ],
     "version": "v3",
-    "sourceVersion": "first"
   }
 }
 ```
