@@ -197,7 +197,6 @@ x-nhn-authorization: {token}
       ],
       "versionCount": 2,
       "version": "second",
-      "sourceVersion": "first"
     },
     {
       "createdAt": "2024-10-24T05:44:25.292Z",
@@ -375,7 +374,6 @@ x-nhn-authorization: {token}
     ],
     "versionCount": 2,
     "version": "second",
-    "sourceVersion": "first"
   }
 }
 ```
@@ -659,7 +657,6 @@ x-nhn-authorization: {token}
 | templates | Body | Array | O | テンプレートバージョンリスト |
 | templates.id | Body | UUID | O | テンプレートID |
 | templates.version | Body | String | O | テンプレートバージョン |
-| templates.sourceVersion | Body | String | O | テンプレート基準バージョン |
 | templates.name | Body | String | O | テンプレート名 |
 | templates.createdAt | Body | String | O | 作成時間(UTC) |
 | templates.description | Body | String | X | テンプレートの説明 |
@@ -832,7 +829,6 @@ x-nhn-authorization: {token}
       ],
       "versionCount": 2,
       "version": "second",
-      "sourceVersion": "first"
     }
   ]
 }
@@ -869,7 +865,6 @@ x-nhn-authorization: {token}
 | template | Body | Object | O | テンプレートバージョン情報 |
 | template.id | Body | UUID | O | テンプレートID |
 | template.version | Body | String | O | テンプレートバージョン |
-| template.sourceVersion | Body | String | O | テンプレート基準バージョン |
 | template.name | Body | String | O | テンプレート名 |
 | template.createdAt | Body | String | O | 作成時間(UTC) |
 | template.description | Body | String | X | テンプレートの説明 |
@@ -1021,7 +1016,6 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Object | O | テンプレートバージョン情報 |
 | template.version | Body | String | O | テンプレートバージョン |
-| template.sourceVersion | Body | String | O | テンプレート基準バージョン |
 | template.name | Body | String | O | テンプレート名 |
 | template.versionDescription | Body | String | X | テンプレートバージョンの説明 |
 | template.dnsConfig | Body | String List | X | コンテナに設定されたDNS Server情報 |
@@ -1107,7 +1101,6 @@ x-nhn-authorization: {token}
     ],
     "description": "new version",
     "name": "nginx-template",
-    "sourceVersion": "first",
     "version": "v3"
   }
 }
@@ -1122,7 +1115,6 @@ x-nhn-authorization: {token}
 | template | Body | Object | O | テンプレート情報 |
 | template.id | Body | UUID | O | テンプレートID |
 | template.version | Body | String | O | テンプレートバージョン |
-| template.sourceVersion | Body | String | O | テンプレート基準バージョン |
 | template.name | Body | String | O | テンプレート名 |
 | template.createdAt | Body | String | O | 作成時間(UTC) |
 | template.description | Body | String | X | テンプレートの説明 |
@@ -1224,7 +1216,6 @@ x-nhn-authorization: {token}
       "211.50.32.6"
     ],
     "version": "v3",
-    "sourceVersion": "first"
   }
 }
 ```
