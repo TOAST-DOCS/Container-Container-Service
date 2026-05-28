@@ -1016,6 +1016,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Object | O | テンプレートバージョン情報 |
 | template.version | Body | String | O | テンプレートバージョン |
+| template.sourceVersion | Body | String | O | テンプレート基準バージョン |
 | template.name | Body | String | O | テンプレート名 |
 | template.versionDescription | Body | String | X | テンプレートバージョンの説明 |
 | template.dnsConfig | Body | String List | X | コンテナに設定されたDNS Server情報 |
@@ -1101,7 +1102,8 @@ x-nhn-authorization: {token}
     ],
     "description": "new version",
     "name": "nginx-template",
-    "version": "v3"
+    "version": "v3",
+    "sourceVersion": "first"
   }
 }
 ```
