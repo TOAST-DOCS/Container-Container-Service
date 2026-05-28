@@ -1015,6 +1015,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Object | O | Template version information |
 | template.version | Body | String | O | Template version |
+| template.sourceVersion | Body | String | O | Template base version |
 | template.name | Body | String | O | Template name |
 | template.versionDescription | Body | String | X | Template version description |
 | template.dnsConfig | Body | String List | X | DNS server information set up in the container |
@@ -1100,7 +1101,8 @@ x-nhn-authorization: {token}
     ],
     "description": "new version",
     "name": "nginx-template",
-    "version": "v3"
+    "version": "v3",
+    "sourceVersion": "first"
   }
 }
 ```
