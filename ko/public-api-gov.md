@@ -1010,6 +1010,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | template | Body | Object | O | 템플릿 버전 정보 |
 | template.version | Body | String | O | 템플릿 버전 |
+| template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
 | template.name | Body | String | O | 템플릿 이름 |
 | template.versionDescription | Body | String | X | 템플릿 버전 설명 |
 | template.dnsConfig | Body | String List | X | 컨테이너에 설정된 DNS Server 정보 |
@@ -1094,7 +1095,8 @@ x-nhn-authorization: {token}
     ],
     "description": "new version",
     "name": "nginx-template",
-    "version": "v3"
+    "version": "v3",
+    "sourceVersion": "first"
   }
 }
 ```
