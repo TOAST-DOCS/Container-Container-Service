@@ -69,7 +69,7 @@
 <a id="november-28-2023-feature-updates"></a>
 #### 機能改善
 * Load Balancerが提供されます。
-    * Load Balancer Instanceはサポートしません。
+    * Load Balancer Instanceはサポートされなくなりました。
 * コンテナポートにHTTPS, TERMINATED_HTTPSプロトコルが追加されました。
 * ログタブが改善されました。
 * コンテナの現在と最後の状態についての詳細な理由をイベントタブで確認できるように改善されました。
