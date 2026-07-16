@@ -1,9 +1,10 @@
+<!-- pre-align:aligned sig=08050b417a83 -->
+
 # NCS API Guide
 
 **Container > NHN Container Service(NCS) > API Guide**
 
 <a id="ncs-api-common-information"></a>
-
 ## NCS API Common Information { #ncs-api-common-information }
 
 <a id="api-endpoint"></a>
@@ -68,11 +69,9 @@ Returns <strong>200 OK</strong> for all API requests. For more information on th
 > In each API response, you may find fields that are not specified within this guide. Those fields are for NHN Cloud internal usage, and as such refrain from using them since they may be changed without prior notice.
 
 <a id="template"></a>
-
 ## Template { #template }
 
 <a id="view-template-list"></a>
-
 ### List Templates { #view-template-list }
 
 Retrieves a list of templates.
@@ -257,7 +256,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-template"></a>
-
 ### View Template { #view-template }
 
 Retrieves information about an individual template.
@@ -397,7 +395,6 @@ This API does not require a request body.
 </details>
 
 <a id="create-template"></a>
-
 ### Create Template { #create-template }
 
 Creates a template.
@@ -510,7 +507,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -626,7 +622,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template"></a>
-
 ### Delete Template { #delete-template }
 
 Deletes a template.
@@ -653,7 +648,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="view-a-list-of-template-versions"></a>
-
 ### View a List of Template Versions { #view-a-list-of-template-versions }
 
 ```bash
@@ -865,7 +859,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-template-versions"></a>
-
 ### View Template Versions { #view-template-versions }
 
 Retrieves information on an individual template version.
@@ -1033,7 +1026,6 @@ This API does not require a request body.
 </details>
 
 <a id="create-template-version"></a>
-
 ### Create Template Version { #create-template-version }
 
 Creates a template version.
@@ -1145,7 +1137,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-version-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1261,7 +1252,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template-version"></a>
-
 ### Delete Template Version { #delete-template-version }
 
 ```bash
@@ -1287,11 +1277,9 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="workload"></a>
-
 ## Workload { #workload }
 
 <a id="list-workloads"></a>
-
 ### List Workloads { #list-workloads }
 
 Retrieves a list of workloads.
@@ -1439,7 +1427,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload"></a>
-
 ### View Workload { #view-workload }
 
 Retrieves an individual workload.
@@ -1450,7 +1437,6 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-workload-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1462,7 +1448,6 @@ This API does not require a request body.
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-workload-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1693,7 +1678,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-log"></a>
-
 ### View Workload Log { #view-workload-log }
 
 Retrieves the container logs for your workload.
@@ -1755,7 +1739,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-event"></a>
-
 ### View Workload Events { #view-workload-event }
 
 Retrieves the events of a workload.
@@ -1822,7 +1805,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-a-list-of-workload-run-history"></a>
-
 ### View a List of Workload Run History { #view-a-list-of-workload-run-history }
 
 Retrieves a list of workload run history.
@@ -1888,7 +1870,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-run-history"></a>
-
 ### View Workload Run History { #view-workload-run-history }
 
 Retrieves the run history of an individual workload.
@@ -2068,7 +2049,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-scheduled-run-history"></a>
-
 ### View workload scheduled run history { #view-workload-scheduled-run-history }
 
 Views the history of a scheduled run.
@@ -2127,7 +2107,6 @@ This API does not require a request body.
 </details>
 
 <a id="create-workload"></a>
-
 ### Create a Workload { #create-workload }
 
 Creates a workload.
@@ -2139,7 +2118,6 @@ x-nhn-authorization: {token}
 ```
 
 <a id="create-workload-request"></a>
-
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -2229,7 +2207,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-workload-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2332,7 +2309,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload"></a>
-
 ### Change Workload { #change-workload }
 
 Changes a workload.
@@ -2344,7 +2320,6 @@ x-nhn-authorization: {token}
 ```
 
 <a id="change-workload-request"></a>
-
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -2430,7 +2405,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2539,7 +2513,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="changing-workload-parts"></a>
-
 ### Change Workload Parts { #changing-workload-parts }
 
 You can modify only part of a workload.
@@ -2689,7 +2662,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="stop-workload"></a>
-
 ### Stop Workload { #stop-workload }
 Stops a workload.
 
@@ -2714,7 +2686,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="restart-workload"></a>
-
 ### Restart Workload { #restart-workload }
 Restarts a workload that is stopped.
 
@@ -2739,7 +2710,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="delete-workload"></a>
-
 ### Restart Workload Task { #delete-workload }
 Restarts a task in the workload.
 
@@ -2765,7 +2735,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="workload-1"></a>
-
 ### Delete Workload { #workload-1 }
 
 Deletes a workload.
@@ -2792,7 +2761,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="view-malware-scan-settings"></a>
-
 ### View Malware Scan Settings { #view-malware-scan-settings }
 Retrieves the configured malware scan settings.
 
@@ -2835,7 +2803,6 @@ This API does not require a request body.
 </details>
 
 <a id="configure-malware-scan"></a>
-
 ### Configure Malware Scan { #configure-malware-scan }
 Configures the malware scan settings.
 
@@ -2885,7 +2852,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-malware-scan-result"></a>
-
 ### View Malware Scan Result { #view-malware-scan-result }
 
 Retrieves the malware scan result.
@@ -2994,7 +2960,6 @@ This API does not require a request body.
 </details>
 
 <a id="response-code"></a>
-
 ## Response Codes { #response-code }
 | resultCode | resultMessage | Description |
 | --- | --- | --- |

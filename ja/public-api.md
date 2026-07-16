@@ -1,3 +1,5 @@
+<!-- pre-align:aligned sig=08050b417a83 -->
+
 # NCSAPIガイド
 
 **Container > NHN Container Service(NCS) > APIガイド**
