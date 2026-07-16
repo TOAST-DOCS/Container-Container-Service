@@ -106,10 +106,9 @@
 #### Feature Updates
 * Enhanced service reliability by improving the internal structure.
 
-<!-- pre-align: ko에 대응 섹션 없음 — 검토 필요 (Contains date text 'February 28, 2023' placed as an L4 heading under March 28, 2023 section — appears to be a misplaced date heading with no ko counterpart at this position) -->
-#### February 28, 2023
+<a id="added-features"></a>
+### February 28, 2023 { #added-features }
 
-<!-- pre-align: ko에 대응 섹션 없음 — 검토 필요 (Dual-matched conflict: t28 'Added Features' at L3 was tentatively matched to k28 (기능 추가, L4 under k27), but k27 (2023. 02. 28.) has no proper L3 date heading in target; t28 cannot simultaneously serve as the date heading and the features subheading — it is structurally orphaned as an extra L3 heading) -->
 <a id="added-features-2"></a>
 #### Added Features
 * Added a feature to subdivide permissions
