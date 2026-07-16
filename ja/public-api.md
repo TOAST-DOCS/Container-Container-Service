@@ -36,6 +36,7 @@ NCSは、API呼び出し時の認証/認可のためにUser Access Keyトーク�
     "resultMessage": "SUCCESS"
   }
 }
+
 ```
 
 </details>
@@ -55,7 +56,6 @@ NCSは、API呼び出し時の認証/認可のためにUser Access Keyトーク�
 
 </details>
 
-
 | 名前 | 種類 | 説明 |
 | --- | --- | --- |
 | header | Object | APIレスポンス情報 |
@@ -63,6 +63,7 @@ NCSは、API呼び出し時の認証/認可のためにUser Access Keyトーク�
 | header.resultCode | Integer | <li>200:正常</li><li>10000以上:エラー</li> |
 | header.resultMessage | String | <li>SUCCESS:正常</li><li>その他:エラー原因メッセージ</li> |
 
+---
 
 > [注意]
 > APIレスポンスにガイドに記載されていないフィールドが表示される場合があります。このようなフィールドはNHN Cloud内部用途で使用され、予告なしに変更される可能性があるため、使用しないでください。
@@ -125,9 +126,9 @@ x-nhn-authorization: {token}
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | templates.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | templates.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| templates.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| templates.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | templates.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
-| templates.containers.args | Body | String List | X | コンテナが実行される時に使用される引数 |
+| templates.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | templates.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
 | templates.containers.env | Body | Array | X | コンテナ環境変数 |
 | templates.containers.env.name | Body | String | O | コンテナ環境変数名 |
@@ -232,7 +233,7 @@ x-nhn-authorization: {token}
           ],
           "restartCount": 0,
           "type": "normal"
-    }
+        }
       ],
       "networks": [
         {
@@ -255,6 +256,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-template"></a>
+
 ### テンプレートの表示 { #view-template }
 
 個別テンプレート情報を照会します。
@@ -265,6 +267,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-template-request"></a>
+
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -276,6 +279,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-template-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -306,7 +310,7 @@ x-nhn-authorization: {token}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -394,6 +398,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template"></a>
+
 ### テンプレートを作成する { #create-template }
 
 テンプレートを作成します。
@@ -422,7 +427,7 @@ x-nhn-authorization: {token}
 | template.hostAliases.hostnames | Body | String List | O | hostnamesで使用するhost情報 |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | X | コンテナタイプ(default: normal)<ul><li>normal:一般</li><li>init:初期化</li></ul> |
+| template.containers.type | Body | String | X | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.imageRegistryCredentials | Body | Object | X | Privateレジストリにアクセス可能な情報 |
 | template.containers.imageRegistryCredentials.username | Body | String | O | PrivateレジストリID |
@@ -433,7 +438,7 @@ x-nhn-authorization: {token}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -466,7 +471,6 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe実行制限時間<li>periodSecondsより大きい値に設定する必要があります。</li> |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒)<ul><li>30 ～120 (default:30)</li></ul>|
-
 
 <details>
   <summary>例</summary>
@@ -506,6 +510,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -530,11 +535,11 @@ x-nhn-authorization: {token}
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
 | template.containers.memoryLimit | Body | Object | O | コンテナに割り当てるメモリ情報 |
-| template.containers.memoryLimit.hard | Body | Integer | O | コンテナ割り当てるメモリ(MiB) |
+| template.containers.memoryLimit.hard | Body | Integer | O | コンテナに割り当てるメモリ(MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -621,6 +626,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template"></a>
+
 ### テンプレートの削除 { #delete-template }
 
 テンプレートを削除します。
@@ -647,6 +653,7 @@ x-nhn-authorization: {token}
 このAPIは共通情報のみレスポンスします。
 
 <a id="view-a-list-of-template-versions"></a>
+
 ### テンプレートバージョンリスト表示 { #view-a-list-of-template-versions }
 
 ```bash
@@ -655,6 +662,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-a-list-of-template-versions-request"></a>
+
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -666,10 +674,11 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | q | Query | String | X | 検索引数 |
 | page | Query | Integer | X | 照会するページ番号 |
-| size | Query | Integer | X | 照会するページサイズ(default:10) |
-| sort | Query | String | X | ソート基準となるフィールド名<br>降順ソートの場合、フィールド名の前に`-`を付ける<br>例) `sort=-name` |
+| size | Query | Integer | X | 照会するページサイズ(default: 10) |
+| sort | Query | String | X | ソート基準となるフィールド名<br>降順ソートの場合、フィールド名の前に`-`を付ける<br>例: `sort=-name` |
 
 <a id="view-a-list-of-template-versions-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -701,7 +710,7 @@ x-nhn-authorization: {token}
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | templates.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | templates.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| templates.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | templates.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | templates.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | templates.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -709,7 +718,7 @@ x-nhn-authorization: {token}
 | templates.containers.env.name | Body | String | O | コンテナ環境変数名 |
 | templates.containers.env.value | Body | String | O | コンテナ環境変数の値 |
 | templates.containers.postStart | Body | String List | X | コンテナ作成直後に実行されるコマンド |
-| templates.containers.preStop | Body | String List | X | コンテナが終了する前に実行されるコマンド |
+| templates.containers.preStop | Body | String List | X | コンテナが終了する直前に実行されるコマンド |
 | templates.containers.configs | Body | List | X | コンテナで使用するConfigMap情報 |
 | templates.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | templates.containers.configs.type | Body | String | O | ConfigMap情報を取得するservice type<ul><li>obs: Object Storage</li></ul> |
@@ -858,6 +867,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-template-versions"></a>
+
 ### テンプレートバージョン表示 { #view-template-versions }
 
 個別テンプレートバージョン情報を照会します。
@@ -868,6 +878,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-template-versions-request"></a>
+
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -880,6 +891,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-template-versions-response"></a>
+
 #### レスポンス
 
 * テンプレートの詳細照会と同じ
@@ -912,7 +924,7 @@ x-nhn-authorization: {token}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -1025,6 +1037,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-version"></a>
+
 ### テンプレートバージョン作成 { #create-template-version }
 
 テンプレートバージョンを作成します。
@@ -1051,7 +1064,7 @@ x-nhn-authorization: {token}
 | template.applyImmediately | Body | Boolean | X | true:即時配布使用、false:即時配布使用しない(default:false) |
 | template.containers | Body | Array | O | テンプレートのコンテナリスト |
 | template.containers.name | Body | String | O | コンテナ名 |
-| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
+| template.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul>|
 | template.containers.image | Body | String | O | コンテナイメージ |
 | template.containers.imageRegistryCredentials | Body | Object | X | Privateレジストリにアクセス可能な情報 |
 | template.containers.imageRegistryCredentials.changed | Body | Boolean | X | 既存アカウントの使用有無(default:false)<ul><li>false:既存アカウントを使用</li><li>true:新規アカウントを使用(username、passwordの送信が必要)</li></ul> |
@@ -1063,7 +1076,7 @@ x-nhn-authorization: {token}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -1136,6 +1149,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-version-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1164,7 +1178,7 @@ x-nhn-authorization: {token}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
@@ -1186,7 +1200,7 @@ x-nhn-authorization: {token}
 | template.containers.volumes.name | Body | String | O | ストレージ名 |
 | template.containers.volumes.path | Body | String | O | NASストレージ接続パス |
 | template.containers.volumes.mountPath | body | String | X | コンテナの接続パス |
-| template.containers.probe | Body | List | X | コンテナのProbe設定 |
+| template.containers.probe | Body | List | X | コンテナProbeの設定 |
 | template.containers.probe.type | Body | String | O | コンテナProbeタイプ<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probeの失敗基準 |
 | template.containers.probe.initialDelaySeconds | Body | Integer | O | Probeの開始待機時間 |
@@ -1251,6 +1265,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template-version"></a>
+
 ### テンプレートバージョンの削除 { #delete-template-version }
 
 ```bash
@@ -1276,9 +1291,11 @@ x-nhn-authorization: {token}
 このAPIは共通情報のみレスポンスします。
 
 <a id="workload"></a>
+
 ## ワークロード { #workload }
 
 <a id="list-workloads"></a>
+
 ### ワークロードリスト表示 { #list-workloads }
 
 ワークロードリストを照会します。
@@ -1289,6 +1306,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="list-workloads-request"></a>
+
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -1302,6 +1320,7 @@ x-nhn-authorization: {token}
 | size | Query | Integer | X | 照会するページサイズ(default: 10) |
 
 <a id="list-workloads-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1317,7 +1336,7 @@ x-nhn-authorization: {token}
 | workloads.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workloads.available | Body | Integer | O | ワークロード作業実行数 |
 | workloads.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
-| workloads.status | Body | String | O | ワークロード状態 <ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
+| workloads.status | Body | String | O | ワークロード状態<ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
 | workloads.url | Body | String | X | ワークロードロードバランサーURL |
 | workloads.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workloads.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサー使用有無 |
@@ -1349,11 +1368,11 @@ x-nhn-authorization: {token}
 | workloads.privateDns.ttl | Body | Integer | O | レコードセットのTTL値 |
 | workloads.privateDns.zoneId | Body | String | O | ワークロードで使用するPrivate DNS Zone ID |
 | workloads.privateDns.domain | Body | String | O | Private DNSに登録されたドメイン情報 |
-| workloads.activeDeadline | Body | Object | X | ワークロードの予約終了情報 |
+| workloads.activeDeadline | Body | Object | X | ワークロード予約終了情報 |
 | workloads.activeDeadline.timeZone | Body | String | O | 予約終了基準時間<li>例：Asia/Seoul、UTC</li> |
 | workloads.activeDeadline.timeOffset | Body | String | O | 予約終了基準時間Offset |
 | workloads.activeDeadline.time | Body | String | O | 予約終了時間 |
-| workloads.autoScaler | Body | Object | X | AutoScalerの設定情報 |
+| workloads.autoScaler | Body | Object | X | AutoScaler設定情報 |
 | workloads.autoScaler.scaleOut | Body | Object | O | ScaleOut情報 |
 | workloads.autoScaler.scaleOut.enabled | Body | Boolean | O | ScaleOutの使用有無 |
 | workloads.autoScaler.scaleOut.maxReplicas | Body | Integer | X | オートスケーリングの最大作業数 |
@@ -1426,6 +1445,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload"></a>
+
 ### ワークロード表示 { #view-workload }
 
 個別ワークロードを照会します。
@@ -1436,6 +1456,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-workload-request"></a>
+
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -1447,6 +1468,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-workload-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1461,11 +1483,11 @@ x-nhn-authorization: {token}
 | workload.desired | Body | Integer | O | ワークロード作業リクエスト数 |
 | workload.available | Body | Integer | O | ワークロード作業実行数 |
 | workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
-| workload.status | String | Integer | O | ワークロード状態 <ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
+| workload.status | Body | String | O | ワークロード状態<ul><li>Pending：ワークロード作成/変更進行中</li><li>Running：ワークロード作成/変更完了</li><li>Failed：ワークロード作成/変更失敗</li><li>Terminated：ワークロード終了</li><li>Paused：ワークロード停止</li><li>Active：予約ワークロード実行中</li><li>Suspend：予約ワークロード停止</li></ul> |
 | workload.url | Body | String | X | ワークロードロードバランサーURL |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
-| workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
+| workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサー使用有無 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IP使用有無 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -1520,7 +1542,7 @@ x-nhn-authorization: {token}
 | workload.tasks.id | Body | UUID | O | 作業ID |
 | workload.tasks.containers | Body | Array | O | 作業のコンテナリスト |
 | workload.tasks.containers.name | Body | String | O | コンテナ名 |
-| workload.tasks.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul> |
+| workload.tasks.containers.type | Body | String | O | コンテナタイプ<ul><li>normal:一般</li><li>init:初期化</li></ul>|
 | workload.tasks.containers.image | Body | String | O | コンテナイメージ |
 | workload.tasks.containers.ip | Body | String | X | コンテナIP |
 | workload.tasks.containers.cpus | Body | Float | O | コンテナに割り当てるCPUの数 |
@@ -1529,9 +1551,9 @@ x-nhn-authorization: {token}
 | workload.tasks.containers.gpuFlavor | Body | String | X | コンテナに割り当てられたGPU Flavor情報 |
 | workload.tasks.containers.ports | Body | Array | X | コンテナのポート情報 |
 | workload.tasks.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| workload.tasks.containers.ports.protocol | Body | String | O | コンテナプロトコル |
+| workload.tasks.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | workload.tasks.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
-| workload.tasks.containers.args | Body | String List | X | コンテナが起動する時に 使用される引数 |
+| workload.tasks.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | workload.tasks.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
 | workload.tasks.containers.env | Body | Array | X | コンテナ環境変数 |
 | workload.tasks.containers.env.name | Body | String | O | コンテナ環境変数名 |
@@ -1544,7 +1566,7 @@ x-nhn-authorization: {token}
 | workload.tasks.containers.configs.value | Body | String | O | オブジェクトURL |
 | workload.tasks.containers.configs.mountPath | Body | String | O | コンテナマウントパス |
 | workload.tasks.containers.secrets | Body | List | X | コンテナで使用するSecret情報 |
-| workload.tasks..containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
+| workload.tasks.containers.secrets.type | Body | String | O | Secret情報を取得するservice type<ul><li>skm: Secure Key Manager</li></ul> |
 | workload.tasks.containers.secrets.value | Body | String | O | キーID |
 | workload.tasks.containers.secrets.mountPath | Body | String | O | コンテナマウントパス |
 | workload.tasks.containers.volumes | Body | Array | X | コンテナで使用するストレージ情報 |
@@ -1677,6 +1699,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-log"></a>
+
 ### ワークロードログ表示 { #view-workload-log }
 
 ワークロードのコンテナログを照会します。
@@ -1738,6 +1761,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-event"></a>
+
 ### ワークロードイベント表示 { #view-workload-event }
 
 ワークロードのイベントを照会します。
@@ -1804,6 +1828,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-a-list-of-workload-run-history"></a>
+
 ### ワークロード実行ヒストリーリスト表示 { #view-a-list-of-workload-run-history }
 
 ワークロード実行ヒストリーリストを照会します。
@@ -1869,6 +1894,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-run-history"></a>
+
 ### ワークロード実行ヒストリー表示 { #view-workload-run-history }
 
 個別ワークロード実行ヒストリーを照会します。
@@ -1879,6 +1905,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-workload-run-history-request"></a>
+
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -1891,6 +1918,7 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-workload-run-history-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1926,8 +1954,8 @@ x-nhn-authorization: {token}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor情報<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | コンテナで使用するポート情報 |
 | template.containers.ports.containerPort | Body | Integer | O | コンテナポート |
-| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li><ul> |
-| template.containers.command | Body | String List | X | コンテナが起動する時に 実行されるコマンド |
+| template.containers.ports.protocol | Body | String | O | コンテナプロトコル<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
+| template.containers.command | Body | String List | X | コンテナが起動する時に実行されるコマンド |
 | template.containers.args | Body | String List | X | コンテナが起動する時に使用される引数 |
 | template.containers.workDirectory | Body | String | X | コンテナの作業ディレクトリ |
 | template.containers.env | Body | Array | X | コンテナ環境変数 |
@@ -2048,6 +2076,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-scheduled-run-history"></a>
+
 ### ワークロード予約実行ヒストリー表示 { #view-workload-scheduled-run-history }
 
 予約実行ヒストリーを照会します。
@@ -2106,6 +2135,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-workload"></a>
+
 ### ワークロードを作成する { #create-workload }
 
 ワークロードを作成します。
@@ -2117,6 +2147,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="create-workload-request"></a>
+
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2132,7 +2163,7 @@ x-nhn-authorization: {token}
 | workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IP使用有無 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -2206,6 +2237,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-workload-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2213,7 +2245,7 @@ x-nhn-authorization: {token}
 | workload | Body | Object | O | ワークロード情報 |
 | workload.id | Body | UUID | O | ワークロードID |
 | workload.name | Body | String | O | ワークロード名 |
-| workload.type | Body | String | X | 配布コントローラー<ul><li>deployment</li><li>statefulset</li></ul> |
+| workload.type | Body | String | O | 配布コントローラー<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
 | workload.templateVersion | Body | String | O | ワークロードのテンプレートバージョン |
 | workload.createdAt | Body | String | O | 作成時間(UTC) |
@@ -2308,6 +2340,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload"></a>
+
 ### ワークロードを変更する { #change-workload }
 
 ワークロードを変更します。
@@ -2319,6 +2352,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="change-workload-request"></a>
+
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2334,7 +2368,7 @@ x-nhn-authorization: {token}
 | workload.internalLBTimeout | Body | Integer | X | 内部リクエストレスポンス待機時間 |
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IP使用有無 |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -2404,6 +2438,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2512,11 +2547,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="changing-workload-parts"></a>
+
 ### ワークロードの部分変更 { #changing-workload-parts }
 
 ワークロードの一部のみを修正できます。
 
 <a id="changing-workload-parts-request"></a>
+
 #### リクエスト
 
 * このAPIを使用する場合、Content-Typeはapplication/json-patch+jsonに設定する必要があります。
@@ -2553,6 +2590,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="changing-workload-parts-response"></a>
+
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2661,6 +2699,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="stop-workload"></a>
+
 ### ワークロード中止 { #stop-workload }
 ワークロードを中止します。
 
@@ -2685,6 +2724,7 @@ x-nhn-authorization: {token}
 このAPIは共通情報のみレスポンスします。
 
 <a id="restart-workload"></a>
+
 ### ワークロード再起動 { #restart-workload }
 中止状態のワークロードを再起動します。
 
@@ -2709,6 +2749,7 @@ x-nhn-authorization: {token}
 このAPIは共通情報のみレスポンスします。
 
 <a id="delete-workload"></a>
+
 ### ワークロード作業再起動 { #delete-workload }
 ワークロードの作業を再起動します。
 
@@ -2734,6 +2775,7 @@ x-nhn-authorization: {token}
 このAPIは共通情報のみレスポンスします。
 
 <a id="workload-1"></a>
+
 ### ワークロードを削除する { #workload-1 }
 
 ワークロードを削除します。
@@ -2760,6 +2802,7 @@ x-nhn-authorization: {token}
 このAPIは共通情報のみレスポンスします。
 
 <a id="view-malware-scan-settings"></a>
+
 ### マルウェア検査設定の照会 { #view-malware-scan-settings }
 設定されているマルウェア検査の設定を照会します。
 
@@ -2771,7 +2814,7 @@ x-nhn-authorization: {token}
 <a id="view-malware-scan-settings-request"></a>
 #### リクエスト
 
-このAPIはリクエストボディを要求しません。
+このAPIはリクエスト本文を要求しません。
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -2802,6 +2845,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="configure-malware-scan"></a>
+
 ### マルウェア検査設定 { #configure-malware-scan }
 マルウェア検査を設定します。
 
@@ -2851,6 +2895,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-malware-scan-result"></a>
+
 ### マルウェア検査結果の照会 { #view-malware-scan-result }
 
 マルウェア検査の結果を照会します。
@@ -2959,6 +3004,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="response-code"></a>
+
 ## レスポンスコード { #response-code }
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
