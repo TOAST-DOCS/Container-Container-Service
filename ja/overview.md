@@ -1,9 +1,13 @@
-## Container > NHN Container Service(NCS) > 概要
+<!-- pre-align:aligned sig=80730cbca944 -->
+
+<a id="container-nhn-container-service-ncs-overview"></a>
+## Container > NHN Container Service(NCS) > 概要 { #container-nhn-container-service-ncs-overview }
 
 NHN Container Service(NCS)はコンテナを駆動する環境を提供するサービスです。
 VMインスタンス、Kubernetesなどのコンテナ実行環境を構成しなくても、このサービスを利用してコンテナを実行できます。
 
-## 特徴
+<a id="ncs-characteristics"></a>
+## 特徴 { #ncs-characteristics }
 
 * パブリック/プライベートコンテナレジストリに保管されたコンテナイメージを駆動できます。
 * コンテナはユーザーVPCに接続されるため、VPCを介して通信可能なインスタンス、ロードバランサー、Online NASなどすべてのIaaSリソースと通信でき、VPCが提供するネットワーク機能を活用できます。
@@ -20,13 +24,15 @@ VMインスタンス、Kubernetesなどのコンテナ実行環境を構成し�
 * 実行中のコンテナにアクセス可能なWebターミナル機能を提供します。
 * ワークロードのリソース使用率をモニタリングし、必要な場合はワークロードの作業数を追加および削除できます。
 
-## 構成および用語
+<a id="configuration-and-terms"></a>
+## 構成および用語 { #configuration-and-terms }
 
 以下はNCSサービス構成の例です。
 
 ![NCS_overview_01.png](https://static.toastoven.net/prod_ncs/20221222/D-NCS_overview_01.png)
 
-### テンプレート
+<a id="template"></a>
+### テンプレート { #template }
 
 どの仕様のコンテナを構成するかを`テンプレート`に定義します。
 `テンプレート`にはテンプレート名、説明、接続するVPC、1つ以上のコンテナ仕様を記述します。
@@ -38,7 +44,8 @@ VMインスタンス、Kubernetesなどのコンテナ実行環境を構成し�
 テンプレートを維持した状態で必要な場合にのみワークロードを作成してコンテナを駆動することもできます。
 ```
 
-### ワークロード
+<a id="workload"></a>
+### ワークロード { #workload }
 
 コンテナ仕様が記述された`テンプレート`を参照して`ワークロード`を定義します。
 `ワークロード`には参照される`テンプレート`、ワークロード実行数、ロードバランサーを使用するかどうか、Floating IPを使用するかどうかを記述します。
@@ -50,7 +57,8 @@ VPCにアクセス可能な場所で作成されたコンテナポートにア�
 
 ワークロード実行数に指定した数だけ`作業`が実行されます。上の例では2に指定したため、2つの作業が作成されました。
 
-### ロードバランサー
+<a id="load-balancer"></a>
+### ロードバランサー { #load-balancer }
 
 ワークロードに複数のコンテナ実行数を設定し、ロードバランサーを接続すると、トラフィック負荷を個別コンテナに分配できます。
 Floating IPを使用するように設定した場合、ロードバランサーにFIPが割り当てられ、ドメインも作成されます。
