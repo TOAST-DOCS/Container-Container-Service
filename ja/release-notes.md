@@ -1,3 +1,5 @@
+<!-- pre-align:aligned sig=d29522461c5f -->
+
 <a id="container-nhn-container-servicencs-release-notes"></a>
 ## Container > NHN Container Service(NCS)  > リリースノート { #container-nhn-container-servicencs-release-notes }
 <a id="october-28-2025"></a>
