@@ -104,13 +104,13 @@ This API does not require a request body.
 | templates.id | Body | UUID | O | Template ID |
 | templates.version | Body | String | O | Template version |
 | templates.name | Body | String | O | Template name |
-| templates.createdAt | Body | String | O | Created time (UTC) |
+| templates.createdAt | Body | String | O | Creation time (UTC) |
 | templates.description | Body | String | X | Template description |
 | templates.versionDescription | Body | String | O | Template version description |
 | templates.networks | Body | Array | O | Network information of the template |
 | templates.networks.vpcId | Body | String | O | VPC ID of the template |
 | templates.networks.subnetId | Body | String | O | Subnet ID of the template |
-| templates.dnsConfig | Body | String List | X | DNS Server information configured in the container |
+| templates.dnsConfig | Body | String List | X | DNS server information configured in the container |
 | templates.hostAliases | Body | List | X | Information configured in the container's `/etc/hosts` |
 | templates.hostAliases.ip | Body | String | O | IP of the hostnames configured in the container |
 | templates.hostAliases.hostnames | Body | String List | O | Hostnames of the IP configured in the container |
@@ -133,9 +133,9 @@ This API does not require a request body.
 | templates.containers.env | Body | Array | X | Container environment variables |
 | templates.containers.env.name | Body | String | O | Container environment variable name |
 | templates.containers.env.value | Body | String | O | Container environment variable value |
-| templates.containers.postStart | Body | String List | X | Commands executed immediately after the container is created |
-| templates.containers.preStop | Body | String List | X | Commands executed immediately before the container is stopped |
-| templates.containers.configs | Body | List | X | ConfigMap information used by the container |
+| templates.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| templates.containers.preStop | Body | String List | X | Commands that run immediately after container termination |
+| templates.containers.configs | Body | List | X | ConfigMap information used by containers |
 | templates.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | templates.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
 | templates.containers.configs.value | Body | String | O | Object URL |
@@ -146,7 +146,7 @@ This API does not require a request body.
 | templates.containers.secrets.mountPath | Body | String | O | Container mount path |
 | templates.containers.volumes | Body | Array | X | NAS storage information used by the container |
 | templates.containers.volumes.name | Body | String | O | Storage name |
-| templates.containers.volumes.path | Body | String | O | NAS connection path |
+| templates.containers.volumes.path | Body | String | O | NAS storage connection path |
 | templates.containers.volumes.mountPath | body | String | X | Container connection path |
 | templates.containers.probe | Body | List | X | Container Probe settings |
 | templates.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
@@ -256,6 +256,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-template"></a>
+
 ### View Template { #view-template }
 
 Retrieves information about an individual template.
@@ -266,6 +267,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-template-request"></a>
+
 #### Request
 
 This API does not require a request body.
@@ -277,6 +279,7 @@ This API does not require a request body.
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-template-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -314,8 +317,8 @@ This API does not require a request body.
 | template.containers.env | Body | Array | X | Container environment variables |
 | template.containers.env.name | Body | String | O | Container environment variable name |
 | template.containers.env.value | Body | String | O | Container environment variable value |
-| template.containers.postStart | Body | String List | X | Command run immediately after the container is created |
-| template.containers.preStop | Body | String List | X | Command run immediately before the container stops |
+| template.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| template.containers.preStop | Body | String List | X | Commands executed immediately before the container is stopped |
 | template.containers.configs | Body | List | X | ConfigMap information used by the container |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
@@ -327,15 +330,15 @@ This API does not require a request body.
 | template.containers.secrets.mountPath | Body | String | O | Container mount path |
 | template.containers.volumes | Body | Array | X | NAS storage information used by the container |
 | template.containers.volumes.name | Body | String | O | Storage name |
-| template.containers.volumes.path | Body | String | O | NAS connection path |
+| template.containers.volumes.path | Body | String | O | NAS storage connection path |
 | template.containers.volumes.mountPath | body | String | X | Container connection path |
 | template.containers.probe | Body | List | X | Container Probe configuration |
 | template.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
-| template.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay time |
+| template.containers.probe.failureThreshold | Body | Integer | O | Probe failure criteria |
+| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout |
-| template.containers.probe.exec | Body | String List | O | Probe execution command |
+| template.containers.probe.exec | Body | String List | O | Command to run a probe |
 | template.containers.stopTimeout | Body | Integer | X | Initialization container execution timeout (seconds) |
 
 <details>
@@ -395,6 +398,7 @@ This API does not require a request body.
 </details>
 
 <a id="create-template"></a>
+
 ### Create Template { #create-template }
 
 Creates a template.
@@ -418,9 +422,9 @@ x-nhn-authorization: {token}
 | template.networks.vpcId | Body | String | O | VPC ID of the template |
 | template.networks.subnetId | Body | String | O | Subnet ID of the template |
 | template.dnsConfig | Body | String List | X | DNS server information used by the container (up to three settings) |
-| template.hostAliases | Body | List | X | Information configured in the container's `/etc/hosts` |
-| template.hostAliases.ip | Body | String | O | IP information used in hostnames |
-| template.hostAliases.hostnames | Body | String List | O | Host information used in hostnames |
+| template.hostAliases | Body | List | X | Information to set in container `/etc/hosts` |
+| template.hostAliases.ip | Body | String | O | IP information used by hostnames |
+| template.hostAliases.hostnames | Body | String List | O | Host information used by hostnames |
 | template.containers | Body | Array | O | Container list of the template |
 | template.containers.name | Body | String | O | Container name |
 | template.containers.type | Body | String | X | Container Type<ul><li>normal: General</li><li>init: Init</li></ul>|
@@ -441,8 +445,8 @@ x-nhn-authorization: {token}
 | template.containers.env | Body | Array | X | Container environment variables |
 | template.containers.env.name | Body | String | O | Container environment variable name |
 | template.containers.env.value | Body | String | O | Container environment variable value |
-| template.containers.postStart | Body | String List | X | Commands to run immediately after the container is created |
-| template.containers.preStop | Body | String List | X | Commands to run immediately before the container stops |
+| template.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| template.containers.preStop | Body | String List | X | Commands that run immediately before the container is stopped |
 | template.containers.configs | Body | List | X | ConfigMap information used by the container (up to 10) |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
@@ -462,12 +466,11 @@ x-nhn-authorization: {token}
 | template.containers.probe | Body | List | X | Container Probe configuration |
 | template.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial wait time |
+| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval<li>Must be set to a value smaller than timeoutSeconds.</li> |
-| template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout<li>Must be set to a value greater than periodSeconds.</li> |
+| template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout<li>A value greater than periodSeconds must be set.</li> |
 | template.containers.probe.exec | Body | String List | O | Probe execution command |
-| template.containers.stopTimeout | Body | Integer | X | Init container execution timeout (seconds)<ul><li>30 to 120 (default: 30)</li></ul>|
-
+| template.containers.stopTimeout | Body | Integer | X | Initialization container execution timeout (seconds)<ul><li>30 to 120 (default: 30)</li></ul>|
 
 <details>
   <summary>Example</summary>
@@ -507,6 +510,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -521,29 +525,29 @@ x-nhn-authorization: {token}
 | template.networks | Body | Array | O | Network information of the template |
 | template.networks.vpcId | Body | String | O | VPC ID of the template |
 | template.networks.subnetId | Body | String | O | Subnet ID of the template |
-| template.dnsConfig | Body | String List | X | DNS Server information configured in the container |
+| template.dnsConfig | Body | String List | X | DNS server information set in the template |
 | template.hostAliases | Body | List | X | Information set up in container `/etc/hosts` |
-| template.hostAliases.ip | Body | String | O | IP of the hostnames configured in the container |
-| template.hostAliases.hostnames | Body | String List | O | Hostnames of the IP configured in the container |
-| template.containers | Body | Array | O | Container list of the template |
+| template.hostAliases.ip | Body | String | O | IP of the hostnames set in the container |
+| template.hostAliases.hostnames | Body | String List | O | hostnames of the IP set in the container |
+| template.containers | Body | Array | O | List of containers in the template |
 | template.containers.name | Body | String | O | Container name |
-| template.containers.type | Body | String | O | Container Type<ul><li>normal: Normal</li><li>init: Init</li></ul>|
+| template.containers.type | Body | String | O | Container Type<ul><li>normal: General</li><li>init: Initialization</li></ul>|
 | template.containers.image | Body | String | O | Container image |
-| template.containers.cpus | Body | Float | O | Number of CPUs allocated to the container |
-| template.containers.memoryLimit | Body | Object | O | Memory information allocated to the container |
+| template.containers.cpus | Body | Float | O | Number of CPU assigned to container |
+| template.containers.memoryLimit | Body | Object | O | Information on memory assigned to container |
 | template.containers.memoryLimit.hard | Body | Integer | O | Memory allocated to the container (MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor information<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | Port information used by the container |
 | template.containers.ports.containerPort | Body | Integer | O | Container port |
 | template.containers.ports.protocol | Body | String | O | Container protocol<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
-| template.containers.command | Body | String List | X | Commands to execute when the container starts |
+| template.containers.command | Body | String List | X | Command to run when the container starts |
 | template.containers.args | Body | String List | X | Arguments used when the container starts |
 | template.containers.workDirectory | Body | String | X | Working directory of the container |
 | template.containers.env | Body | Array | X | Container environment variables |
 | template.containers.env.name | Body | String | O | Container environment variable name |
 | template.containers.env.value | Body | String | O | Container environment variable value |
 | template.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
-| template.containers.preStop | Body | String List | X | Commands that run immediately before the container terminates |
+| template.containers.preStop | Body | String List | X | Commands that run immediately before the container is stopped |
 | template.containers.configs | Body | List | X | ConfigMap information used by the container |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
@@ -553,17 +557,17 @@ x-nhn-authorization: {token}
 | template.containers.secrets.type | Body | String | O | Service type for retrieving Secret information<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | Key ID |
 | template.containers.secrets.mountPath | Body | String | O | Container mount path |
-| template.containers.volumes | Body | Array | X | NAS storage information used by the container |
+| template.containers.volumes | Body | Array | X | Information on NAS storage used in containers |
 | template.containers.volumes.name | Body | String | O | Storage name |
-| template.containers.volumes.path | Body | String | O | NAS connection path |
+| template.containers.volumes.path | Body | String | O | NAS Storage Connection Path |
 | template.containers.volumes.mountPath | body | String | X | Container connection path |
 | template.containers.probe | Body | List | X | Container Probe settings |
 | template.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay |
+| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout |
-| template.containers.probe.exec | Body | String List | O | Probe execution command |
+| template.containers.probe.exec | Body | String List | O | Probe execution commands |
 | template.containers.stopTimeout | Body | Integer | X | Initialization container execution timeout (seconds) |
 
 <details>
@@ -622,6 +626,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template"></a>
+
 ### Delete Template { #delete-template }
 
 Deletes a template.
@@ -648,6 +653,7 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="view-a-list-of-template-versions"></a>
+
 ### View a List of Template Versions { #view-a-list-of-template-versions }
 
 ```bash
@@ -656,6 +662,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-a-list-of-template-versions-request"></a>
+
 #### Request
 
 This API does not require a request body.
@@ -671,6 +678,7 @@ This API does not require a request body.
 | sort | Query | String | X | Field name to sort by<br>Prefix field names with `-` for reverse sorting<br>Example: `sort=-name` |
 
 <a id="view-a-list-of-template-versions-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -690,7 +698,7 @@ This API does not require a request body.
 | templates.hostAliases | Body | List | X | Information configured in the container's `/etc/hosts` |
 | templates.hostAliases.ip | Body | String | O | IP of the hostnames configured in the container |
 | templates.hostAliases.hostnames | Body | String List | O | Hostnames of the IP configured in the container |
-| templates.versionCount | Body | Integer | O | Number of template versions |
+| templates.versionCount | Body | Integer | O | Number of versions of the template |
 | templates.workloadCount | Body | Integer | O | Number of workloads using the template |
 | templates.containers | Body | Array | O | Container list of the template |
 | templates.containers.name | Body | String | O | Container name |
@@ -709,9 +717,9 @@ This API does not require a request body.
 | templates.containers.env | Body | Array | X | Container environment variables |
 | templates.containers.env.name | Body | String | O | Container environment variable name |
 | templates.containers.env.value | Body | String | O | Container environment variable value |
-| templates.containers.postStart | Body | String List | X | Command executed immediately after the container is created |
-| templates.containers.preStop | Body | String List | X | Command executed immediately before the container stops |
-| templates.containers.configs | Body | List | X | ConfigMap information used by the container |
+| templates.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| templates.containers.preStop | Body | String List | X | Commands that run immediately after container termination |
+| templates.containers.configs | Body | List | X | ConfigMap information used by containers |
 | templates.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | templates.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
 | templates.containers.configs.value | Body | String | O | Object URL |
@@ -724,13 +732,13 @@ This API does not require a request body.
 | templates.containers.volumes.name | Body | String | O | Storage name |
 | templates.containers.volumes.path | Body | String | O | NAS storage connection path |
 | templates.containers.volumes.mountPath | body | String | X | Container connection path |
-| templates.containers.probe | Body | List | X | Container probe settings |
-| templates.containers.probe.type | Body | String | O | Container probe type<ul><li>startup</li><li>liveness</li></ul> |
-| templates.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| templates.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay time |
+| templates.containers.probe | Body | List | X | Container Probe settings |
+| templates.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
+| templates.containers.probe.failureThreshold | Body | Integer | O | Probe failure criteria |
+| templates.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | templates.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval |
 | templates.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout |
-| templates.containers.probe.exec | Body | String List | O | Probe execution command |
+| templates.containers.probe.exec | Body | String List | O | Command to run a probe |
 | templates.containers.stopTimeout | Body | Integer | X | Initialization container execution timeout (seconds) |
 
 <details>
@@ -859,6 +867,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-template-versions"></a>
+
 ### View Template Versions { #view-template-versions }
 
 Retrieves information on an individual template version.
@@ -869,6 +878,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-template-versions-request"></a>
+
 #### Request
 
 This API does not require a request body.
@@ -881,6 +891,7 @@ This API does not require a request body.
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-template-versions-response"></a>
+
 #### Response
 
 * Same as retrieving template details
@@ -905,7 +916,7 @@ This API does not require a request body.
 | template.workloadCount | Body | Integer | O | Number of workloads using the template |
 | template.containers | Body | Array | O | Container list of the template |
 | template.containers.name | Body | String | O | Container name |
-| template.containers.type | Body | String | O | Container Type<ul><li>normal: Standard</li><li>init: Init</li></ul>|
+| template.containers.type | Body | String | O | Container Type<ul><li>normal: General</li><li>init: Initialization</li></ul>|
 | template.containers.image | Body | String | O | Container image |
 | template.containers.cpus | Body | Float | O | Number of CPUs allocated to the container |
 | template.containers.memoryLimit | Body | Object | O | Memory information allocated to the container |
@@ -920,28 +931,28 @@ This API does not require a request body.
 | template.containers.env | Body | Array | X | Container environment variables |
 | template.containers.env.name | Body | String | O | Container environment variable name |
 | template.containers.env.value | Body | String | O | Container environment variable value |
-| template.containers.postStart | Body | String List | X | Commands to run immediately after the container is created |
-| template.containers.preStop | Body | String List | X | Commands to run immediately before the container stops |
-| template.containers.configs | Body | List | X | ConfigMap information used in the container |
+| template.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| template.containers.preStop | Body | String List | X | Commands that run immediately before the container terminates |
+| template.containers.configs | Body | List | X | ConfigMap information used by the container |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | Object URL |
 | template.containers.configs.mountPath | Body | String | O | Container mount path |
-| template.containers.secrets | Body | List | X | Secret information used in the container |
+| template.containers.secrets | Body | List | X | Secret information used by the container |
 | template.containers.secrets.type | Body | String | O | Service type for retrieving Secret information<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | Key ID |
 | template.containers.secrets.mountPath | Body | String | O | Container mount path |
-| template.containers.volumes | Body | Array | X | NAS storage information used in the container |
+| template.containers.volumes | Body | Array | X | NAS storage information used by the container |
 | template.containers.volumes.name | Body | String | O | Storage name |
 | template.containers.volumes.path | Body | String | O | NAS storage connection path |
 | template.containers.volumes.mountPath | body | String | X | Container connection path |
 | template.containers.probe | Body | List | X | Container Probe configuration |
 | template.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
-| template.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay |
+| template.containers.probe.failureThreshold | Body | Integer | O | Probe failure criteria |
+| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout |
-| template.containers.probe.exec | Body | String List | O | Probe execution command |
+| template.containers.probe.exec | Body | String List | O | Command to run a probe |
 | template.containers.stopTimeout | Body | Integer | X | Initialization container execution timeout (seconds) |
 
 <details>
@@ -1026,9 +1037,10 @@ This API does not require a request body.
 </details>
 
 <a id="create-template-version"></a>
+
 ### Create Template Version { #create-template-version }
 
-Creates a template version.
+Creates a version of the template.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
@@ -1045,18 +1057,18 @@ x-nhn-authorization: {token}
 | template.sourceVersion | Body | String | O | Baseline template version |
 | template.name | Body | String | O | Template name |
 | template.versionDescription | Body | String | X | Template version description |
-| template.dnsConfig | Body | String List | X | DNS Server information configured in the container |
+| template.dnsConfig | Body | String List | X | DNS server information configured in the container |
 | template.hostAliases | Body | List | X | Information configured in the container's `/etc/hosts` |
 | template.hostAliases.ip | Body | String | O | IP of the hostnames configured in the container |
 | template.hostAliases.hostnames | Body | String List | O | Hostnames of the IP configured in the container |
 | template.applyImmediately | Body | Boolean | X | true: Enable instant deployment, false: Disable instant deployment (default: false) |
 | template.containers | Body | Array | O | List of containers in the template |
 | template.containers.name | Body | String | O | Container name |
-| template.containers.type | Body | String | O | Container Type<ul><li>normal: General</li><li>init: Init</li></ul>|
+| template.containers.type | Body | String | O | Container Type<ul><li>normal: General</li><li>init: Initialization</li></ul>|
 | template.containers.image | Body | String | O | Container image |
 | template.containers.imageRegistryCredentials | Body | Object | X | Information for accessing a private registry |
 | template.containers.imageRegistryCredentials.changed | Body | Boolean | X | Whether to use an existing account (default: false)<ul><li>false: Use existing account</li><li>true: Use a new account (username, password must be passed)</li></ul> |
-| template.containers.imageRegistryCredentials.username | Body | String | O | Private registry username |
+| template.containers.imageRegistryCredentials.username | Body | String | O | Private registry ID |
 | template.containers.imageRegistryCredentials.password | Body | String | O | Private registry password |
 | template.containers.cpus | Body | Float | O | Number of CPUs allocated to the container |
 | template.containers.memoryLimit | Body | Object | O | Memory information allocated to the container |
@@ -1065,14 +1077,14 @@ x-nhn-authorization: {token}
 | template.containers.ports | Body | Array | X | Port information used by the container |
 | template.containers.ports.containerPort | Body | Integer | O | Container port |
 | template.containers.ports.protocol | Body | String | O | Container protocol<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
-| template.containers.command | Body | String List | X | Command to run when the container starts |
+| template.containers.command | Body | String List | X | Commands to run when the container starts |
 | template.containers.args | Body | String List | X | Arguments used when the container starts |
 | template.containers.workDirectory | Body | String | X | Working directory of the container |
 | template.containers.env | Body | Array | X | Container environment variables |
 | template.containers.env.name | Body | String | O | Container environment variable name |
 | template.containers.env.value | Body | String | O | Container environment variable value |
-| template.containers.postStart | Body | String List | X | Command to run immediately after the container is created |
-| template.containers.preStop | Body | String List | X | Command to run immediately before the container stops |
+| template.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| template.containers.preStop | Body | String List | X | Commands executed immediately before the container is stopped |
 | template.containers.configs | Body | List | X | ConfigMap information used by the container |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
@@ -1088,18 +1100,18 @@ x-nhn-authorization: {token}
 | template.containers.secrets.type | Body | String | O | Service type for retrieving Secret information<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | Key ID |
 | template.containers.secrets.mountPath | Body | String | O | Container mount path |
-| template.containers.volumes | Body | Array | X | NAS storage information used by the container |
+| template.containers.volumes | Body | Array | X | Information on NAS storage used in containers |
 | template.containers.volumes.name | Body | String | O | Storage name |
-| template.containers.volumes.path | Body | String | O | NAS connection path |
+| template.containers.volumes.path | Body | String | O | NAS Storage Connection Path |
 | template.containers.volumes.mountPath | body | String | X | Container connection path |
 | template.containers.probe | Body | List | X | Container Probe configuration |
 | template.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay |
+| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout |
 | template.containers.probe.exec | Body | String List | O | Probe execution command |
-| template.containers.stopTimeout | Body | Integer | X | Init container execution timeout (seconds) |
+| template.containers.stopTimeout | Body | Integer | X | Initialization container execution timeout (seconds) |
 
 <details>
   <summary>Example</summary>
@@ -1137,6 +1149,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-version-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1151,16 +1164,16 @@ x-nhn-authorization: {token}
 | template.networks | Body | Array | O | Network information of the template |
 | template.networks.vpcId | Body | String | O | VPC ID of the template |
 | template.networks.subnetId | Body | String | O | Subnet ID of the template |
-| template.dnsConfig | Body | String List | X | DNS server information configured in the container |
-| template.hostAliases | Body | List | X | Information configured in the container's `/etc/hosts` |
-| template.hostAliases.ip | Body | String | O | IP of the hostnames configured in the container |
-| template.hostAliases.hostnames | Body | String List | O | Hostnames for the IP configured in the container |
-| template.containers | Body | Array | O | Container list of the template |
+| template.dnsConfig | Body | String List | X | DNS server information set in the template |
+| template.hostAliases | Body | List | X | Information set up in container `/etc/hosts` |
+| template.hostAliases.ip | Body | String | O | IP of the hostnames set in the container |
+| template.hostAliases.hostnames | Body | String List | O | hostnames of the IP set in the container |
+| template.containers | Body | Array | O | List of containers in the template |
 | template.containers.name | Body | String | O | Container name |
-| template.containers.type | Body | String | O | Container type<ul><li>normal: Normal</li><li>init: Init</li></ul>|
+| template.containers.type | Body | String | O | Container Type<ul><li>normal: General</li><li>init: Initialization</li></ul>|
 | template.containers.image | Body | String | O | Container image |
-| template.containers.cpus | Body | Float | O | Number of CPUs allocated to the container |
-| template.containers.memoryLimit | Body | Object | O | Memory information allocated to the container |
+| template.containers.cpus | Body | Float | O | Number of CPU assigned to container |
+| template.containers.memoryLimit | Body | Object | O | Information on memory assigned to container |
 | template.containers.memoryLimit.hard | Body | Integer | O | Memory allocated to the container (MiB) |
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor information<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 | template.containers.ports | Body | Array | X | Port information used by the container |
@@ -1173,24 +1186,24 @@ x-nhn-authorization: {token}
 | template.containers.env.name | Body | String | O | Container environment variable name |
 | template.containers.env.value | Body | String | O | Container environment variable value |
 | template.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
-| template.containers.preStop | Body | String List | X | Command to run immediately before container termination |
-| template.containers.configs | Body | List | X | ConfigMap information used by the container |
+| template.containers.preStop | Body | String List | X | Commands executed just before container termination |
+| template.containers.configs | Body | List | X | ConfigMap information used by containers |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
 | template.containers.configs.value | Body | String | O | Object URL |
 | template.containers.configs.mountPath | Body | String | O | Container mount path |
-| template.containers.secrets | Body | List | X | Secret information used by the container |
+| template.containers.secrets | Body | List | X | Secret information used by containers |
 | template.containers.secrets.type | Body | String | O | Service type for retrieving Secret information<ul><li>skm: Secure Key Manager</li></ul> |
 | template.containers.secrets.value | Body | String | O | Key ID |
 | template.containers.secrets.mountPath | Body | String | O | Container mount path |
-| template.containers.volumes | Body | Array | X | NAS storage information used by the container |
+| template.containers.volumes | Body | Array | X | Information on NAS storage used in containers |
 | template.containers.volumes.name | Body | String | O | Storage name |
-| template.containers.volumes.path | Body | String | O | NAS storage connection path |
+| template.containers.volumes.path | Body | String | O | NAS Storage Connection Path |
 | template.containers.volumes.mountPath | body | String | X | Container connection path |
-| template.containers.probe | Body | List | X | Container probe settings |
-| template.containers.probe.type | Body | String | O | Container probe type<ul><li>startup</li><li>liveness</li></ul> |
+| template.containers.probe | Body | List | X | Container Probe configuration |
+| template.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay time |
+| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout |
 | template.containers.probe.exec | Body | String List | O | Probe execution command |
@@ -1252,6 +1265,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template-version"></a>
+
 ### Delete Template Version { #delete-template-version }
 
 ```bash
@@ -1277,9 +1291,11 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="workload"></a>
+
 ## Workload { #workload }
 
 <a id="list-workloads"></a>
+
 ### List Workloads { #list-workloads }
 
 Retrieves a list of workloads.
@@ -1290,6 +1306,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="list-workloads-request"></a>
+
 #### Request
 
 This API does not require a request body.
@@ -1303,11 +1320,12 @@ This API does not require a request body.
 | size | Query | Integer | X | Page size to retrieve (default: 10) |
 
 <a id="list-workloads-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
 | --- | --- | --- | --- | --- |
-| X-Total-Count | Header | Integer | O | Total number of workloads created with the Appkey |
+| X-Total-Count | Header | Integer | O | Number of workloads created in Appkey |
 | workloads | Body | Array | O | Workload list |
 | workloads.id | Body | UUID | O | Workload ID |
 | workloads.name | Body | String | O | Workload name |
@@ -1318,12 +1336,12 @@ This API does not require a request body.
 | workloads.desired | Body | Integer | O | Number of tasks requested for the workload |
 | workloads.available | Body | Integer | O | Number of workload tasks running |
 | workloads.internalLBTimeout | Body | Integer | X | Internal request response latency |
-| workloads.status | Body | String | O | Workload status<ul><li>Pending: Workload creation/modification in progress</li><li>Running: Workload creation/modification complete</li><li>Failed: Workload creation/modification failed</li><li>Terminated: Workload terminated</li><li>Paused: Workload paused</li><li>Active: Scheduled workload running</li><li>Suspend: Scheduled workload suspended</li></ul> |
+| workloads.status | Body | String | O | Workload status<ul><li>Pending: Workload creation/change in progress</li><li>Running: Workload creation/modification complete</li><li>Failed: Workload creation/modification failed</li><li>Terminated: Workload terminated</li><li>Paused: Workload paused</li><li>Active: Scheduled workload running</li><li>Suspend: Scheduled workload suspended</li></ul> |
 | workloads.url | Body | String | X | Workload load balancer URL |
 | workloads.loadBalancing | Body | Object | O | Workload load balancer information |
-| workloads.loadBalancing.enabled | Body | Boolean | O | Whether the workload load balancer is enabled |
-| workloads.loadBalancing.floatingIp | Body | Boolean | O | Whether the workload load balancer uses a floating IP |
-| workloads.loadBalancing.healthMonitor | Body | Object | X | Health check information for the load balancer |
+| workloads.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
+| workloads.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
+| workloads.loadBalancing.healthMonitor | Body | Object | X | About checking the health of the load balancer |
 | workloads.loadBalancing.healthMonitor.delay | Body | Integer | O | Health check interval |
 | workloads.loadBalancing.healthMonitor.timeout | Body | Integer | O | Maximum response wait time |
 | workloads.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | Maximum number of retries |
@@ -1346,26 +1364,26 @@ This API does not require a request body.
 | workloads.internalLoadBalancing.enalbed | Body | Boolean | O | Whether the internal load balancer is enabled |
 | workloads.internalLoadBalancing.type | Body | String | X | Internal load balancer IP allocation method<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
 | workloads.internalLoadBalancing.ip | Body | String | X | Designated IP for the internal load balancer |
-| workloads.privateDns | Body | Object | X | Determine whether to register workload working IPs with Private DNS |
-| workloads.privateDns.ttl | Body | Integer | O | TTL value of the record set |
-| workloads.privateDns.zoneId | Body | String | O | Private DNS Zone ID used by the workload |
-| workloads.privateDns.domain | Body | String | O | Domain information registered in Private DNS |
-| workloads.activeDeadline | Body | Object | X | Workload scheduled termination information |
-| workloads.activeDeadline.timeZone | Body | String | O | Base time for scheduled termination<li>Examples: Asia/Seoul, UTC</li> |
-| workloads.activeDeadline.timeOffset | Body | String | O | Base time offset for scheduled termination |
+| workloads.privateDns | Body | Object | X | Determinine whether to register workload working IPs with Private DNS |
+| workloads.privateDns.ttl | Body | Integer | O | TTL value of a recordset |
+| workloads.privateDns.zoneId | Body | String | O | The Private DNS Zone ID used by the workload |
+| workloads.privateDns.domain | Body | String | O | About domains registered with Private DNS |
+| workloads.activeDeadline | Body | Object | X | Information on workload scheduling end |
+| workloads.activeDeadline.timeZone | Body | String | O | Scheduling end base time<li>Example: Asia/Seoul, UTC</li> |
+| workloads.activeDeadline.timeOffset | Body | String | O | Offset the scheduling end base time |
 | workloads.activeDeadline.time | Body | String | O | Scheduled termination time |
 | workloads.autoScaler | Body | Object | X | AutoScaler configuration information |
 | workloads.autoScaler.scaleOut | Body | Object | O | ScaleOut information |
 | workloads.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether ScaleOut is enabled |
-| workloads.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of tasks for auto-scaling |
+| workloads.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of jobs for autoscaling |
 | workloads.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling out |
 | workloads.autoScaler.scaleOut.condition | Body | List | X | Scale-out conditions |
 | workloads.autoScaler.scaleOut.condition.resource | Body | String | X | Resource used as the scale-out condition basis<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Resource usage for scale-out condition (1–100) |
-| workloads.autoScaler.scaleOut.condition.duration | Body | Integer | X | Duration for maintaining resource usage for scale-out condition (minutes) |
+| workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Scale out condition resource usage (1-100) |
+| workloads.autoScaler.scaleOut.condition.duration | Body | Integer | X | Scale out condition resource usage hold time (minutes) |
 | workloads.autoScaler.scaleIn | Body | Object | X | ScaleIn information |
 | workloads.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is enabled |
-| workloads.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of tasks for auto-scaling |
+| workloads.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of jobs for autoscaling |
 | workloads.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scaling in |
 | workloads.autoScaler.scaleIn.condition | Body | List | X | Scale-in conditions |
 | workloads.autoScaler.scaleIn.condition.resource | Body | String | X | Resource used as the scale-in condition basis<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
@@ -1427,6 +1445,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload"></a>
+
 ### View Workload { #view-workload }
 
 Retrieves an individual workload.
@@ -1437,6 +1456,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-workload-request"></a>
+
 #### Request
 
 This API does not require a request body.
@@ -1448,6 +1468,7 @@ This API does not require a request body.
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-workload-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1460,21 +1481,21 @@ This API does not require a request body.
 | workload.templateVersion | Body | String | O | Template version of the workload |
 | workload.createdAt | Body | String | O | Creation time (UTC) |
 | workload.desired | Body | Integer | O | Number of tasks requested for the workload |
-| workload.available | Body | Integer | O | Number of tasks running for the workload |
+| workload.available | Body | Integer | O | Number of workload tasks running |
 | workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
-| workload.status | Body | String | O | Workload status<ul><li>Pending: Workload creation/modification in progress</li><li>Running: Workload creation/modification complete</li><li>Failed: Workload creation/modification failed</li><li>Terminated: Workload terminated</li><li>Paused: Workload paused</li><li>Active: Scheduled workload running</li><li>Suspend: Scheduled workload paused</li></ul> |
+| workload.status | Body | String | O | Workload status<ul><li>Pending: Workload creation/change in progress</li><li>Running: Workload creation/modification complete</li><li>Failed: Workload creation/modification failed</li><li>Terminated: Workload terminated</li><li>Paused: Workload paused</li><li>Active: Scheduled workload running</li><li>Suspend: Scheduled workload suspended</li></ul> |
 | workload.url | Body | String | X | Workload load balancer URL |
 | workload.loadBalancing | Body | Object | O | Workload load balancer information |
-| workload.loadBalancing.enabled | Body | Boolean | O | Whether the workload uses a load balancer |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether the workload load balancer uses a floating IP |
-| workload.loadBalancing.healthMonitor | Body | Object | X | Health check information for the load balancer |
+| workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
+| workload.loadBalancing.healthMonitor | Body | Object | X | About checking the health of the load balancer |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | Health check interval |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | Maximum response wait time |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | Maximum number of retries |
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP method<ul><li>GET</li></ul> |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP status code<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | Certificate used by the load balancer when using TERMINATED\_HTTPS |
+| workload.loadBalancing.certificate | Body | String | X | Certificates used by the load balancer when using TERMINATED\_HTTPS |
 | workload.loadBalancing.privateKey | Body | String | X | Private key used by the load balancer when using TERMINATED\_HTTPS |
 | workload.loadBalancing.tlsVersion | Body | String | X | TLS version when using TERMINATED\_HTTPS<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
 | workload.loadBalancing.containerHref | Body | String | X | Secret container ID<li>If you separately registered a certificate and private key to use in TERMINATED\_HTTPS using the Load Balancer API, use it.</li> |
@@ -1483,36 +1504,36 @@ This API does not require a request body.
 | workload.schedule | Body | Object | X | Scheduled execution configuration information |
 | workload.schedule.timeZone | Body | String | O | Base time for scheduled execution<ul><li>Example: Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | Cron expression for scheduled execution |
-| workload.schedule.jobsHistoryLimit | Body | Integer | O | Number of scheduled execution histories |
+| workload.schedule.jobsHistoryLimit | Body | Integer | O | Number of scheduled execution history |
 | workload.schedule.concurrencyPolicy | Body | String | O | Concurrency policy<ul><li>Forbid</li><li>Replace</li></ul> |
-| workload.schedule.timeOffset | Body | String | O | Offset for scheduled execution base time |
+| workload.schedule.timeOffset | Body | String | O | Offset the scheduled execution base time |
 | workload.internalLoadBalancing | Body | Object | X | Internal load balancer information |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use the internal load balancer |
-| workload.internalLoadBalancing.type | Body | String | X | Internal load balancer IP allocation method<ul><li>dynamic: automatic allocation</li><li>static: specify IP</li></ul> |
-| workload.internalLoadBalancing.ip | Body | String | X | Specified IP for the internal load balancer |
-| workload.privateDns | Body | Object | X | Determine whether to register workload working IPs with Private DNS |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use an internal load balancer |
+| workload.internalLoadBalancing.type | Body | String | X | How to assign internal load balancer IPs<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
+| workload.internalLoadBalancing.ip | Body | String | X | Specify internal load balancer IP |
+| workload.privateDns | Body | Object | X | Determinine whether to register workload working IPs with Private DNS |
 | workload.privateDns.ttl | Body | Integer | O | TTL value of the record set |
-| workload.privateDns.zoneId | Body | String | O | Private DNS Zone ID used by the workload |
-| workload.privateDns.domain | Body | String | O | Domain information registered in Private DNS |
-| workload.activeDeadline | Body | Object | X | Workload scheduled termination information |
-| workload.activeDeadline.timeZone | Body | String | O | Base time for scheduled termination<li>Example: Asia/Seoul, UTC</li> |
-| workload.activeDeadline.timeOffset | Body | String | O | Offset for scheduled termination base time |
+| workload.privateDns.zoneId | Body | String | O | The Private DNS Zone ID used by the workload |
+| workload.privateDns.domain | Body | String | O | About domains registered with Private DNS |
+| workload.activeDeadline | Body | Object | X | Information on workload scheduling end |
+| workload.activeDeadline.timeZone | Body | String | O | Scheduling end base time<li>Example: Asia/Seoul, UTC</li> |
+| workload.activeDeadline.timeOffset | Body | String | O | Offset the scheduling end base time |
 | workload.activeDeadline.time | Body | String | O | Scheduled termination time |
 | workload.autoScaler | Body | Object | X | AutoScaler configuration information |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut information |
-| workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether to use ScaleOut |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of tasks for auto-scaling |
+| workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether ScaleOut is enabled |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of jobs for autoscaling |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling out |
 | workload.autoScaler.scaleOut.condition | Body | List | X | Scale-out conditions |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resource for scale-out condition<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Resource usage for scale-out condition (1–100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Duration for maintaining resource usage for scale-out condition (minutes) |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resource criteria for scale-out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Scale out condition resource usage (1-100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Scale out condition resource usage hold time (minutes) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn information |
-| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether to use ScaleIn |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of tasks for auto-scaling |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scaling in |
+| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is enabled |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of jobs for autoscaling |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale in |
 | workload.autoScaler.scaleIn.condition | Body | List | X | Scale-in conditions |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resource for scale-in condition<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resource for scale-in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Resource usage for scale-in condition (1–100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Duration for maintaining resource usage for scale-in condition (minutes) |
 | workload.securityGroups | Body | List | X | SecurityGroups information |
@@ -1532,14 +1553,14 @@ This API does not require a request body.
 | workload.tasks.containers.ports.containerPort | Body | Integer | O | Container port |
 | workload.tasks.containers.ports.protocol | Body | String | O | Container protocol<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
 | workload.tasks.containers.command | Body | String List | X | Commands to run when the container starts |
-| workload.tasks.containers.args | Body | String List | X | Arguments used when the container starts |
+| workload.tasks.containers.args | Body | String List | X | Arguments used when the container is started |
 | workload.tasks.containers.workDirectory | Body | String | X | Working directory of the container |
 | workload.tasks.containers.env | Body | Array | X | Container environment variables |
 | workload.tasks.containers.env.name | Body | String | O | Container environment variable name |
 | workload.tasks.containers.env.value | Body | String | O | Container environment variable value |
-| workload.tasks.containers.postStart | Body | String List | X | Commands to run immediately after the container is created |
-| workload.tasks.containers.preStop | Body | String List | X | Commands to run immediately before the container is terminated |
-| workload.tasks.containers.configs | Body | List | X | ConfigMap information used by the container |
+| workload.tasks.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| workload.tasks.containers.preStop | Body | String List | X | Commands executed just before container termination |
+| workload.tasks.containers.configs | Body | List | X | ConfigMap information used by containers |
 | workload.tasks.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | workload.tasks.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
 | workload.tasks.containers.configs.value | Body | String | O | Object URL |
@@ -1554,15 +1575,15 @@ This API does not require a request body.
 | workload.tasks.containers.volumes.mountPath | body | String | X | Container connection path (default: /mnt) |
 | workload.tasks.containers.probe | Body | List | X | Container Probe configuration |
 | workload.tasks.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
-| workload.tasks.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| workload.tasks.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay |
+| workload.tasks.containers.probe.failureThreshold | Body | Integer | O | Probe failure criteria |
+| workload.tasks.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | workload.tasks.containers.probe.periodSeconds | Body | String | O | Probe execution interval |
 | workload.tasks.containers.probe.timeoutSeconds | Body | String | O | Probe execution timeout |
-| workload.tasks.containers.probe.exec | Body | String List | O | Probe execution command |
-| workload.tasks.containers.stopTimeout | Body | Integer | X | Execution timeout for init containers (seconds) |
+| workload.tasks.containers.probe.exec | Body | String List | O | Command to run a probe |
+| workload.tasks.containers.stopTimeout | Body | Integer | X | Initialization container execution timeout (seconds) |
 | workload.tasks.containers.state | Body | String | O | Container status |
 | workload.tasks.containers.startedAt | Body | String | O | Container start time |
-| workload.tasks.containers.finishedAt | Body | String | X | Init container completion time |
+| workload.tasks.containers.finishedAt | Body | String | X | Initialization container completion time |
 | workload.tasks.containers.restartCount | Body | String | O | Number of container restarts |
 
 <details>
@@ -1678,6 +1699,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-log"></a>
+
 ### View Workload Log { #view-workload-log }
 
 Retrieves the container logs for your workload.
@@ -1739,6 +1761,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-event"></a>
+
 ### View Workload Events { #view-workload-event }
 
 Retrieves the events of a workload.
@@ -1805,6 +1828,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-a-list-of-workload-run-history"></a>
+
 ### View a List of Workload Run History { #view-a-list-of-workload-run-history }
 
 Retrieves a list of workload run history.
@@ -1870,6 +1894,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-run-history"></a>
+
 ### View Workload Run History { #view-workload-run-history }
 
 Retrieves the run history of an individual workload.
@@ -1880,6 +1905,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="view-workload-run-history-request"></a>
+
 #### Request
 
 This API does not require a request body.
@@ -1892,6 +1918,7 @@ This API does not require a request body.
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 
 <a id="view-workload-run-history-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1901,7 +1928,7 @@ This API does not require a request body.
 | history.createdAt | Body | String | O | Run time |
 | history.deletedAt | Body | String | O | End time |
 | history.templateId | Body | UUID | O | Template ID used by the workload |
-| history.name | Body | String | O | Template name used by the workload |
+| history.name | Body | String | O | Template name used by workloads |
 | history.status | Body | String | O | Status<ul><li>Succeeded</li><li>Terminated</li><li>Pending</li></ul> |
 | template | Body | Object | O | Template information |
 | template.id | Body | UUID | O | Template ID |
@@ -1917,9 +1944,9 @@ This API does not require a request body.
 | template.hostAliases | Body | List | X | Information configured in the container's `/etc/hosts` |
 | template.hostAliases.ip | Body | String | O | IP of the hostnames configured in the container |
 | template.hostAliases.hostnames | Body | String List | O | Hostnames of the IP configured in the container |
-| template.containers | Body | Array | O | Container list of the template |
+| template.containers | Body | Array | O | List of containers in the template |
 | template.containers.name | Body | String | O | Container name |
-| template.containers.type | Body | String | O | Container Type<ul><li>normal: Normal</li><li>init: Init</li></ul>|
+| template.containers.type | Body | String | O | Container Type<ul><li>normal: General</li><li>init: Initialization</li></ul>|
 | template.containers.image | Body | String | O | Container image |
 | template.containers.cpus | Body | Float | O | Number of CPUs allocated to the container |
 | template.containers.memoryLimit | Body | Object | O | Memory information allocated to the container |
@@ -1928,14 +1955,14 @@ This API does not require a request body.
 | template.containers.ports | Body | Array | X | Port information used by the container |
 | template.containers.ports.containerPort | Body | Integer | O | Container port |
 | template.containers.ports.protocol | Body | String | O | Container protocol<ul><li>TCP</li><li>UDP</li><li>HTTP</li><li>HTTPS</li><li>TERMINATED\_HTTPS</li></ul> |
-| template.containers.command | Body | String List | X | Command to run when the container starts |
-| template.containers.args | Body | String List | X | Arguments used when the container starts |
+| template.containers.command | Body | String List | X | Command to run when container starts |
+| template.containers.args | Body | String List | X | Arguments used when the container is started |
 | template.containers.workDirectory | Body | String | X | Working directory of the container |
 | template.containers.env | Body | Array | X | Container environment variables |
 | template.containers.env.name | Body | String | O | Container environment variable name |
 | template.containers.env.value | Body | String | O | Container environment variable value |
-| template.containers.postStart | Body | String List | X | Command to run immediately after the container is created |
-| template.containers.preStop | Body | String List | X | Command to run immediately before the container terminates |
+| template.containers.postStart | Body | String List | X | Commands that run immediately after container creation |
+| template.containers.preStop | Body | String List | X | Commands executed just before container termination |
 | template.containers.configs | Body | List | X | ConfigMap information used by the container |
 | template.containers.configs.id | Body | Integer | O | ConfigMap ID |
 | template.containers.configs.type | Body | String | O | Service type for retrieving ConfigMap information<ul><li>obs: Object Storage</li></ul> |
@@ -1947,12 +1974,12 @@ This API does not require a request body.
 | template.containers.secrets.mountPath | Body | String | O | Container mount path |
 | template.containers.volumes | Body | Array | X | NAS storage information used by the container |
 | template.containers.volumes.name | Body | String | O | Storage name |
-| template.containers.volumes.path | Body | String | O | NAS connection path |
+| template.containers.volumes.path | Body | String | O | NAS Storage Connection Path |
 | template.containers.volumes.mountPath | body | String | X | Container connection path |
-| template.containers.probe | Body | List | X | Container Probe configuration |
+| template.containers.probe | Body | List | X | Container Probe settings |
 | template.containers.probe.type | Body | String | O | Container Probe type<ul><li>startup</li><li>liveness</li></ul> |
 | template.containers.probe.failureThreshold | Body | Integer | O | Probe failure threshold |
-| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe initial delay |
+| template.containers.probe.initialDelaySeconds | Body | Integer | O | Probe startup latency |
 | template.containers.probe.periodSeconds | Body | Integer | O | Probe execution interval |
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe execution timeout |
 | template.containers.probe.exec | Body | String List | O | Probe execution command |
@@ -2049,6 +2076,7 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-scheduled-run-history"></a>
+
 ### View workload scheduled run history { #view-workload-scheduled-run-history }
 
 Views the history of a scheduled run.
@@ -2107,6 +2135,7 @@ This API does not require a request body.
 </details>
 
 <a id="create-workload"></a>
+
 ### Create a Workload { #create-workload }
 
 Creates a workload.
@@ -2118,6 +2147,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="create-workload-request"></a>
+
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -2126,14 +2156,14 @@ x-nhn-authorization: {token}
 | token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
 | workload | Body | Object | O | Workload information |
 | workload.name | Body | String | O | Workload name |
-| workload.type | Body | String | X | Deployment controller (default: deployment)<ul><li>deployment</li><li>statefulset</li></ul> |
+| workload.type | Body | String | X | Deployment controller (default:deployment)<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | Template ID of the workload |
 | workload.templateVersion | Body | String | X | Template version of the workload (default: latest version) |
-| workload.desired | Body | Integer | O | Number of tasks requested |
+| workload.desired | Body | Integer | O | Number of tasks requested for the workload |
 | workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Workload load balancer information |
-| workload.loadBalancing.enabled | Body | Boolean | O | Whether to use the workload load balancer |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use a floating IP for the workload load balancer |
+| workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | Health check information for the load balancer |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | Health check interval |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | Maximum response wait time |
@@ -2153,34 +2183,34 @@ x-nhn-authorization: {token}
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | Number of scheduled execution histories |
 | workload.schedule.concurrencyPolicy | Body | String | O | Concurrency policy<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.internalLoadBalancing | Body | Object | X | Internal load balancer information |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use the internal load balancer |
-| workload.internalLoadBalancing.type | Body | String | X | IP allocation method for the internal load balancer<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
-| workload.internalLoadBalancing.ip | Body | String | X | Specified IP for the internal load balancer |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use an internal load balancer |
+| workload.internalLoadBalancing.type | Body | String | X | How to assign internal load balancer IPs<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
+| workload.internalLoadBalancing.ip | Body | String | X | Specify internal load balancer IP |
 | workload.privateDns | Body | Object | X | Determinine whether to register workload working IPs with Private DNS |
 | workload.privateDns.ttl | Body | Integer | O | TTL value of the record set |
-| workload.privateDns.zoneId | Body | String | O | Private DNS Zone ID used by the workload |
-| workload.privateDns.domain | Body | String | O | Domain information registered in Private DNS |
+| workload.privateDns.zoneId | Body | String | O | The Private DNS Zone ID used by the workload |
+| workload.privateDns.domain | Body | String | O | About domains registered with Private DNS |
 | workload.activeDeadline | Body | Object | X | Workload scheduled termination information |
 | workload.activeDeadline.timeZone | Body | String | O | Base time for scheduled termination<li>Example: Asia/Seoul, UTC</li> |
-| workload.activeDeadline.timeOffset | Body | String | O | Offset for the scheduled termination base time |
+| workload.activeDeadline.timeOffset | Body | String | O | Offset the scheduling end base time |
 | workload.activeDeadline.time | Body | String | O | Scheduled termination time |
 | workload.autoScaler | Body | Object | X | AutoScaler configuration information |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut information |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether to use ScaleOut |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of tasks for auto scaling |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scale-out |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of jobs for autoscaling |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling up |
 | workload.autoScaler.scaleOut.condition | Body | List | X | Scale-out conditions |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resource criteria for scale-out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Resource usage threshold for scale-out conditions (1 to 100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Duration to maintain resource usage for scale-out conditions (minutes) |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resources based on scale out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Scale out condition resource usage (1-100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Scale out condition resource usage hold time (minutes) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn information |
-| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether to use ScaleIn |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of tasks for auto scaling |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale-in |
+| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is enabled |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of jobs for autoscaling |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale in |
 | workload.autoScaler.scaleIn.condition | Body | List | X | Scale-in conditions |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resource criteria for scale-in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Resource usage threshold for scale-in conditions (1 to 100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Duration to maintain resource usage for scale-in conditions (minutes) |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resources based on scale in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Scale in condition resource usage (1-100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Scale in condition resource usage hold time (minutes) |
 | workload.securityGroups | Body | List | X | SecurityGroups information |
 | workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
@@ -2207,6 +2237,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-workload-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2221,12 +2252,12 @@ x-nhn-authorization: {token}
 | workload.desired | Body | Integer | O | Number of tasks requested for the workload |
 | workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Workload load balancer information |
-| workload.loadBalancing.enabled | Body | Boolean | O | Whether the workload uses a load balancer |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether the workload load balancer uses a floating IP |
+| workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | Health check information for the load balancer |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | Health check interval |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | Maximum response wait time |
-| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | Maximum retries |
+| workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | Maximum number of retries |
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP method<ul><li>GET</li></ul> |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP status code<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
@@ -2241,36 +2272,36 @@ x-nhn-authorization: {token}
 | workload.schedule.cron | Body | String | O | Cron expression for scheduled execution |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | Number of scheduled execution histories |
 | workload.schedule.concurrencyPolicy | Body | String | O | Concurrency policy<ul><li>Forbid</li><li>Replace</li></ul> |
-| workload.schedule.timeOffset | Body | String | O | Base time offset for scheduled execution |
+| workload.schedule.timeOffset | Body | String | O | Offset the scheduled execution base time |
 | workload.internalLoadBalancing | Body | Object | X | Internal load balancer information |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether the internal load balancer is used |
-| workload.internalLoadBalancing.type | Body | String | X | IP allocation method for the internal load balancer<ul><li>dynamic: Automatic assignment</li><li>static: Specify IP</li></ul> |
-| workload.internalLoadBalancing.ip | Body | String | X | Designated IP for the internal load balancer |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use an internal load balancer |
+| workload.internalLoadBalancing.type | Body | String | X | How to assign internal load balancer IPs<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
+| workload.internalLoadBalancing.ip | Body | String | X | Specify internal load balancer IP |
 | workload.privateDns | Body | Object | X | Determinine whether to register workload working IPs with Private DNS |
 | workload.privateDns.ttl | Body | Integer | O | TTL value of the record set |
-| workload.privateDns.zoneId | Body | String | O | Private DNS Zone ID used by the workload |
-| workload.privateDns.domain | Body | String | O | Domain information registered in Private DNS |
-| workload.activeDeadline | Body | Object | X | Workload schedule termination information |
-| workload.activeDeadline.timeZone | Body | String | O | Base time for scheduled termination<li>Example: Asia/Seoul, UTC</li> |
-| workload.activeDeadline.timeOffset | Body | String | O | Base time offset for scheduled termination |
+| workload.privateDns.zoneId | Body | String | O | The Private DNS Zone ID used by the workload |
+| workload.privateDns.domain | Body | String | O | About domains registered with Private DNS |
+| workload.activeDeadline | Body | Object | X | Workload scheduled termination information |
+| workload.activeDeadline.timeZone | Body | String | O | Scheduling end base time<li>Example: Asia/Seoul, UTC</li> |
+| workload.activeDeadline.timeOffset | Body | String | O | Offset the scheduling end base time |
 | workload.activeDeadline.time | Body | String | O | Scheduled termination time |
 | workload.autoScaler | Body | Object | X | AutoScaler configuration information |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut information |
-| workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether ScaleOut is used |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of tasks for auto scaling |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling out |
+| workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether ScaleOut is enabled |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of jobs for autoscaling |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling up |
 | workload.autoScaler.scaleOut.condition | Body | List | X | Scale-out conditions |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resource basis for scale-out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Resource usage for scale-out condition (1–100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Duration for maintaining resource usage for scale-out condition (minutes) |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resources based on scale out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Scale out condition resource usage (1-100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Scale out condition resource usage hold time (minutes) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn information |
-| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is used |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of tasks for auto scaling |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scaling in |
+| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is enabled |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of jobs for autoscaling |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale in |
 | workload.autoScaler.scaleIn.condition | Body | List | X | Scale-in conditions |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resource basis for scale-in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Resource usage for scale-in condition (1–100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Duration for maintaining resource usage for scale-in condition (minutes) |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resources based on scale in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Scale in condition resource usage (1-100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Scale in condition resource usage hold time (minutes) |
 | workload.securityGroups | Body | List | X | SecurityGroups information |
 | workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
@@ -2309,6 +2340,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload"></a>
+
 ### Change Workload { #change-workload }
 
 Changes a workload.
@@ -2320,6 +2352,7 @@ x-nhn-authorization: {token}
 ```
 
 <a id="change-workload-request"></a>
+
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -2334,8 +2367,8 @@ x-nhn-authorization: {token}
 | workload.desired | Body | Integer | O | Number of tasks requested for the workload |
 | workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Workload load balancer information |
-| workload.loadBalancing.enabled | Body | Boolean | O | Whether the workload uses a load balancer |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether the workload load balancer uses a floating IP |
+| workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | Health check information for the load balancer |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | Health check interval |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | Maximum response wait time |
@@ -2343,10 +2376,10 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP method<ul><li>GET</li></ul> |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP status code<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | Certificates used by the load balancer when using TERMINATED_HTTPS |
-| workload.loadBalancing.privateKey | Body | String | X | Private key used by the load balancer when using TERMINATED_HTTPS |
-| workload.loadBalancing.tlsVersion | Body | String | X | TLS version when using TERMINATED_HTTPS<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
-| workload.loadBalancing.containerHref | Body | String | X | Secret container ID<li>If you separately registered a certificate and private key to use in TERMINATED_HTTPS using the Load Balancer API, use it.</li> |
+| workload.loadBalancing.certificate | Body | String | X | Certificates used by the load balancer when using TERMINATED\_HTTPS |
+| workload.loadBalancing.privateKey | Body | String | X | Private key used by the load balancer when using TERMINATED\_HTTPS |
+| workload.loadBalancing.tlsVersion | Body | String | X | TLS version when using TERMINATED\_HTTPS<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
+| workload.loadBalancing.containerHref | Body | String | X | Secret container ID<li>If you separately registered a certificate and private key to use in TERMINATED\_HTTPS using the Load Balancer API, use it.</li> |
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | List of IP access control groups to apply to the load balancer |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP access control group ID |
 | workload.schedule | Body | Object | X | Scheduled execution configuration information |
@@ -2355,30 +2388,30 @@ x-nhn-authorization: {token}
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | Number of scheduled execution histories |
 | workload.schedule.concurrencyPolicy | Body | String | O | Concurrency policy<ul><li>Forbid</li><li>Replace</li></ul> |
 | workload.internalLoadBalancing | Body | Object | X | Internal load balancer information |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use the internal load balancer |
-| workload.internalLoadBalancing.type | Body | String | X | IP assignment method for the internal load balancer<ul><li>dynamic: Automatic assignment</li><li>static: Specify IP</li></ul> |
-| workload.internalLoadBalancing.ip | Body | String | X | Designated IP for the internal load balancer |
-| workload.activeDeadline | Body | Object | X | Workload schedule termination information |
-| workload.activeDeadline.timeZone | Body | String | O | Base time for schedule termination<li>Example: Asia/Seoul, UTC</li> |
-| workload.activeDeadline.timeOffset | Body | String | O | Offset of the base time for schedule termination |
-| workload.activeDeadline.time | Body | String | O | Schedule termination time |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use an internal load balancer |
+| workload.internalLoadBalancing.type | Body | String | X | How to assign internal load balancer IPs<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
+| workload.internalLoadBalancing.ip | Body | String | X | Specify internal load balancer IP |
+| workload.activeDeadline | Body | Object | X | Workload scheduled termination information |
+| workload.activeDeadline.timeZone | Body | String | O | Base time for scheduled termination<li>Example: Asia/Seoul, UTC</li> |
+| workload.activeDeadline.timeOffset | Body | String | O | Offset the scheduling end base time |
+| workload.activeDeadline.time | Body | String | O | Scheduled termination time |
 | workload.autoScaler | Body | Object | X | AutoScaler configuration information |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut information |
-| workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether to use ScaleOut |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of tasks for auto-scaling |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scale-out |
+| workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether ScaleOut is enabled |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of jobs for autoscaling |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling up |
 | workload.autoScaler.scaleOut.condition | Body | List | X | Scale-out conditions |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resource criteria for scale-out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Resource usage threshold for scale-out conditions (1–100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Duration to maintain resource usage for scale-out conditions (minutes) |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resources based on scale out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Scale out condition resource usage (1-100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Scale out condition resource usage hold time (minutes) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn information |
-| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether to use ScaleIn |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of tasks for auto-scaling |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale-in |
+| workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is enabled |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of jobs for autoscaling |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale in |
 | workload.autoScaler.scaleIn.condition | Body | List | X | Scale-in conditions |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resource criteria for scale-in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Resource usage threshold for scale-in conditions (1–100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Duration to maintain resource usage for scale-in conditions (minutes) |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resources based on scale in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Scale in condition resource usage (1-100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Scale in condition resource usage hold time (minutes) |
 | workload.securityGroups | Body | List | X | SecurityGroups information |
 | workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
@@ -2405,6 +2438,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2415,13 +2449,13 @@ x-nhn-authorization: {token}
 | workload.type | Body | String | O | Deployment controller<ul><li>deployment</li><li>statefulset</li></ul> |
 | workload.templateId | Body | String | O | Template ID of the workload |
 | workload.templateVersion | Body | String | O | Template version of the workload |
-| workload.createdAt | Body | String | O | Created time (UTC) |
+| workload.createdAt | Body | String | O | Creation time (UTC) |
 | workload.desired | Body | Integer | O | Number of tasks requested for the workload |
 | workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Workload load balancer information |
-| workload.loadBalancing.enabled | Body | Boolean | O | Whether a workload load balancer is enabled |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether a workload load balancer floating IP is enabled |
-| workload.loadBalancing.healthMonitor | Body | Object | X | Health check information of the load balancer |
+| workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
+| workload.loadBalancing.healthMonitor | Body | Object | X | Health check information for the load balancer |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | Health check interval |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | Maximum response wait time |
 | workload.loadBalancing.healthMonitor.maxRetries | Body | Integer | O | Maximum number of retries |
@@ -2435,40 +2469,40 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.ipAclGroupsBinding | Body | List | X | List of IP access control groups to apply to the load balancer |
 | workload.loadBalancing.ipAclGroupsBinding.ipAclGroupId | Body | String | O | IP access control group ID |
 | workload.schedule | Body | Object | X | Scheduled execution configuration information |
-| workload.schedule.timeZone | Body | String | O | Scheduled execution base time<ul><li>Example: Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
+| workload.schedule.timeZone | Body | String | O | Base time for scheduled execution<ul><li>Example: Asia/Seoul, UTC</li><li>[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)</li></ul> |
 | workload.schedule.cron | Body | String | O | Cron expression for scheduled execution |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | Number of scheduled execution histories |
 | workload.schedule.concurrencyPolicy | Body | String | O | Concurrency policy<ul><li>Forbid</li><li>Replace</li></ul> |
-| workload.schedule.timeOffset | Body | String | O | Scheduled execution base time offset |
+| workload.schedule.timeOffset | Body | String | O | Offset the scheduled execution base time |
 | workload.internalLoadBalancing | Body | Object | X | Internal load balancer information |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether the internal load balancer is enabled |
-| workload.internalLoadBalancing.type | Body | String | X | Internal load balancer IP allocation method<ul><li>dynamic: Automatic allocation</li><li>static: IP designation</li></ul> |
-| workload.internalLoadBalancing.ip | Body | String | X | Designated IP of the internal load balancer |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use an internal load balancer |
+| workload.internalLoadBalancing.type | Body | String | X | How to assign internal load balancer IPs<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
+| workload.internalLoadBalancing.ip | Body | String | X | Specify internal load balancer IP |
 | workload.privateDns | Body | Object | X | Determinine whether to register workload working IPs with Private DNS |
 | workload.privateDns.ttl | Body | Integer | O | TTL value of the record set |
-| workload.privateDns.zoneId | Body | String | O | Private DNS Zone ID used by the workload |
-| workload.privateDns.domain | Body | String | O | Domain information registered in Private DNS |
-| workload.activeDeadline | Body | Object | X | Workload schedule termination information |
-| workload.activeDeadline.timeZone | Body | String | O | Schedule termination base time<li>Example: Asia/Seoul, UTC</li> |
-| workload.activeDeadline.timeOffset | Body | String | O | Schedule termination base time offset |
-| workload.activeDeadline.time | Body | String | O | Schedule termination time |
+| workload.privateDns.zoneId | Body | String | O | The Private DNS Zone ID used by the workload |
+| workload.privateDns.domain | Body | String | O | About domains registered with Private DNS |
+| workload.activeDeadline | Body | Object | X | Workload scheduled termination information |
+| workload.activeDeadline.timeZone | Body | String | O | Scheduling end base time<li>Example: Asia/Seoul, UTC</li> |
+| workload.activeDeadline.timeOffset | Body | String | O | Offset the scheduling end base time |
+| workload.activeDeadline.time | Body | String | O | Scheduled termination time |
 | workload.autoScaler | Body | Object | X | AutoScaler configuration information |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut information |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether ScaleOut is enabled |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of tasks for auto scaling |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scale-out |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of jobs for autoscaling |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling up |
 | workload.autoScaler.scaleOut.condition | Body | List | X | Scale-out conditions |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resource criteria for scale-out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Resource usage threshold for scale-out conditions (1–100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Duration (in minutes) for maintaining resource usage for scale-out conditions |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resources based on scale out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Scale out condition resource usage (1-100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Scale out condition resource usage hold time (minutes) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn information |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is enabled |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of tasks for auto scaling |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale-in |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of jobs for autoscaling |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale in |
 | workload.autoScaler.scaleIn.condition | Body | List | X | Scale-in conditions |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resource criteria for scale-in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Resource usage threshold for scale-in conditions (1–100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Duration (in minutes) for maintaining resource usage for scale-in conditions |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resources based on scale in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Scale in condition resource usage (1-100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Scale in condition resource usage hold time (minutes) |
 | workload.securityGroups | Body | List | X | SecurityGroups information |
 | workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
@@ -2513,11 +2547,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="changing-workload-parts"></a>
+
 ### Change Workload Parts { #changing-workload-parts }
 
 You can modify only part of a workload.
 
 <a id="changing-workload-parts-request"></a>
+
 #### Request
 
 * When using this API, the Content-Type must be set to application/json-patch+json.
@@ -2554,6 +2590,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="changing-workload-parts-response"></a>
+
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2565,11 +2602,11 @@ x-nhn-authorization: {token}
 | workload.templateId | Body | String | O | Template ID of the workload |
 | workload.templateVersion | Body | String | O | Template version of the workload |
 | workload.createdAt | Body | String | O | Creation time (UTC) |
-| workload.desired | Body | Integer | O | Number of tasks requested |
+| workload.desired | Body | Integer | O | Number of tasks requested for the workload |
 | workload.internalLBTimeout | Body | Integer | X | Internal request response latency |
 | workload.loadBalancing | Body | Object | O | Workload load balancer information |
-| workload.loadBalancing.enabled | Body | Boolean | O | Whether the workload load balancer is enabled |
-| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether the workload load balancer floating IP is enabled |
+| workload.loadBalancing.enabled | Body | Boolean | O | Whether to use workload load balancer |
+| workload.loadBalancing.floatingIp | Body | Boolean | O | Whether to use the workload load balancer floating IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | Health check information for the load balancer |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | X | Health check interval |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | Maximum response wait time |
@@ -2577,7 +2614,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing.healthMonitor.httpMethod | Body | String | X | HTTP method<ul><li>GET</li></ul> |
 | workload.loadBalancing.healthMonitor.expectedCodes | Body | String | X | HTTP status code<ul><li>200</li><li>200,202</li><li>200-204</li></ul> |
 | workload.loadBalancing.healthMonitor.urlPath | Body | String | X | HTTP URL |
-| workload.loadBalancing.certificate | Body | String | X | Certificate used by the load balancer when using TERMINATED\_HTTPS |
+| workload.loadBalancing.certificate | Body | String | X | Certificates used by the load balancer when using TERMINATED\_HTTPS |
 | workload.loadBalancing.privateKey | Body | String | X | Private key used by the load balancer when using TERMINATED\_HTTPS |
 | workload.loadBalancing.tlsVersion | Body | String | X | TLS version when using TERMINATED\_HTTPS<ul><li>SSLv3</li><li>TLSv1.0</li><li>TLSv1.0\_2016</li><li>TLSv1.1</li><li>TLSv1.2</li><li>TLSv1.3</li></ul> |
 | workload.loadBalancing.containerHref | Body | String | X | Secret container ID<li>If you separately registered a certificate and private key to use in TERMINATED\_HTTPS using the Load Balancer API, use it.</li> |
@@ -2588,36 +2625,36 @@ x-nhn-authorization: {token}
 | workload.schedule.cron | Body | String | O | Cron expression for scheduled execution |
 | workload.schedule.jobsHistoryLimit | Body | Integer | O | Number of scheduled execution histories |
 | workload.schedule.concurrencyPolicy | Body | String | O | Concurrency policy<ul><li>Forbid</li><li>Replace</li></ul> |
-| workload.schedule.timeOffset | Body | String | O | Offset for scheduled execution base time |
+| workload.schedule.timeOffset | Body | String | O | Offset the scheduled execution base time |
 | workload.internalLoadBalancing | Body | Object | X | Internal load balancer information |
-| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether the internal load balancer is enabled |
-| workload.internalLoadBalancing.type | Body | String | X | IP allocation method for the internal load balancer<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
-| workload.internalLoadBalancing.ip | Body | String | X | Specified IP for the internal load balancer |
-| workload.privateDns | Body | Object | X | Determine whether to register workload working IPs with Private DNS |
+| workload.internalLoadBalancing.enalbed | Body | Boolean | O | Whether to use an internal load balancer |
+| workload.internalLoadBalancing.type | Body | String | X | How to assign internal load balancer IPs<ul><li>dynamic: Automatic allocation</li><li>static: Specify IP</li></ul> |
+| workload.internalLoadBalancing.ip | Body | String | X | Specify internal load balancer IP |
+| workload.privateDns | Body | Object | X | Determinine whether to register workload working IPs with Private DNS |
 | workload.privateDns.ttl | Body | Integer | O | TTL value of the record set |
-| workload.privateDns.zoneId | Body | String | O | Private DNS Zone ID used by the workload |
-| workload.privateDns.domain | Body | String | O | Domain information registered in Private DNS |
+| workload.privateDns.zoneId | Body | String | O | The Private DNS Zone ID used by the workload |
+| workload.privateDns.domain | Body | String | O | About domains registered with Private DNS |
 | workload.activeDeadline | Body | Object | X | Workload scheduled termination information |
-| workload.activeDeadline.timeZone | Body | String | O | Base time for scheduled termination<li>Example: Asia/Seoul, UTC</li> |
-| workload.activeDeadline.timeOffset | Body | String | O | Offset for scheduled termination base time |
+| workload.activeDeadline.timeZone | Body | String | O | Scheduling end base time<li>Example: Asia/Seoul, UTC</li> |
+| workload.activeDeadline.timeOffset | Body | String | O | Offset the scheduling end base time |
 | workload.activeDeadline.time | Body | String | O | Scheduled termination time |
 | workload.autoScaler | Body | Object | X | AutoScaler configuration information |
 | workload.autoScaler.scaleOut | Body | Object | O | ScaleOut information |
 | workload.autoScaler.scaleOut.enabled | Body | Boolean | O | Whether ScaleOut is enabled |
-| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of tasks for auto scaling |
-| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scale-out |
+| workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | Maximum number of jobs for autoscaling |
+| workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | Wait time after scaling up |
 | workload.autoScaler.scaleOut.condition | Body | List | X | Scale-out conditions |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resource for scale-out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Resource usage threshold for scale-out conditions (1 to 100) |
-| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Duration for maintaining resource usage for scale-out conditions (minutes) |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | Resources based on scale out conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | Scale out condition resource usage (1-100) |
+| workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | Scale out condition resource usage hold time (minutes) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn information |
 | workload.autoScaler.scaleIn.enabled | Body | Boolean | O | Whether ScaleIn is enabled |
-| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of tasks for auto scaling |
-| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale-in |
+| workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | Minimum number of jobs for autoscaling |
+| workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | Wait time after scale in |
 | workload.autoScaler.scaleIn.condition | Body | List | X | Scale-in conditions |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resource for scale-in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
-| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Resource usage threshold for scale-in conditions (1 to 100) |
-| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Duration for maintaining resource usage for scale-in conditions (minutes) |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | Resources based on scale in conditions<ul><li>cpu</li><li>memory</li><li>gpu</li><li>gpu-memory</li></ul> |
+| workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | Scale in condition resource usage (1-100) |
+| workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | Scale in condition resource usage hold time (minutes) |
 | workload.securityGroups | Body | List | X | SecurityGroups information |
 | workload.securityGroups.id | Body | String | O | SecurityGroups ID |
 
@@ -2662,6 +2699,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="stop-workload"></a>
+
 ### Stop Workload { #stop-workload }
 Stops a workload.
 
@@ -2686,6 +2724,7 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="restart-workload"></a>
+
 ### Restart Workload { #restart-workload }
 Restarts a workload that is stopped.
 
@@ -2710,6 +2749,7 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="delete-workload"></a>
+
 ### Restart Workload Task { #delete-workload }
 Restarts a task in the workload.
 
@@ -2735,6 +2775,7 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="workload-1"></a>
+
 ### Delete Workload { #workload-1 }
 
 Deletes a workload.
@@ -2761,6 +2802,7 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="view-malware-scan-settings"></a>
+
 ### View Malware Scan Settings { #view-malware-scan-settings }
 Retrieves the configured malware scan settings.
 
@@ -2803,6 +2845,7 @@ This API does not require a request body.
 </details>
 
 <a id="configure-malware-scan"></a>
+
 ### Configure Malware Scan { #configure-malware-scan }
 Configures the malware scan settings.
 
@@ -2852,6 +2895,7 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-malware-scan-result"></a>
+
 ### View Malware Scan Result { #view-malware-scan-result }
 
 Retrieves the malware scan result.
@@ -2960,6 +3004,7 @@ This API does not require a request body.
 </details>
 
 <a id="response-code"></a>
+
 ## Response Codes { #response-code }
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
