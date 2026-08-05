@@ -78,7 +78,7 @@ NCSは、API呼び出し時の認証/認可のためにUser Access Keyトーク�
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-template-list-request"></a>
@@ -89,7 +89,7 @@ x-nhn-authorization: {token}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | page | Query | Integer | X | 照会するページ番号 |
 | size | Query | Integer | X | 照会するページサイズ(default: 10) |
 | disable\_containers | Query | Boolean | X | <li>true:コンテナは除外して照会</li><li>false:コンテナも含めて照会(default)</li> |
@@ -156,6 +156,9 @@ x-nhn-authorization: {token}
 | templates.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | templates.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | templates.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| templates.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| templates.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更</li><li>false: 変更なし</li></ul> |
+| templates.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ (MiB) |
 
 <details>
   <summary>例</summary>
@@ -256,18 +259,16 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-template"></a>
-
 ### テンプレートの表示 { #view-template }
 
 個別テンプレート情報を照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-template-request"></a>
-
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -276,10 +277,8 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | templateId | URL | String | O | テンプレートID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud トークン |
 <a id="view-template-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -340,6 +339,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| template.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更</li><li>false: 変更なし</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ (MiB) |
 
 <details>
   <summary>例</summary>
@@ -398,7 +400,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template"></a>
-
 ### テンプレートを作成する { #create-template }
 
 テンプレートを作成します。
@@ -406,13 +407,13 @@ x-nhn-authorization: {token}
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates
 Content-Type: application/json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | template | Body | Array | O | テンプレート情報 |
 | template.name | Body | String | O | テンプレート名 |
 | template.version | Body | String | X | テンプレートバージョン |
@@ -471,6 +472,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe実行制限時間<li>periodSecondsより大きい値に設定する必要があります。</li> |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒)<ul><li>30 ～120 (default:30)</li></ul>|
+| template.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更</li><li>false: 変更なし</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ(MiB) |
 
 <details>
   <summary>例</summary>
@@ -510,7 +514,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -569,6 +572,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| template.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更あり</li><li>false: 変更なし</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ (MiB) |
 
 <details>
   <summary>例</summary>
@@ -626,14 +632,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template"></a>
-
 ### テンプレートの削除 { #delete-template }
 
 テンプレートを削除します。
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="delete-template-request"></a>
@@ -645,24 +650,21 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | templateId | URL | String | O | テンプレートID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud Token |
 <a id="delete-template-response"></a>
 #### レスポンス
 
 このAPIは共通情報のみレスポンスします。
 
 <a id="view-a-list-of-template-versions"></a>
-
 ### テンプレートバージョンリスト表示 { #view-a-list-of-template-versions }
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-a-list-of-template-versions-request"></a>
-
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -671,14 +673,13 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | templateId | Path | String | O | テンプレートID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | q | Query | String | X | 検索引数 |
 | page | Query | Integer | X | 照会するページ番号 |
 | size | Query | Integer | X | 照会するページサイズ(default: 10) |
 | sort | Query | String | X | ソート基準となるフィールド名<br>降順ソートの場合、フィールド名の前に`-`を付ける<br>例: `sort=-name` |
 
 <a id="view-a-list-of-template-versions-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -740,6 +741,9 @@ x-nhn-authorization: {token}
 | templates.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | templates.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | templates.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| templates.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| templates.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更</li><li>false: 変更なし</li></ul> |
+| templates.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ(MiB) |
 
 <details>
   <summary>例</summary>
@@ -867,18 +871,16 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-template-versions"></a>
-
 ### テンプレートバージョン表示 { #view-template-versions }
 
 個別テンプレートバージョン情報を照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions/{version}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-template-versions-request"></a>
-
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -888,10 +890,8 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | サービスAppkey |
 | templateId | URL | String | O | テンプレートID |
 | version | URL | String | O | テンプレートバージョン |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud Token |
 <a id="view-template-versions-response"></a>
-
 #### レスポンス
 
 * テンプレートの詳細照会と同じ
@@ -954,6 +954,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| template.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更</li><li>false: 変更なし</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ(MiB) |
 
 <details>
   <summary>例</summary>
@@ -1037,21 +1040,20 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-version"></a>
-
 ### テンプレートバージョン作成 { #create-template-version }
 
 テンプレートバージョンを作成します。
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | templateId | URL | String | O | テンプレートID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | template | Body | Object | O | テンプレートバージョン情報 |
 | template.version | Body | String | O | テンプレートバージョン |
 | template.sourceVersion | Body | String | O | テンプレート基準バージョン |
@@ -1112,6 +1114,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| template.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更あり</li><li>false: 変更なし</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ (MiB) |
 
 <details>
   <summary>例</summary>
@@ -1149,7 +1154,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-template-version-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1208,6 +1212,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| template.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更あり</li><li>false: 変更なし</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ (MiB) |
 
 <details>
   <summary>例</summary>
@@ -1265,12 +1272,11 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="delete-template-version"></a>
-
 ### テンプレートバージョンの削除 { #delete-template-version }
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="delete-template-version-request"></a>
@@ -1283,30 +1289,26 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | サービスAppkey |
 | templateId | URL | String | O | テンプレートID |
 | version | URL | String | O | テンプレートバージョン |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud トークン |
 <a id="delete-template-version-response"></a>
 #### レスポンス
 
 このAPIは共通情報のみレスポンスします。
 
 <a id="workload"></a>
-
 ## ワークロード { #workload }
 
 <a id="list-workloads"></a>
-
 ### ワークロードリスト表示 { #list-workloads }
 
 ワークロードリストを照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="list-workloads-request"></a>
-
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -1314,13 +1316,12 @@ x-nhn-authorization: {token}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | q | Query | String | X | ワークロード名とテンプレートID、テンプレートバージョンでフィルタリング<ul>例：<li>q=templateId=${テンプレートID}</li><li>q=${ワークロード名)</li><li>q=templateId=${テンプレートID}\&version=${テンプレートバージョン}</li></ul> |
 | page | Query | Integer | X | 照会するページ番号 |
 | size | Query | Integer | X | 照会するページサイズ(default: 10) |
 
 <a id="list-workloads-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1341,6 +1342,8 @@ x-nhn-authorization: {token}
 | workloads.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workloads.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサー使用有無 |
 | workloads.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IP使用有無 |
+| workloads.loadBalancing.ipAddress | Body | String | O | ワークロードロードバランサーIP情報（vip、floating ip） |
+| workloads.loadBalancing.vipAddress | Body | String | X | ワークロードロードバランサー指定 IP |
 | workloads.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workloads.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workloads.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -1445,18 +1448,16 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload"></a>
-
 ### ワークロード表示 { #view-workload }
 
 個別ワークロードを照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-request"></a>
-
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -1465,10 +1466,8 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud トークン |
 <a id="view-workload-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1488,6 +1487,8 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサー使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IP使用有無 |
+| workload.loadBalancing.ipAddress | Body | String | O | ワークロードロードバランサーIP情報（vip、floating ip） |
+| workload.loadBalancing.vipAddress | Body | String | X | ワークロードロードバランサー指定 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -1581,6 +1582,9 @@ x-nhn-authorization: {token}
 | workload.tasks.containers.probe.timeoutSeconds | Body | String | O | Probeの実行制限時間 |
 | workload.tasks.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | workload.tasks.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| workload.tasks.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| workload.tasks.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更</li><li>false: 変更なし</li></ul> |
+| workload.tasks.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ (MiB) |
 | workload.tasks.containers.state | Body | String | O | コンテナ状態 |
 | workload.tasks.containers.startedAt | Body | String | O | コンテナ開始時間 |
 | workload.tasks.containers.finishedAt | Body | String | X | 初期化コンテナ完了時間 |
@@ -1699,14 +1703,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-log"></a>
-
 ### ワークロードログ表示 { #view-workload-log }
 
 ワークロードのコンテナログを照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?container={ContainerName}&from={YYYY-MM-DDThh:mm:ssZ}&to={YYYY-MM-DDThh:mm:ssZ}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-log-request"></a>
@@ -1719,7 +1722,7 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
 | taskId | URL | String | O | 作業ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | containerName | Query | String | O | コンテナ名 |
 | from | Query | String | X | ログ開始時間(default:現在から5分前) |
 | to | Query | String | X | ログ終了時間(default:現在時間) |
@@ -1761,14 +1764,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-event"></a>
-
 ### ワークロードイベント表示 { #view-workload-event }
 
 ワークロードのイベントを照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-event-request"></a>
@@ -1781,7 +1783,7 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
 | taskId | URL | String | O | 作業ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | type | Query | Integer | X | イベントタイプ<ul><li>Normal</li><li>Warning</li></ul> |
 | q | Query | String | X | イベント内容フィルタリング |
 | page | Query | String | X | 照会するページ |
@@ -1828,14 +1830,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-a-list-of-workload-run-history"></a>
-
 ### ワークロード実行ヒストリーリスト表示 { #view-a-list-of-workload-run-history }
 
 ワークロード実行ヒストリーリストを照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-a-list-of-workload-run-history-request"></a>
@@ -1847,7 +1848,7 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | page | Query | Integer | X | 照会するページ番号 |
 | size | Query | Integer | X | 照会するページサイズ(default: 10) |
 | sort | Query | String | X | ソート基準となるフィールド名<br>降順ソートの場合はフィールド名の前に`-`を付ける<br>例) `sort=-id` |
@@ -1894,18 +1895,16 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-run-history"></a>
-
 ### ワークロード実行ヒストリー表示 { #view-workload-run-history }
 
 個別ワークロード実行ヒストリーを照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-run-history-request"></a>
-
 #### リクエスト
 
 このAPIはリクエスト本文を要求しません。
@@ -1915,10 +1914,8 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
 | historyId | URL | Integer | O | ヒストリーID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud Token |
 <a id="view-workload-run-history-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -1984,6 +1981,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probeの実行制限時間 |
 | template.containers.probe.exec | Body | String List | O | Probeの実行コマンド |
 | template.containers.stopTimeout | Body | Integer | X | 初期化コンテナ実行制限時間(秒) |
+| template.containers.sharedMemory | Body | Object | X | コンテナ共有メモリ設定情報 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | コンテナ共有メモリ設定の変更有無<ul><li>true: 変更</li><li>false: 変更なし</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | コンテナに設定する共有メモリ (MiB) |
 
 <details>
   <summary>例</summary>
@@ -2076,14 +2076,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-workload-scheduled-run-history"></a>
-
 ### ワークロード予約実行ヒストリー表示 { #view-workload-scheduled-run-history }
 
 予約実行ヒストリーを照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/schedulehistory
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-scheduled-run-history-request"></a>
@@ -2095,7 +2094,7 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | page | Query | Integer | X | 照会するページ番号 |
 | size | Query | Integer | X | 照会するページサイズ(default:10) |
 
@@ -2135,7 +2134,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-workload"></a>
-
 ### ワークロードを作成する { #create-workload }
 
 ワークロードを作成します。
@@ -2143,17 +2141,16 @@ x-nhn-authorization: {token}
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads
 Content-Type: application/json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="create-workload-request"></a>
-
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | workload | Body | Object | O | ワークロード情報 |
 | workload.name | Body | String | O | ワークロード名 |
 | workload.type | Body | String | X | 配布コントローラー(default:deployment)<ul><li>deployment</li><li>statefulset</li></ul> |
@@ -2164,6 +2161,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
+| workload.loadBalancing.vipAddress | Body | String | X | ワークロードロードバランサー指定 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -2237,7 +2235,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="create-workload-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2254,6 +2251,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
+| workload.loadBalancing.vipAddress | Body | String | X | ワークロードロードバランサー指定IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -2340,7 +2338,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload"></a>
-
 ### ワークロードを変更する { #change-workload }
 
 ワークロードを変更します。
@@ -2348,18 +2345,17 @@ x-nhn-authorization: {token}
 ```bash
 PUT /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="change-workload-request"></a>
-
 #### リクエスト
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | workload | Body | Object | O | ワークロード情報 |
 | workload.name | Body | String | O | ワークロード名 |
 | workload.templateId | Body | String | O | ワークロードのテンプレートID |
@@ -2369,6 +2365,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
+| workload.loadBalancing.vipAddress | Body | String | X | ワークロードロードバランサー指定 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -2438,7 +2435,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="change-workload-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2455,6 +2451,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
+| workload.loadBalancing.vipAddress | Body | String | X | ワークロードロードバランサー指定IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 最大レスポンス待機時間 |
@@ -2547,13 +2544,11 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="changing-workload-parts"></a>
-
 ### ワークロードの部分変更 { #changing-workload-parts }
 
 ワークロードの一部のみを修正できます。
 
 <a id="changing-workload-parts-request"></a>
-
 #### リクエスト
 
 * このAPIを使用する場合、Content-Typeはapplication/json-patch+jsonに設定する必要があります。
@@ -2561,14 +2556,14 @@ x-nhn-authorization: {token}
 ```bash
 PATCH /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json-patch+json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | op | Body | String | O | Operation<ul><li>Add</li><li>Remove</li><li>Replace</li><li>Copy</li><li>Move</li><li>Test</li></ul> |
 | path | Body | String | O | 変更するデータパス |
 | value | Body | String | X | 変更値 |
@@ -2590,7 +2585,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="changing-workload-parts-response"></a>
-
 #### レスポンス
 
 | 名前 | 種類 | 形式 | 必須 | 説明 |
@@ -2607,6 +2601,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | ワークロードロードバランサー情報 |
 | workload.loadBalancing.enabled | Body | Boolean | O | ワークロードロードバランサーの使用有無 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | ワークロードロードバランサーFloating IPの使用有無 |
+| workload.loadBalancing.vipAddress | Body | String | X | ワークロードロードバランサー指定 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | ロードバランサーのヘルスチェック情報 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | X | ヘルスチェック周期 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 最大レスポンス待機時間 |
@@ -2699,13 +2694,12 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="stop-workload"></a>
-
 ### ワークロード中止 { #stop-workload }
 ワークロードを中止します。
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/pause
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="stop-workload-request"></a>
@@ -2717,20 +2711,18 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | テンプレートID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud トークン |
 <a id="stop-workload-response"></a>
 #### レスポンス
 このAPIは共通情報のみレスポンスします。
 
 <a id="restart-workload"></a>
-
 ### ワークロード再起動 { #restart-workload }
 中止状態のワークロードを再起動します。
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/resume
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="restart-workload-request"></a>
@@ -2742,20 +2734,18 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud トークン |
 <a id="restart-workload-response"></a>
 #### レスポンス
 このAPIは共通情報のみレスポンスします。
 
 <a id="delete-workload"></a>
-
 ### ワークロード作業再起動 { #delete-workload }
 ワークロードの作業を再起動します。
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/restart
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="delete-workload-request"></a>
@@ -2768,21 +2758,19 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
 | taskId | URL | String | O | 作業ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud トークン |
 <a id="delete-workload-response"></a>
 #### レスポンス
 このAPIは共通情報のみレスポンスします。
 
 <a id="workload-1"></a>
-
 ### ワークロードを削除する { #workload-1 }
 
 ワークロードを削除します。
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="workload-1-1"></a>
@@ -2794,21 +2782,19 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
 | workloadId | URL | String | O | ワークロードID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
+| token | Header | String | O | NHN Cloud Token |
 <a id="workload-1-2"></a>
 #### レスポンス
 
 このAPIは共通情報のみレスポンスします。
 
 <a id="view-malware-scan-settings"></a>
-
 ### マルウェア検査設定の照会 { #view-malware-scan-settings }
 設定されているマルウェア検査の設定を照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/malware/config
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-malware-scan-settings-request"></a>
@@ -2819,9 +2805,7 @@ x-nhn-authorization: {token}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
-
-
+| token | Header | String | O | NHN Cloud Token |
 <a id="view-malware-scan-settings-respose"></a>
 #### レスポンス
 
@@ -2845,13 +2829,12 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="configure-malware-scan"></a>
-
 ### マルウェア検査設定 { #configure-malware-scan }
 マルウェア検査を設定します。
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/malware/config
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="configure-malware-scan-request"></a>
@@ -2859,7 +2842,7 @@ x-nhn-authorization: {token}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | enabled | Body | String | O | マルウェア検査設定<ul><li>true: 使用</li><li>false: 使用しない</li></ul>|
 
 <details>
@@ -2895,14 +2878,13 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="view-malware-scan-result"></a>
-
 ### マルウェア検査結果の照会 { #view-malware-scan-result }
 
 マルウェア検査の結果を照会します。
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}/malware
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-malware-scan-result-request"></a>
@@ -2913,7 +2895,7 @@ x-nhn-authorization: {token}
 | 名前 | 種類 | 形式 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | サービスAppkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud トークン |
 | workloadId | URL | String | O | ワークロードID |
 
 
@@ -3004,7 +2986,6 @@ x-nhn-authorization: {token}
 </details>
 
 <a id="response-code"></a>
-
 ## レスポンスコード { #response-code }
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
