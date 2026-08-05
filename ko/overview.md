@@ -7,20 +7,16 @@
 <!-- pre-align:aligned sig=80730cbca944 -->
 
 <a id="container-nhn-container-service-ncs-overview"></a>
+{% endif -%}
 ## Container > NHN Container Service(NCS) > 개요 { #container-nhn-container-service-ncs-overview }
-{%- else -%}
-## Container > NHN Container Service(NCS) > 개요
-{%- endif %}
 
 NHN Container Service(NCS)는 컨테이너를 구동하는 환경을 제공하는 서비스입니다.
 VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지 않아도 이 서비스를 이용하여 컨테이너를 실행할 수 있습니다.
 
 {% if not variant -%}
 <a id="ncs-characteristics"></a>
+{% endif -%}
 ## 특징 { #ncs-characteristics }
-{%- else -%}
-## 특징
-{%- endif %}
 
 * 퍼블릭/프라이빗 컨테이너 레지스트리에 보관된 컨테이너 이미지를 구동시킬 수 있습니다.
 * 컨테이너는 사용자 VPC에 연결되므로 VPC를 통해 통신 가능한 인스턴스, 로드 밸런서, Online NAS 등 모든 IaaS 자원과 통신할 수 있고, VPC가 제공하는 네트워킹 기능을 활용할 수 있습니다.
@@ -43,10 +39,8 @@ VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지
 
 {% if not variant -%}
 <a id="configuration-and-terms"></a>
+{% endif -%}
 ## 구성 및 용어 { #configuration-and-terms }
-{%- else -%}
-## 구성 및 용어
-{%- endif %}
 
 다음은 NCS 서비스 구성 예시입니다.
 
@@ -54,10 +48,8 @@ VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지
 
 {% if not variant -%}
 <a id="template"></a>
+{% endif -%}
 ### 템플릿 { #template }
-{%- else -%}
-### 템플릿
-{%- endif %}
 
 어떤 사양의 컨테이너를 구성할 것인지 `템플릿`에 정의합니다.
 `템플릿`에는 템플릿 이름, 설명, 연결할 VPC, 한 개 이상의 컨테이너 사양을 기술합니다.
@@ -71,10 +63,8 @@ VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지
 
 {% if not variant -%}
 <a id="workload"></a>
+{% endif -%}
 ### 워크로드 { #workload }
-{%- else -%}
-### 워크로드
-{%- endif %}
 
 컨테이너 사양이 기술된 `템플릿`을 참조하여 `워크로드`를 정의합니다.
 `워크로드`에는 참조되는 `템플릿`, 워크로드 실행 수, 로드 밸런서 사용 여부, 플로팅 IP 사용 여부를 기술합니다.
@@ -88,10 +78,8 @@ VPC에 접근 가능한 곳에서 생성된 컨테이너 포트로 접근하려�
 
 {% if not variant -%}
 <a id="load-balancer"></a>
+{% endif -%}
 ### 로드 밸런서 { #load-balancer }
-{%- else -%}
-### 로드 밸런서
-{%- endif %}
 
 워크로드에 컨테이너 실행 수를 여러 개로 설정하고 로드 밸런서를 연결하면 트래픽 부하를 개별 컨테이너로 분배할 수 있습니다.
 플로팅 IP 사용하도록 설정한 경우 로드 밸런서에 FIP가 할당되고 도메인도 생성됩니다.
