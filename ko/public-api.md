@@ -5,22 +5,16 @@
 {#- API endpoint 도메인은 환경별로 완전히 별개 (external URL) 이므로 dict 유지.
     auth link 는 cross-file (nhncloud repo) 이므로 링크 정책 (0-5) 대로 base URL 사용. -#}
 {%- set api_domain = {"": "nhncloudservice.com", "gov": "gov-nhncloudservice.com"}[variant] %}
-{% if not variant -%}
 <!-- pre-align:aligned sig=08050b417a83 -->
 
-{% endif %}
 # NCS API 가이드
 
 **Container > NHN Container Service(NCS) > API 가이드**
 
-{% if not variant -%}
 <a id="ncs-api-common-information"></a>
-{% endif -%}
 ## NCS API 공통 정보 { #ncs-api-common-information }
 
-{% if not variant -%}
 <a id="api-endpoint"></a>
-{% endif -%}
 ### API 엔드포인트 { #api-endpoint }
 
 | 리전 | 도메인 |
@@ -30,16 +24,12 @@
 | 한국(광주) 리전 | https://kr3-ncs.api.nhncloudservice.com |
 {%- endif %}
 
-{% if not variant -%}
 <a id="authentication-and-permission"></a>
-{% endif -%}
 ### 인증 및 권한 { #authentication-and-permission }
 
 NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용합니다. User Access Key 토큰은 User Access Key를 기반으로 발급되는 Bearer 타입의 일시적 액세스 토큰입니다. User Access Key 토큰 발급 및 사용에 대한 자세한 내용은 [User Access Key 토큰](/nhncloud/ko/public-api/user-access-key-token)을 참고하세요.
 
-{% if not variant -%}
 <a id="common-response-information"></a>
-{% endif -%}
 ### 응답 공통 정보 { #common-response-information }
 
 모든 API 요청에 <strong>200 OK</strong>로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
@@ -87,14 +77,10 @@ NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용�
 > [주의]
 > API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
-{% if not variant -%}
 <a id="template"></a>
-{% endif -%}
 ## 템플릿 { #template }
 
-{% if not variant -%}
 <a id="view-template-list"></a>
-{% endif -%}
 ### 템플릿 목록 보기 { #view-template-list }
 
 템플릿 목록을 조회합니다.
@@ -104,9 +90,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-template-list-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -119,9 +103,7 @@ x-nhn-authorization: Bearer {accessToken}
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 | disable\_containers | Query | Boolean | X | <li>true: 컨테이너는 제외하여 조회</li><li>false: 컨테이너도 포함하여 조회(default)</li> |
 
-{% if not variant -%}
 <a id="view-template-list-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -287,9 +269,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-template"></a>
-{% endif -%}
 ### 템플릿 보기 { #view-template }
 
 개별 템플릿 정보를 조회합니다.
@@ -299,9 +279,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-template-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -312,9 +290,7 @@ x-nhn-authorization: Bearer {accessToken}
 | templateId | URL | String | O | 템플릿 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="view-template-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -437,9 +413,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="create-template"></a>
-{% endif -%}
 ### 템플릿 생성하기 { #create-template }
 
 템플릿을 생성합니다.
@@ -555,9 +529,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="create-template-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -677,9 +649,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="delete-template"></a>
-{% endif -%}
 ### 템플릿 삭제하기 { #delete-template }
 
 템플릿을 삭제합니다.
@@ -689,9 +659,7 @@ DELETE /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="delete-template-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -702,16 +670,12 @@ x-nhn-authorization: Bearer {accessToken}
 | templateId | URL | String | O | 템플릿 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="delete-template-response"></a>
-{% endif %}
 #### 응답
 
 이 API는 공통 정보만 응답합니다.
 
-{% if not variant -%}
 <a id="view-a-list-of-template-versions"></a>
-{% endif -%}
 ### 템플릿 버전 목록 보기 { #view-a-list-of-template-versions }
 
 ```bash
@@ -719,9 +683,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-a-list-of-template-versions-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -736,9 +698,7 @@ x-nhn-authorization: Bearer {accessToken}
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 | sort | Query | String | X | 정렬 기준이 될 필드명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예: `sort=-name` |
 
-{% if not variant -%}
 <a id="view-a-list-of-template-versions-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -931,9 +891,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-template-versions"></a>
-{% endif -%}
 ### 템플릿 버전 보기 { #view-template-versions }
 
 개별 템플릿 버전 정보를 조회합니다.
@@ -943,9 +901,7 @@ GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions/{version}
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-template-versions-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -957,9 +913,7 @@ x-nhn-authorization: Bearer {accessToken}
 | version | URL | String | O | 템플릿 버전 |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="view-template-versions-response"></a>
-{% endif %}
 #### 응답
 
 * 템플릿 상세 조회와 동일
@@ -1109,9 +1063,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="create-template-version"></a>
-{% endif -%}
 ### 템플릿 버전 생성 { #create-template-version }
 
 템플릿 버전을 생성합니다.
@@ -1227,9 +1179,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="create-template-version-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1349,9 +1299,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="delete-template-version"></a>
-{% endif -%}
 ### 템플릿 버전 삭제 { #delete-template-version }
 
 ```bash
@@ -1359,9 +1307,7 @@ DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="delete-template-version-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1373,21 +1319,15 @@ x-nhn-authorization: Bearer {accessToken}
 | version | URL | String | O | 템플릿 버전 |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="delete-template-version-response"></a>
-{% endif %}
 #### 응답
 
 이 API는 공통 정보만 응답합니다.
 
-{% if not variant -%}
 <a id="workload"></a>
-{% endif -%}
 ## 워크로드 { #workload }
 
-{% if not variant -%}
 <a id="list-workloads"></a>
-{% endif -%}
 ### 워크로드 목록 보기 { #list-workloads }
 
 워크로드 목록을 조회합니다.
@@ -1397,9 +1337,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="list-workloads-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1412,9 +1350,7 @@ x-nhn-authorization: Bearer {accessToken}
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
-{% if not variant -%}
 <a id="list-workloads-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1540,9 +1476,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-workload"></a>
-{% endif -%}
 ### 워크로드 보기 { #view-workload }
 
 개별 워크로드를 조회합니다.
@@ -1552,9 +1486,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-workload-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1565,9 +1497,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workloadId | URL | String | O | 워크로드 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="view-workload-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1804,9 +1734,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-workload-log"></a>
-{% endif -%}
 ### 워크로드 로그 보기 { #view-workload-log }
 
 워크로드의 컨테이너 로그를 조회합니다.
@@ -1816,9 +1744,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?contai
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-workload-log-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1835,9 +1761,7 @@ x-nhn-authorization: Bearer {accessToken}
 | page | Query | String | X | 조회할 페이지 |
 | size | Query | String | X | 조회할 페이지 크기(default: 100) |
 
-{% if not variant -%}
 <a id="view-workload-log-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1871,9 +1795,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-workload-event"></a>
-{% endif -%}
 ### 워크로드 이벤트 보기 { #view-workload-event }
 
 워크로드의 이벤트를 조회합니다.
@@ -1883,9 +1805,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-workload-event-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1903,9 +1823,7 @@ x-nhn-authorization: Bearer {accessToken}
 | from | Query | String | X | 이벤트 마지막 발생 일시 시작 시간(default: 현재로부터 1시간 전) |
 | to | Query | String | X | 이벤트 마지막 발생 일시 종료 시간(default: 현재 시간) |
 
-{% if not variant -%}
 <a id="view-workload-event-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1943,9 +1861,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-a-list-of-workload-run-history"></a>
-{% endif -%}
 ### 워크로드 실행 히스토리 목록 보기 { #view-a-list-of-workload-run-history }
 
 워크로드 실행 히스토리 목록을 조회합니다.
@@ -1955,9 +1871,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-a-list-of-workload-run-history-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1971,9 +1885,7 @@ x-nhn-authorization: Bearer {accessToken}
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 | sort | Query | String | X | 정렬 기준이 될 필드명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예: `sort=-id` |
 
-{% if not variant -%}
 <a id="view-a-list-of-workload-run-history-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2014,9 +1926,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-workload-run-history"></a>
-{% endif -%}
 ### 워크로드 실행 히스토리 보기 { #view-workload-run-history }
 
 개별 워크로드 실행 히스토리를 조회합니다.
@@ -2026,9 +1936,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-workload-run-history-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2040,9 +1948,7 @@ x-nhn-authorization: Bearer {accessToken}
 | historyId | URL | Integer | O | 히스토리 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="view-workload-run-history-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2204,9 +2110,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="view-workload-scheduled-run-history"></a>
-{% endif -%}
 ### 워크로드 예약 실행 히스토리 보기 { #view-workload-scheduled-run-history }
 
 예약 실행 히스토리를 조회합니다.
@@ -2216,9 +2120,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/schedulehistory
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-workload-scheduled-run-history-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2231,9 +2133,7 @@ x-nhn-authorization: Bearer {accessToken}
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
-{% if not variant -%}
 <a id="view-workload-scheduled-run-history-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2268,9 +2168,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="create-workload"></a>
-{% endif -%}
 ### 워크로드 생성하기 { #create-workload }
 
 워크로드를 생성합니다.
@@ -2281,9 +2179,7 @@ Content-Type: application/json
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="create-workload-request"></a>
-{% endif %}
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2373,9 +2269,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="create-workload-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2478,9 +2372,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="change-workload"></a>
-{% endif -%}
 ### 워크로드 변경하기 { #change-workload }
 
 워크로드를 변경합니다.
@@ -2491,9 +2383,7 @@ Content-Type: application/json
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="change-workload-request"></a>
-{% endif %}
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2579,9 +2469,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="change-workload-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2690,16 +2578,12 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="changing-workload-parts"></a>
-{% endif -%}
 ### 워크로드 부분 변경하기 { #changing-workload-parts }
 
 워크로드의 일부만 수정할 수 있습니다.
 
-{% if not variant -%}
 <a id="changing-workload-parts-request"></a>
-{% endif %}
 #### 요청
 
 * 이 API를 사용하는 경우 Content-Type은 application/json-patch+json으로 설정해야 합니다.
@@ -2735,9 +2619,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="changing-workload-parts-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2848,9 +2730,7 @@ x-nhn-authorization: Bearer {accessToken}
 
 </details>
 
-{% if not variant -%}
 <a id="stop-workload"></a>
-{% endif -%}
 ### 워크로드 중지 { #stop-workload }
 워크로드를 중지합니다.
 
@@ -2859,9 +2739,7 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/pause
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="stop-workload-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2872,15 +2750,11 @@ x-nhn-authorization: Bearer {accessToken}
 | workloadId | URL | String | O | 템플릿 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="stop-workload-response"></a>
-{% endif %}
 #### 응답
 이 API는 공통 정보만 응답합니다.
 
-{% if not variant -%}
 <a id="restart-workload"></a>
-{% endif -%}
 ### 워크로드 재시작 { #restart-workload }
 중지 상태의 워크로드를 재시작합니다.
 
@@ -2889,9 +2763,7 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/resume
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="restart-workload-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2902,15 +2774,11 @@ x-nhn-authorization: Bearer {accessToken}
 | workloadId | URL | String | O | 워크로드 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="restart-workload-response"></a>
-{% endif %}
 #### 응답
 이 API는 공통 정보만 응답합니다.
 
-{% if not variant -%}
 <a id="delete-workload"></a>
-{% endif -%}
 ### 워크로드 작업 재시작 { #delete-workload }
 워크로드의 작업을 재시작합니다.
 
@@ -2919,9 +2787,7 @@ POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/restart
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="delete-workload-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2933,15 +2799,11 @@ x-nhn-authorization: Bearer {accessToken}
 | taskId | URL | String | O | 작업 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="delete-workload-response"></a>
-{% endif %}
 #### 응답
 이 API는 공통 정보만 응답합니다.
 
-{% if not variant -%}
 <a id="workload-1"></a>
-{% endif -%}
 ### 워크로드 삭제하기 { #workload-1 }
 
 워크로드를 삭제합니다.
@@ -2951,9 +2813,7 @@ DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="workload-1-1"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2964,16 +2824,12 @@ x-nhn-authorization: Bearer {accessToken}
 | workloadId | URL | String | O | 워크로드 ID |
 | token | Header | String | O | NHN Cloud Token |
 
-{% if not variant -%}
 <a id="workload-1-2"></a>
-{% endif %}
 #### 응답
 
 이 API는 공통 정보만 응답합니다.
 
-{% if not variant -%}
 <a id="view-malware-scan-settings"></a>
-{% endif -%}
 ### 악성 코드 검사 설정 조회 { #view-malware-scan-settings }
 설정되어 있는 악성 코드 검사 설정을 조회합니다.
 
@@ -2982,9 +2838,7 @@ GET /ncs/v1.0/appkeys/{appKey}/malware/config
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-malware-scan-settings-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2995,9 +2849,7 @@ x-nhn-authorization: Bearer {accessToken}
 | token | Header | String | O | NHN Cloud Token |
 
 
-{% if not variant -%}
 <a id="view-malware-scan-settings-respose"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -3019,9 +2871,7 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 </details>
 
-{% if not variant -%}
 <a id="configure-malware-scan"></a>
-{% endif -%}
 ### 악성코드 검사 설정 { #configure-malware-scan }
 악성 코드 검사 설정을 합니다.
 
@@ -3030,9 +2880,7 @@ POST /ncs/v1.0/appkeys/{appKey}/malware/config
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="configure-malware-scan-request"></a>
-{% endif %}
 #### 요청
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -3050,9 +2898,7 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 </details>
 
-{% if not variant -%}
 <a id="configure-malware-scan-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -3074,9 +2920,7 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 </details>
 
-{% if not variant -%}
 <a id="view-malware-scan-result"></a>
-{% endif -%}
 ### 악성코드 검사 결과 조회 { #view-malware-scan-result }
 
 악성 코드 검사 결과를 조회합니다.
@@ -3086,9 +2930,7 @@ GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}/malwar
 x-nhn-authorization: Bearer {accessToken}
 ```
 
-{% if not variant -%}
 <a id="view-malware-scan-result-request"></a>
-{% endif %}
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -3100,9 +2942,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workloadId | URL | String | O | 워크로드 ID |
 
 
-{% if not variant -%}
 <a id="view-malware-scan-result-response"></a>
-{% endif %}
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -3188,9 +3028,7 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 </details>
 
-{% if not variant -%}
 <a id="response-code"></a>
-{% endif -%}
 ## 응답 코드 { #response-code }
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
