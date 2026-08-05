@@ -592,6 +592,8 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 | Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
 | Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
+{% endif -%}
+{% if variant != "ncgn" -%}
 <a id="loadbalancer-static-ip"></a>
 ### 워크로드 로드 밸런서 IP 지정
 * API로 워크로드의 로드 밸런서 IP를 지정할 수 있습니다.
