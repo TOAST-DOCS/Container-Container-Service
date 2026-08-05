@@ -2,8 +2,9 @@
       "gov"  if "gov"  in build_flags
  else ""
 ) -%}
-{%- set api_domain    = {"": "nhncloudservice.com",     "gov": "gov-nhncloudservice.com"       }[variant] -%}
-{%- set auth_link_frag = {"": "user-access-key-token",   "gov": "user-access-key-token-gov"     }[variant] %}
+{#- API endpoint 도메인은 환경별로 완전히 별개 (external URL) 이므로 dict 유지.
+    auth link 는 cross-file (nhncloud repo) 이므로 링크 정책 (0-5) 대로 base URL 사용. -#}
+{%- set api_domain = {"": "nhncloudservice.com", "gov": "gov-nhncloudservice.com"}[variant] %}
 {% if not variant -%}
 <!-- pre-align:aligned sig=08050b417a83 -->
 
@@ -40,7 +41,7 @@
 ### 인증 및 권한
 {%- endif %}
 
-NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용합니다. User Access Key 토큰은 User Access Key를 기반으로 발급되는 Bearer 타입의 일시적 액세스 토큰입니다. User Access Key 토큰 발급 및 사용에 대한 자세한 내용은 [User Access Key 토큰](/nhncloud/ko/public-api/$[ auth_link_frag ]$)을 참고하세요.
+NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용합니다. User Access Key 토큰은 User Access Key를 기반으로 발급되는 Bearer 타입의 일시적 액세스 토큰입니다. User Access Key 토큰 발급 및 사용에 대한 자세한 내용은 [User Access Key 토큰](/nhncloud/ko/public-api/user-access-key-token)을 참고하세요.
 
 {% if not variant -%}
 <a id="common-response-information"></a>
