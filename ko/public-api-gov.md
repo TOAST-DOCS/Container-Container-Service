@@ -145,7 +145,7 @@ x-nhn-authorization: Bearer {accessToken}
 | templates.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | templates.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | templates.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| templates.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| templates.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | templates.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -325,7 +325,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -456,7 +456,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초)<ul><li>30 ~ 120 (default: 30)</li></ul>|
 | template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -554,7 +554,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -717,7 +717,7 @@ x-nhn-authorization: Bearer {accessToken}
 | templates.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | templates.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | templates.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| templates.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| templates.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | templates.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -927,7 +927,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -1085,7 +1085,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -1181,7 +1181,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
@@ -1304,7 +1304,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
-| workloads.loadBalancing.ipAddress | Body | String | O | 워크로드 로드 밸런서 IP 정보 (vip, floating ip) |
+| workloads.loadBalancing.ipAddress | Body | String | O | 워크로드 로드 밸런서 IP 정보(vip, floating ip) |
 | workloads.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workloads.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workloads.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
@@ -1447,7 +1447,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
-| workload.loadBalancing.ipAddress | Body | String | O | 워크로드 로드 밸런서 IP 정보 (vip, floating ip) |
+| workload.loadBalancing.ipAddress | Body | String | O | 워크로드 로드 밸런서 IP 정보(vip, floating ip) |
 | workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
@@ -1542,7 +1542,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.tasks.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | workload.tasks.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | workload.tasks.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| workload.tasks.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| workload.tasks.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | workload.tasks.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 | workload.tasks.containers.state | Body | String | O | 컨테이너 상태 |
 | workload.tasks.containers.startedAt | Body | String | O | 컨테이너 시작 시간 |
@@ -1929,7 +1929,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
 | template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
-| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안함</li></ul> |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
 | template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
