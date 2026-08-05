@@ -10,19 +10,15 @@
 <!-- pre-align:aligned sig=53f25fa4d7f2 -->
 
 <a id="container-nhn-container-servicencs-user-guide"></a>
+{% endif -%}
 ## Container > NHN Container Service(NCS) > 사용 가이드 { #container-nhn-container-servicencs-user-guide }
-{%- else -%}
-## Container > NHN Container Service(NCS) > 사용 가이드
-{%- endif %}
 
 <a id="template"></a>
-## 템플릿{% if not variant %} { #template }{% endif %}
-
+## 템플릿 { #template }
 템플릿은 워크로드 실행에 필요한 컨테이너, 네트워크 등의 리소스를 정의하는 서비스입니다.
 
 <a id="template-create"></a>
-### 템플릿 생성{% if not variant %} { #template-create }{% endif %}
-
+### 템플릿 생성 { #template-create }
 NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 합니다. **Container** > **NHN Container Service(NCS)** 페이지에서 **템플릿** 탭을 클릭한 뒤 **템플릿 생성**을 클릭합니다. 템플릿 생성에 필요한 항목은 다음과 같습니다.
 
 | 항목 | 설명 |
@@ -93,8 +89,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 초기화 컨테이너는 로드 밸런서에 포함되지 않습니다.
 
 <a id="template-retrieve"></a>
-### 템플릿 조회{% if not variant %} { #template-retrieve }{% endif %}
-
+### 템플릿 조회 { #template-retrieve }
 생성한 템플릿은 **Container** > **NHN Container Service(NCS)** 페이지의 **템플릿** 탭에서 확인할 수 있습니다. 템플릿 목록에는 사용 중인 워크로드 수, 최신 템플릿 버전, 템플릿 버전 개수가 표시됩니다.
 
 <a id="template-basic-information"></a>
@@ -126,16 +121,14 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 특정 템플릿을 클릭한 뒤 **사용 중인 워크로드** 탭으로 이동하여 템플릿을 사용 중인 워크로드 목록을 확인할 수 있습니다.
 
 <a id="template-delete"></a>
-### 템플릿 삭제{% if not variant %} { #template-delete }{% endif %}
-
+### 템플릿 삭제 { #template-delete }
 삭제할 템플릿을 선택하고 **템플릿 삭제**를 클릭하면 삭제됩니다.
 
 > [참고]
 > 해당 템플릿을 사용하는 워크로드가 존재하면 템플릿을 삭제할 수 없습니다.
 
 <a id="version-create"></a>
-### 버전 생성{% if not variant %} { #version-create }{% endif %}
-
+### 버전 생성 { #version-create }
 템플릿 목록에서 **버전 보기**를 클릭한 뒤 **버전 생성**을 클릭합니다. 템플릿 생성과 버전 생성의 다른 항목은 아래와 같습니다.
 
 | 항목 | 설명 |
@@ -146,8 +139,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 네트워크 | 버전 생성에서는 워크로드에 연결할 서브넷을 선택할 수 없습니다. 템플릿 생성에서 선택한 서브넷을 사용합니다. |
 
 <a id="version-retrieve"></a>
-### 버전 조회{% if not variant %} { #version-retrieve }{% endif %}
-
+### 버전 조회 { #version-retrieve }
 템플릿 목록에서 **버전 보기**를 클릭하여 버전 목록을 확인할 수 있습니다. 버전 목록에는 컨테이너 리소스의 총합이 표시됩니다.
 
 <a id="version-basic-information"></a>
@@ -189,21 +181,18 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 특정 버전을 클릭한 뒤 **사용 중인 워크로드** 탭으로 이동하여 해당 버전을 사용 중인 워크로드 목록을 확인할 수 있습니다.
 
 <a id="version-delete"></a>
-### 버전 삭제{% if not variant %} { #version-delete }{% endif %}
-
+### 버전 삭제 { #version-delete }
 삭제할 버전을 선택하고 **버전 삭제**를 클릭하면 삭제됩니다.
 
 > [참고]
 > 해당 버전을 사용하는 워크로드가 존재하면 버전을 삭제할 수 없습니다.
 
 <a id="workload"></a>
-## 워크로드{% if not variant %} { #workload }{% endif %}
-
+## 워크로드 { #workload }
 정의한 템플릿을 이용하여 컨테이너를 실행하는 서비스입니다.
 
 <a id="workload-create"></a>
-### 워크로드 생성{% if not variant %} { #workload-create }{% endif %}
-
+### 워크로드 생성 { #workload-create }
 **Container** > **NHN Container Service(NCS)** 페이지에서 **워크로드** 탭을 클릭한 뒤 **워크로드 생성**을 클릭합니다. 워크로드 생성에 필요한 항목은 다음과 같습니다.
 
 | 항목 | 설명 |
@@ -246,8 +235,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 
 {% endif -%}
 <a id="workload-retrieve"></a>
-### 워크로드 조회{% if not variant %} { #workload-retrieve }{% endif %}
-
+### 워크로드 조회 { #workload-retrieve }
 생성한 워크로드는 **Container** > **NHN Container Service(NCS)** 페이지의 **워크로드** 탭에서 확인할 수 있습니다.
 
 <a id="workload-basic-information"></a>
@@ -414,8 +402,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 상태 | 예약 작업 상태<br>waiting: 예약 실행 준비 중<br>running: 예약 작업 실행 중<br>completed: 예약 작업 정상 종료<br>error: 예약 작업 비정상 종료 |
 
 <a id="workload-change"></a>
-### 워크로드 변경{% if not variant %} { #workload-change }{% endif %}
-
+### 워크로드 변경 { #workload-change }
 변경할 워크로드를 선택한 뒤 **기본 정보** 탭에서 **변경**을 클릭해 실행 중인 워크로드를 변경할 수 있습니다.
 
 | 항목 | 설명 |
@@ -439,7 +426,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 워크로드 변경에 실패할 경우(예, 이미지 오류) 변경 시도가 종료되며, 작업 교체가 발생하지 않습니다.
 
 <a id="workload-stop-restart"></a>
-### 워크로드 중지/재시작{% if not variant %} { #workload-stop-restart }{% endif %}
+### 워크로드 중지/재시작 { #workload-stop-restart }
 워크로드 중지를 실행하면 플로팅 IP와 URL은 유지되며 워크로드의 모든 작업이 종료됩니다.
 
 워크로드 재시작을 실행하면 로드 밸런서 IP는 변경됩니다.{% if variant != "ncgn" %} IP를 변경하지 않으려면 API로 로드 밸런서 IP를 지정하세요.{% endif %}
@@ -452,13 +439,12 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 워크로드를 중지하여도 작업 반복 주기가 되면 예약 실행 히스토리는 삭제됩니다.
 
 <a id="workload-delete"></a>
-### 워크로드 삭제{% if not variant %} { #workload-delete }{% endif %}
-
+### 워크로드 삭제 { #workload-delete }
 삭제할 워크로드를 선택하고 **워크로드 삭제**를 클릭하면 삭제됩니다.
 
 {% if variant != "ncgn" -%}
 <a id="workload-malware-scan"></a>
-### 악성 코드 검사{% if not variant %} { #workload-malware-scan }{% endif %}
+### 악성 코드 검사 { #workload-malware-scan }
 **악성 코드 검사**를 클릭하여 워크로드에서 사용하는 컨테이너 이미지에 대해 악성 코드 검사를 수행합니다.
 악성 코드 검사는 워크로드 생성, 워크로드 템플릿 변경, 워크로드 재시작할 때 수행되며 악성 코드가 검출되면 워크로드 생성 중단 또는 이전 템플릿으로 복원됩니다.
 악성 코드 검사 결과는 **실행 히스토리** 탭의 **악성코드 검사 결과** 버튼을 클릭하여 확인할 수 있습니다.
@@ -476,11 +462,11 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 
 {% endif -%}
 <a id="role"></a>
-## NCS 서비스 이용 역할{% if not variant %} { #role }{% endif %}
+## NCS 서비스 이용 역할 { #role }
 역할을 설정하여 NCS 서비스 및 리소스에 액세스할 수 있는 역할을 제어할 수 있습니다.
 
 <a id="role-assign"></a>
-### NCS 서비스 이용 역할 수정{% if not variant %} { #role-assign }{% endif %}
+### NCS 서비스 이용 역할 수정 { #role-assign }
 NCS에 대한 실행 역할은 NHN Cloud Console 화면에서 설정합니다.
 1. **프로젝트** 화면에서 **멤버 관리** 탭을 클릭합니다.
 2. 역할을 변경할 멤버를 선택합니다.
@@ -491,7 +477,7 @@ NCS에 대한 실행 역할은 NHN Cloud Console 화면에서 설정합니다.
 역할에 대한 자세한 내용은 [멤버 관리](/nhncloud/ko/console-guide/#_22)를 참고하세요.
 
 <a id="role-details"></a>
-### 역할 세부 정리{% if not variant %} { #role-details }{% endif %}
+### 역할 세부 정리 { #role-details }
 NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 
 | 역할 | 권한 |
@@ -506,7 +492,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 > Infrastructure ADMIN은 기본 인프라 서비스의 모든 역할을 포함합니다. 
 
 <a id="role-minimum"></a>
-### NCS 최소 역할 부여{% if not variant %} { #role-minimum }{% endif %}
+### NCS 최소 역할 부여 { #role-minimum }
 프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 기능을 이용하기 위한 **최소 역할들**은 다음과 같습니다.
 
 | 기능 | Infrastructure MEMBER | Infrastructure NCS ADMIN | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
@@ -523,12 +509,10 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 > Infrastructure NCS ADMIN 권한만으로는 조회만 가능합니다.
 
 <a id="considerations"></a>
-## 참고 사항{% if not variant %} { #considerations }{% endif %}
-
+## 참고 사항 { #considerations }
 {% if variant != "ncgn" -%}
 <a id="considerations-region"></a>
-### 리전{% if not variant %} { #considerations-region }{% endif %}
-
+### 리전 { #considerations-region }
 {% if variant == "gov" -%}
 * NCS 서비스는 한국(판교) 리전에서만 사용할 수 있습니다.
 {%- else -%}
@@ -536,7 +520,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 {%- endif %}
 
 <a id="considerations-resource-provision-policy"></a>
-### 리소스 제공 정책{% if not variant %} { #considerations-resource-provision-policy }{% endif %}
+### 리소스 제공 정책 { #considerations-resource-provision-policy }
 {% else -%}
 <a id="considerations-resource-provision-policy"></a>
 ### 리소스 제공 정책
@@ -544,8 +528,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 * [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요.
 
 <a id="considerations-template-container"></a>
-### 템플릿/컨테이너{% if not variant %} { #considerations-template-container }{% endif %}
-
+### 템플릿/컨테이너 { #considerations-template-container }
 * 템플릿에 기술되는 컨테이너들은 각각 서로 다른 컨테이너 포트를 사용하도록 설정해야 합니다.
 * 컨테이너 포트에 직접 연결하는 경우, 보안 그룹이 잘 설정되어 있는지 확인해야 합니다.
 * 컨테이너 포트를 지정하지 않은 템플릿을 사용하는 경우 로드 밸런서를 생성할 수 없습니다.
@@ -573,7 +556,6 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 {% if not variant -%}
 <a id="considerations-gpu"></a>
 ### GPU { #considerations-gpu }
-
 * A100 40GB 카드의 MIG (multi instance GPU)를 제공합니다.
 * 자세한 사항은 아래 링크를 참고하십시오.
     * [https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/](https://www.nvidia.com/ko-kr/technologies/multi-instance-gpu/)
@@ -616,13 +598,11 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% endif -%}
 <a id="problem-solving"></a>
-## 문제 해결 가이드{% if not variant %} { #problem-solving }{% endif %}
-
+## 문제 해결 가이드 { #problem-solving }
 NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결하는 방법을 설명합니다.
 
 <a id="problem-solving-workload"></a>
-### 워크로드{% if not variant %} { #problem-solving-workload }{% endif %}
-
+### 워크로드 { #problem-solving-workload }
 * 워크로드가 정상적으로 생성되었고, 컨테이너도 정상적으로 실행 중일 때 **FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs** 타입의 컨테이너 이벤트가 발생하는 현상
     * 해당 이벤트는 NCS에서 사용하기 위한 Network Interface가 생성 완료되지 않은 경우 발생합니다. 템플릿 생성 직후 워크로드를 생성하거나 워크로드를 대량 생성하는 경우 일시적으로 발생하는 이벤트로 일정 시간이 경과하면 해당 이벤트는 발생하지 않습니다.
 * 워크로드가 Pending 상태일 때 **IpAddressGenerationFailure** 타입의 컨테이너 이벤트가 발생하는 현상
@@ -638,11 +618,9 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 
 {% if variant != "ncgn" -%}
 <a id="integrate-with-nhncloud-service"></a>
-## NHN Cloud 서비스 연동{% if not variant %} { #integrate-with-nhncloud-service }{% endif %}
-
+## NHN Cloud 서비스 연동 { #integrate-with-nhncloud-service }
 <a id="integrate-with-logandcrash"></a>
-### Log & Crash Search 서비스 연동{% if not variant %} { #integrate-with-logandcrash }{% endif %}
-
+### Log & Crash Search 서비스 연동 { #integrate-with-logandcrash }
 워크로드가 삭제 또는 재시작되면 로그는 삭제되어 조회할 수 없습니다. 중요한 로그를 백업하거나 특정 로그를 검색하고 조회하기 위해서 Log & Crash Search(L&C) 서비스와 연동할 수 있습니다.
 
 아래 내용은 로깅 에이전트(FluentBit, Logstash)를 사이드카 컨테이너로 생성하여 L&C 연동하는 방법에 대해 기술합니다.
