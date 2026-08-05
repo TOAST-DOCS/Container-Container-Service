@@ -4,7 +4,7 @@
  else ""
 ) -%}
 {#- 링크 suffix (커밋 1: byte-match 검증용. 커밋 2 에서 base 로 통일). -#}
-{%- set ncr_suffix        = {"": "",      "gov": "-gov", "ncgn": "-ngsc"}[variant] -%}
+{%- set ncr_path          = {"": "user-guide", "gov": "gov-user-guide", "ncgn": "user-guide-ngsc"}[variant] -%}
 {%- set nas_suffix        = {"": "",      "gov": "-gov", "ncgn": ""     }[variant] -%}
 {%- set console_suffix    = {"": "",      "gov": "-gov", "ncgn": "-ngsc"}[variant] -%}
 {%- set console_role_frag = {"": "#_22",  "gov": "#_23", "ncgn": "#_21" }[variant] -%}
@@ -35,7 +35,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 템플릿 설명 | 템플릿에 대한 설명. 255자 이내로 입력할 수 있습니다. |
 | 컨테이너 이름 | 컨테이너의 이름. 253자 이내의 영문 소문자와 숫자, 일부 기호(`-`)만 입력할 수 있습니다. |
 | 컨테이너 유형 | 컨테이너의 유형<br><ul><li>일반: 실행 상태가 유지되어야 하는 컨테이너</li><li>초기화: 일반 컨테이너 실행 전 완료되어야 하는 컨테이너</li></ul>|
-| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/user-guide$[ ncr_suffix ]$/#user-access-keysecret-key)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
+| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/$[ ncr_path ]$/#user-access-keysecret-key)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
 | 레지스트리 유형 | 레지스트리의 유형. 퍼블릭 또는 프라이빗을 선택할 수 있습니다. |
 | 이미지 URL | 컨테이너 이미지의 정보. 255자 이내의 영문 소문자와 숫자, 일부 기호(`-`, `\_`, `.`, `,`, `/`, `@`, `:`)만 입력할 수 있습니다. |
 | 레지스트리 아이디 | 프라이빗 레지스트리 인증에 사용되는 아이디 |
