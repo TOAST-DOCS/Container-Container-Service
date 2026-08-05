@@ -1,9 +1,4 @@
-{%- set gov_or_ncgn = (
-      "gov"  if "gov"  in build_flags
- else "ncgn" if "ncgn" in build_flags
- else ""
-) -%}
-{#- 통합 후 in-repo · cross-file 링크는 gov_or_ncgn suffix 를 붙이지 않음.
+{#- 통합 후 in-repo · cross-file 링크는 variant suffix 를 붙이지 않음.
     다른 문서/repo 도 같은 방식으로 통합되므로 링크 대상은 항상 base 파일 하나이고
     build_flags 는 그 base 파일이 자기 안에서 알아서 해석함. -#}
 <!-- pre-align:aligned sig=53f25fa4d7f2 -->
@@ -33,7 +28,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 메모리 | 컨테이너에 할당하는 메모리 |
 | 포트 | 컨테이너에서 사용하는 포트 |
 | CPU | 컨테이너에 할당하는 CPU 개수. 0.25~16 사이의 수를 0.25개 단위로 입력할 수 있습니다. |
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 | GPU 사용 여부 | 컨테이너의 GPU 사용 여부를 결정합니다. |
 | GPU 타입 | 컨테이너에 할당할 GPU 타입을 결정합니다. |
 {% endif -%}
@@ -43,7 +38,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 환경 변수 | 컨테이너에 설정할 환경 변수 |
 | 수명 주기 훅 | 컨테이너의 생성, 종료 시점에 실행할 커맨드를 설정할 수 있습니다.<br>생성 직후에 입력한 커맨드가 실패한다면 컨테이너가 재시작됩니다.<br>커맨드 실행 전에 컨테이너가 종료되는 경우 커맨드가 실행되지 않을 수 있습니다.<ul><li>워크로드 작업의 GracePeriodSeconds는 30초입니다.</li></ul>생성 직후(postStart) 예) bash,-c,curl $URL/postStart <br>종료 직전(preStop) 예) bash,-c,curl $URL/preStop |
 | 컨피그맵 | Object Storage에 업로드한 파일을 컨테이너 디렉터리에 마운트하여 사용할 수 있습니다. <ul><li>Appkey: 파일 데이터를 사용할 프로젝트의 Object Storage 서비스의 Appkey를 입력합니다.</li><li>User Access Key: Object Storage 서비스에 접근하는 사용자의 User Access Key를 입력합니다. User Access Key는 NHN Cloud 콘솔의 계정 > **API 보안 설정** 페이지에서 생성 및 확인할 수 있습니다.</li><li>User Secret Key: Object Storage 서비스에 접근하는 사용자의 Secret Access Key를 입력합니다. Secret Access Key는 NHN Cloud 콘솔의 계정 > **API 보안 설정** 페이지에서 생성 및 확인할 수 있습니다.</li><li>오브젝트 URL: 오브젝트 다운로드 URL을 입력합니다. </li><li>컨테이너 마운트 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>입력한 경로에 파일이 마운트됩니다.</li></ul></li></ul> |
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 | 시크릿 | Secure Key Manager에 저장한 기밀 데이터 파일을 컨테이너 디렉터리에 마운트하여 사용할 수 있습니다. <ul><li>키 아이디: Secret Key Manager 서비스의 기밀 데이터 유형의 아이디를 입력합니다.</li><li>컨테이너 마운트 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>입력한 경로에 파일이 마운트됩니다.</li></ul></li></ul> |
 {% endif -%}
 | NAS 스토리지 연결 | 컨테이너에 연결할 NAS 스토리지를 입력합니다.<ul><li>이름: 스토리지 이름. 63자 이내의 영문 소문자와 숫자, 일부 기호(-)만 입력할 수 있습니다.</li><li>NAS 연결 경로: NAS 스토리지의 연결 정보를 입력합니다. <ul><li>NAS 스토리지를 사용하는 경우 **Storage** \> **NAS** 페이지에서 연결할 NAS 스토리지의 연결 정보를 입력합니다. 사용 방법은 [NAS 사용 가이드](/Storage/NAS/ko/console-guide/)를 참고하세요.</li><li>별도 구축된 NFSv3 서버를 사용하는 경우 NFS 서버의 마운트 포인트를 입력합니다.</li></ul></li><li>컨테이너 연결 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>`$컨테이너 연결 경로`/`$스토리지 이름`에 마운트됩니다.</li></ul></li></ul>템플릿과 동일한 VPC를 사용하는 NAS 스토리지만 사용할 수 있습니다. |
@@ -72,7 +67,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 컨테이너당 임시 스토리지는 20GB가 제공됩니다. 제공된 사용량을 초과하는 경우 컨테이너가 재시작되어 임시 스토리지는 초기화됩니다.
 
 > [참고]
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 > 컨피그맵과 시크릿은 템플릿을 만들 때의 정보를 사용합니다. 원본 파일이나 비밀 데이터가 수정되더라도, 이미 만들어진 템플릿의 정보는 영향을 받지 않습니다.
 > 컨피그맵은 동일 조직 내의 프로젝트 Object Storage만 사용할 수 있습니다.
 > 시크릿은 같은 프로젝트의 Secure Key Manager를 활용합니다. 시크릿을 사용하려면 먼저 Secure Key Manager 서비스를 활성화해야 합니다.
@@ -101,7 +96,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 설명 | 템플릿의 설명 |
 | 컨테이너 | 템플릿의 최신 버전에 정의된 컨테이너 개수 |
 | CPU | 템플릿의 최신 버전에 정의된 컨테이너들의 CPU 수를 더한 수 |
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 | GPU | 템플릿의 최신 버전에 정의된 컨테이너들의 GPU 수를 더한 수 |
 {% endif -%}
 | 생성일 | 템플릿이 생성된 날짜 |
@@ -157,7 +152,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 이미지 URL | 컨테이너 이미지의 정보 |
 | 메모리 | 컨테이너에 할당된 메모리 |
 | CPU | 컨테이너에 할당된 CPU 수 |
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 | GPU | 컨테이너에 할당된 GPU 정보 |
 {% endif -%}
 | 포트 | 컨테이너에서 사용하는 포트 |
@@ -168,7 +163,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 스토리지 | 컨테이너에 연결된 스토리지 |
 | 수명 주기 훅 | 컨테이너에 설정된 수명 주기 훅 |
 | 컨피그맵 | 컨테이너에 연결된 오브젝트 파일과 마운트 경로 |
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 | 시크릿 | 컨테이너에 연결된 기밀 데이터와 마운트 경로 |
 {% endif -%}
 | 상태 점검 | 컨테이너에 설정된 상태 점검 |
@@ -206,7 +201,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 종료 예약 | 워크로드의 작업 종료 시간을 예약 설정할 수 있습니다. <ul><li>기준 시간: 작업 종료 예약 시간에 대한 타임존을 지정합니다.</li><li>종료 일시: 작업이 종료되는 시간을 입력할 수 있습니다.</li></ul>예약된 종료 시간이 되면 모든 작업이 종료되고 FIP, 도메인을 포함한 모든 리소스는 삭제됩니다. |
 | 로드 밸런서 | 템플릿의 컨테이너 정보에 포트가 지정된 경우에만 사용 버튼이 활성화됩니다.<ul><li>플로팅 IP: 플로팅 IP를 사용하기 위해서는 반드시 인터넷 게이트웨이가 설정된 서브넷에 연결되어 있어야 합니다.<ul><li>외부에서 컨테이너에 접근하기 위해서는 플로팅 IP를 사용해야 합니다. 플로팅 IP를 사용하면 domain URL이 추가됩니다.</li></ul></li><li>상태 확인: 로드 밸런서에서 워크로드의 상태 확인을 시도합니다.</li><li>IP 접근 제어 그룹: 접근 제어 그룹을 로드 밸런서에 적용할 수 있습니다.</li><li>컨테이너에서 TERMINATED\_HTTPS 프로토콜을 사용하는 경우 SSL 인증서를 등록해야 합니다.</li><li>로드 밸런서의 포트와 프로토콜은 템플릿의 컨테이너에 정의된 포트와 프로토콜을 사용합니다.</li></ul>레거시 네트워크 환경에서는 로드 밸런서를 사용할 수 없습니다. |
 | 내부 로드 밸런서 | NCS 내의 동일한 서브넷에서만 통신 가능한 로드 밸런서를 사용할 수 있습니다. 템플릿의 컨테이너 정보에 포트가 지정된 경우에만 사용 버튼이 활성화됩니다.<br><ul><li>IP: 로드 밸런서의 IP를 지정합니다.<br><ul><li>자동 할당: 워크로드의 서브넷에서 할당받은 IP를 사용합니다.</li><li>지정: 특정 IP를 사용합니다. 다른 리소스에서 사용 중인 IP를 입력할 경우 워크로드에서는 해당 IP로 다른 리소스와 연동할 수 없습니다.</li></ul><li>내부 로드 밸런서는 TCP, UDP 프로토콜만 지원합니다. HTTP, HTTPS, TERMINATED_HTTPS가 지정된 경우 TCP로 변경되어 생성됩니다.</li></li></ul>|
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 | Private DNS | VPC 내에서 접근 가능한 도메인을 사용할 수 있습니다.<ul><li>Private DNS Zone: 레코드 세트를 생성할 Zone을 선택합니다.</li><li>TTL: 레코드 세트 정보의 갱신 주기를 초 단위로 입력합니다.</li></ul>|
 {% endif -%}
 | 보안 그룹 | 워크로드의 보안 그룹을 지정할 수 있습니다.<br>워크로드 보안 그룹을 선택한 경우 컨테이너 포트의 보안 규칙을 생성해야 합니다.<br>워크로드 보안 그룹을 선택하지 않는 경우 NCS에서 생성한 보안 그룹이 적용되며 컨테이너 포트의 보안 규칙이 자동으로 생성됩니다. |
@@ -227,7 +222,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > [참고]
 > 내부 로드 밸런서 IP로 로컬 통신은 할 수 없습니다.
 
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 > [주의]
 > 워크로드에서 사용 중인 Private DNS Zone 또는 Private DNS 레코드 세트를 삭제하면 VPC 내에서 도메인 연동이 되지 않습니다.
 
@@ -244,7 +239,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 항목 | 설명 |
 | --- | --- |
 | 이름 | 워크로드의 이름과 ID |
-{% if gov_or_ncgn == "ncgn" -%}
+{% if "ncgn" in build_flags -%}
 | 유형 | 컨테이너 유형 |
 {% endif -%}
 | 설명 | 워크로드에 대한 설명 |
@@ -254,10 +249,10 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 작업 실행 수 | 실행된 템플릿 수 |
 | 오토 스케일러 | 워크로드에 설정된 오토 스케일러 정보 |
 | 생성일 | 워크로드가 생성된 날짜 |
-| VPC | 워크로드에 설정된 VPC{% if not gov_or_ncgn %} 들{% endif %}|
+| VPC | 워크로드에 설정된 VPC{% if "gov" not in build_flags and "ncgn" not in build_flags %} 들{% endif %}|
 | 서브넷 | 워크로드에 설정된 서브넷 |
 | 보안 그룹 | 워크로드에 설정된 보안 그룹의 이름 |
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 | Private DNS | 워크로드에 설정된 Private DNS 정보 |
 {% endif -%}
 | 로드 밸런서 | 로드 밸런서 정보 |
@@ -274,7 +269,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 항목 | 설명 |
 | --- | --- |
 | 컨테이너 이름 | 컨테이너의 이름 |
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 | 유형 | 컨테이너 유형 |
 {% endif -%}
 | 이미지 URL | 컨테이너 이미지의 정보 |
@@ -283,7 +278,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 재시작 횟수 | 컨테이너가 재시작된 횟수 |
 | 메모리 | 컨테이너에 할당된 메모리 |
 | CPU | 컨테이너에 할당된 CPU 수 |
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 | GPU | 컨테이너에 할당된 GPU 정보 |
 {% endif -%}
 | 포트 | 컨테이너에서 사용하는 포트 |
@@ -294,7 +289,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 스토리지 | 컨테이너에 연결된 스토리지 |
 | 수명 주기 훅 | 컨테이너에 설정된 수명 주기 훅 |
 | 컨피그맵 | 컨테이너에 연결된 오브젝트 파일과 마운트 경로 |
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 | 시크릿 | 컨테이너에 연결된 기밀 데이터와 마운트 경로 |
 {% endif -%}
 | 상태 점검 | 컨테이너에 설정된 상태 점검 |
@@ -336,7 +331,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 네트워크 데이터 수신 | bps | 워크로드의 작업 기준으로 네트워크 데이터 수신 정보가 제공됩니다. |
 | 디스크 사용률 | % | 컨테이너에 추가된 NAS 스토리지의 사용률이 제공됩니다. |
 | 임시 스토리지 사용률 | % | 워크로드의 작업 기준으로 임시 스토리지 사용률이 제공됩니다. |
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 | GPU 사용률 | % | 컨테이너에 할당된 GPU 사용률이 제공됩니다. |
 | GPU 메모리 사용률 | % | 컨테이너에 할당된 GPU 메모리 사용률이 제공됩니다. |
 | GPU 전력 사용량 | mW | 컨테이너에 할당된 GPU 전력 사용량이 제공됩니다. |
@@ -408,7 +403,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 설명 | 워크로드의 설명 |
 | 템플릿 | 실행 중인 워크로드의 템플릿 변경<br>템플릿 변경 시 롤링 업데이트 방식으로 워크로드가 무중단 배포됩니다.<br>작업이 하나씩 순차적으로 교체되어 배포 중에 기존 작업과 새로운 작업이 동시에 실행된 상태일 수 있습니다.<br>**워크로드 실행 히스토리**탭에서 변경 결과를 확인할 수 있습니다. |
 | 작업 요청 수 | 실행 중인 워크로드의 작업 수 변경<br>작업 요청 수 증가: 기존 작업은 유지하며 새로운 작업이 생성됩니다.<br>작업 요청 수 감소: 감소된 작업 개수만큼 작업이 종료됩니다. |
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 | 오토 스케일러 | 실행 중인 워크로드의 오토 스케일러 설정 변경 |
 {% endif -%}
 | 종료 예약 | 워크로드 작업의 종료 예약 설정을 변경 |
@@ -427,7 +422,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 ### 워크로드 중지/재시작 { #workload-stop-restart }
 워크로드 중지를 실행하면 플로팅 IP와 URL은 유지되며 워크로드의 모든 작업이 종료됩니다.
 
-워크로드 재시작을 실행하면 로드 밸런서 IP는 변경됩니다.{% if gov_or_ncgn != "ncgn" %} IP를 변경하지 않으려면 API로 로드 밸런서 IP를 지정하세요.{% endif %}
+워크로드 재시작을 실행하면 로드 밸런서 IP는 변경됩니다.{% if "ncgn" not in build_flags %} IP를 변경하지 않으려면 API로 로드 밸런서 IP를 지정하세요.{% endif %}
 
 > [참고]
 > 배포 컨트롤러에 따라서 워크로드 중지/재시작을 실행하면 컨테이너 IP가 변경될 수 있습니다.
@@ -440,7 +435,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 ### 워크로드 삭제 { #workload-delete }
 삭제할 워크로드를 선택하고 **워크로드 삭제**를 클릭하면 삭제됩니다.
 
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 <a id="workload-malware-scan"></a>
 ### 악성 코드 검사 { #workload-malware-scan }
 **악성 코드 검사**를 클릭하여 워크로드에서 사용하는 컨테이너 이미지에 대해 악성 코드 검사를 수행합니다.
@@ -508,10 +503,10 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 
 <a id="considerations"></a>
 ## 참고 사항 { #considerations }
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 <a id="considerations-region"></a>
 ### 리전 { #considerations-region }
-{% if gov_or_ncgn == "gov" -%}
+{% if "gov" in build_flags -%}
 * NCS 서비스는 한국(판교) 리전에서만 사용할 수 있습니다.
 {%- else -%}
 * NCS는 한국(판교), 한국(광주) 리전에서만 사용할 수 있습니다.
@@ -543,7 +538,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 
 * 컨테이너 이미지 내에서 컨테이너가 서비스를 위해 사용하기로 결정한 포트와 템플릿의 컨테이너 포트는 일치해야 합니다.
     * 80 포트를 서비스하기로 지정된 기본 nginx 컨테이너 이미지를 이용하는 경우 컨테이너 포트에 80을 지정해야 합니다. 컨테이너 이미지의 내용을 변경하여 다른 포트를 서비스하도록 설정한 경우 해당 포트 번호를 지정해야 합니다.
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 * 컨피그맵과 시크릿은 템플릿을 만들 때의 정보를 사용합니다. 원본 파일이나 비밀 데이터가 수정되더라도, 이미 만들어진 템플릿의 정보는 영향을 받지 않습니다.
     * 컨피그맵 또는 시크릿의 내용을 업데이트하고 해당 변경 사항을 반영하려면 새로운 템플릿 또는 버전을 생성하고 워크로드를 실행해야 합니다.
 {%- else -%}
@@ -551,7 +546,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
     * 컨피그맵의 내용을 업데이트하고 해당 변경 사항을 반영하려면 새로운 템플릿을 생성하고 워크로드를 실행해야 합니다.
 {%- endif %}
 
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 <a id="considerations-gpu"></a>
 ### GPU { #considerations-gpu }
 * A100 40GB 카드의 MIG (multi instance GPU)를 제공합니다.
@@ -569,7 +564,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 | Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
 {% endif -%}
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 <a id="loadbalancer-static-ip"></a>
 ### 워크로드 로드 밸런서 IP 지정
 * API로 워크로드의 로드 밸런서 IP를 지정할 수 있습니다.
@@ -614,7 +609,7 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 | {{.Resource}} 리소스가 부족하여 워크로드를 생성할 수 없습니다. | NCS 환경의 리소스가 부족하여 워크로드를 생성할 수 없습니다.<br>잠시 후 다시 시도하거나 고객 센터에 문의하세요. |
 | 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요. |
 
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 <a id="integrate-with-nhncloud-service"></a>
 ## NHN Cloud 서비스 연동 { #integrate-with-nhncloud-service }
 <a id="integrate-with-logandcrash"></a>
