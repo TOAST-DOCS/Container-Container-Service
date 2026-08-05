@@ -1,10 +1,10 @@
-{%- set variant = (
+{%- set gov_or_ncgn = (
       "gov"  if "gov"  in build_flags
  else ""
 ) -%}
 {#- API endpoint 도메인은 환경별로 완전히 별개 (external URL) 이므로 dict 유지.
     auth link 는 cross-file (nhncloud repo) 이므로 링크 정책 (0-5) 대로 base URL 사용. -#}
-{%- set api_domain = {"": "nhncloudservice.com", "gov": "gov-nhncloudservice.com"}[variant] %}
+{%- set api_domain = {"": "nhncloudservice.com", "gov": "gov-nhncloudservice.com"}[gov_or_ncgn] %}
 <!-- pre-align:aligned sig=08050b417a83 -->
 
 # NCS API 가이드
@@ -20,7 +20,7 @@
 | 리전 | 도메인 |
 | --- | --- |
 | 한국(판교) 리전 | https://kr1-ncs.api.$[ api_domain ]$ |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | 한국(광주) 리전 | https://kr3-ncs.api.nhncloudservice.com |
 {%- endif %}
 
@@ -132,7 +132,7 @@ x-nhn-authorization: Bearer {accessToken}
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -318,7 +318,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -450,7 +450,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -555,7 +555,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -727,7 +727,7 @@ x-nhn-authorization: Bearer {accessToken}
 | templates.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | templates.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | templates.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | templates.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | templates.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -943,7 +943,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -1099,7 +1099,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -1205,7 +1205,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -1410,7 +1410,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workloads.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
 | workloads.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workloads.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
-| workloads.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workloads.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workloads.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workloads.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workloads.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
@@ -1418,7 +1418,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workloads.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
 | workloads.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workloads.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
-| workloads.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workloads.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workloads.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workloads.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workloads.securityGroups | Body | List | X | SecurityGroups 정보 |
@@ -1556,7 +1556,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
@@ -1564,7 +1564,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
@@ -1579,7 +1579,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.tasks.containers.cpus | Body | Float | O | 컨테이너에 할당된 CPU 수 |
 | workload.tasks.containers.memoryLimit | Body | Object | O | 컨테이너에 할당된 메모리 정보 |
 | workload.tasks.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당된 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | workload.tasks.containers.gpuFlavor | Body | String | X | 컨테이너에 할당된 GPU Flavor 정보 |
 {%- endif %}
 | workload.tasks.containers.ports | Body | Array | X | 컨테이너의 포트 정보 |
@@ -1981,7 +1981,7 @@ x-nhn-authorization: Bearer {accessToken}
 | template.containers.cpus | Body | Float | O | 컨테이너에 할당하는 CPU 개수 |
 | template.containers.memoryLimit | Body | Object | O | 컨테이너에 할당하는 메모리 정보 |
 | template.containers.memoryLimit.hard | Body | Integer | O | 컨테이너에 할당하는 메모리(MiB) |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | template.containers.gpuFlavor | Body | String | X | GPU Flavor 정보<ul><li>ncs1.g1m5</li><li>ncs1.g2m10</li></ul> |
 {%- endif %}
 | template.containers.ports | Body | Array | X | 컨테이너에서 사용하는 포트 정보 |
@@ -2233,7 +2233,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
@@ -2241,7 +2241,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
@@ -2324,7 +2324,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
@@ -2332,7 +2332,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
@@ -2433,7 +2433,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
@@ -2441,7 +2441,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
@@ -2524,7 +2524,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
@@ -2532,7 +2532,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
@@ -2636,7 +2636,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 {%- endif %}
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
@@ -2676,7 +2676,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleOut.maxReplicas | Body | Integer | X | 오토 스케일링 최대 작업 수 |
 | workload.autoScaler.scaleOut.coolDownMinute | Body | Integer | X | 증설 후 대기 시간 |
 | workload.autoScaler.scaleOut.condition | Body | List | X | 증설 조건 |
-| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleOut.condition.resource | Body | String | X | 증설 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleOut.condition.threshold | Body | Integer | X | 증설 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleOut.condition.duration | Body | Integer | X | 증설 조건 리소스 사용량 유지 시간(분) |
 | workload.autoScaler.scaleIn | Body | Object | X | ScaleIn 정보 |
@@ -2684,7 +2684,7 @@ x-nhn-authorization: Bearer {accessToken}
 | workload.autoScaler.scaleIn.minReplicas | Body | Integer | X | 오토 스케일링 최소 작업 수 |
 | workload.autoScaler.scaleIn.coolDownMinute | Body | Integer | X | 감축 후 대기 시간 |
 | workload.autoScaler.scaleIn.condition | Body | List | X | 감축 조건 |
-| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not variant %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
+| workload.autoScaler.scaleIn.condition.resource | Body | String | X | 감축 조건 기준 리소스<ul><li>cpu</li><li>memory</li>{% if not gov_or_ncgn %}<li>gpu</li><li>gpu-memory</li></ul>{% else %}</ul>{% endif %} |
 | workload.autoScaler.scaleIn.condition.threshold | Body | Integer | X | 감축 조건 리소스 사용량(1~100) |
 | workload.autoScaler.scaleIn.condition.duration | Body | Integer | X | 감축 조건 리소스 사용량 유지 시간(분) |
 | workload.securityGroups | Body | List | X | SecurityGroups 정보 |
@@ -3045,7 +3045,7 @@ x-nhn-authorization: Bearer {accessToken}
 | 10044 | The template in use by the workload cannot be deleted. | 워크로드에서 사용 중인 템플릿은 삭제할 수 없습니다. |
 | 10045 | Duplicate container port exists in the template. | 템플릿에 동일한 컨테이너 포트가 존재합니다. |
 | 10046 | Template with the same name already exists. | 동일한 이름의 템플릿이 이미 존재합니다. |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | 10047 | Resource {{.gpuFlavor}} is not available. If you want to use, please contact the Customer Center. | {{.gpuFlavor}} 자원은 가용되지 않고 있습니다. |
 {%- endif %}
 | 10048 | Failed to download ConfigMaps. | 컨피그맵 다운로드에 실패하였습니다. |
@@ -3054,7 +3054,7 @@ x-nhn-authorization: Bearer {accessToken}
 | 10051 | Failed to download secrets from Secure Key Manager. | Secure Key Manager에서 시크릿 다운로드에 실패하였습니다. |
 | 10052 | Could not create a template that consists only of init containers. | 초기화 컨테이너로만 구성된 템플릿은 생성할 수 없습니다. |
 | 10053 | The {{.Resource}} of an init container must be less than the sum of the normal containers. | 초기화 컨테이너의 {{.Resource}}는 일반 컨테이너의 합보다 작아야 합니다. |
-{%- if not variant %}
+{%- if not gov_or_ncgn %}
 | 10054 | Could not set the GPU type of an init container differently than a regular container. | 초기화 컨테이너의 GPU 타입을 일반 컨테이너와 다르게 설정할 수 없습니다. |
 {%- endif %}
 | 10061 | Could not find the workload. | 워크로드를 찾을 수 없습니다. |
