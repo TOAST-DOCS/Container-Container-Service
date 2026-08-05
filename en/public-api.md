@@ -72,7 +72,6 @@ Returns <strong>200 OK</strong> for all API requests. For more information on th
 ## Template { #template }
 
 <a id="view-template-list"></a>
-
 ### List Templates { #view-template-list }
 
 Retrieves a list of templates.
@@ -83,7 +82,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-template-list-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -97,7 +95,6 @@ This API does not require a request body.
 | disable\_containers | Query | Boolean | X | <li>true: Retrieve excluding containers</li><li>false: Retrieve including containers (default)</li> |
 
 <a id="view-template-list-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -262,7 +259,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-template"></a>
-
 ### View Template { #view-template }
 
 Retrieves information about an individual template.
@@ -273,7 +269,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-template-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -284,7 +279,6 @@ This API does not require a request body.
 | templateId | URL | String | O | Template ID |
 | token | Header | String | O | NHN Cloud Token |
 <a id="view-template-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -406,7 +400,6 @@ This API does not require a request body.
 </details>
 
 <a id="create-template"></a>
-
 ### Create Template { #create-template }
 
 Creates a template.
@@ -521,7 +514,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="create-template-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -640,7 +632,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="delete-template"></a>
-
 ### Delete Template { #delete-template }
 
 Deletes a template.
@@ -651,7 +642,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="delete-template-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -667,7 +657,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="view-a-list-of-template-versions"></a>
-
 ### View a List of Template Versions { #view-a-list-of-template-versions }
 
 ```bash
@@ -676,7 +665,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-a-list-of-template-versions-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -692,7 +680,6 @@ This API does not require a request body.
 | sort | Query | String | X | Field name to sort by<br>Prefix field names with `-` for reverse sorting<br>Example: `sort=-name` |
 
 <a id="view-a-list-of-template-versions-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -884,7 +871,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-template-versions"></a>
-
 ### View Template Versions { #view-template-versions }
 
 Retrieves information on an individual template version.
@@ -895,7 +881,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-template-versions-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -907,7 +892,6 @@ This API does not require a request body.
 | version | URL | String | O | Template version |
 | token | Header | String | O | NHN Cloud Token |
 <a id="view-template-versions-response"></a>
-
 #### Response
 
 * Same as retrieving template details
@@ -1056,7 +1040,6 @@ This API does not require a request body.
 </details>
 
 <a id="create-template-version"></a>
-
 ### Create Template Version { #create-template-version }
 
 Creates a version of the template.
@@ -1171,7 +1154,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="create-template-version-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1290,7 +1272,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="delete-template-version"></a>
-
 ### Delete Template Version { #delete-template-version }
 
 ```bash
@@ -1299,7 +1280,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="delete-template-version-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1316,11 +1296,9 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="workload"></a>
-
 ## Workload { #workload }
 
 <a id="list-workloads"></a>
-
 ### List Workloads { #list-workloads }
 
 Retrieves a list of workloads.
@@ -1331,7 +1309,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="list-workloads-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1345,7 +1322,6 @@ This API does not require a request body.
 | size | Query | Integer | X | Page size to retrieve (default: 10) |
 
 <a id="list-workloads-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1472,7 +1448,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload"></a>
-
 ### View Workload { #view-workload }
 
 Retrieves an individual workload.
@@ -1483,7 +1458,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1494,7 +1468,6 @@ This API does not require a request body.
 | workloadId | URL | String | O | Workload ID |
 | token | Header | String | O | NHN Cloud Token |
 <a id="view-workload-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -1730,7 +1703,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-log"></a>
-
 ### View Workload Log { #view-workload-log }
 
 Retrieves the container logs for your workload.
@@ -1741,7 +1713,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-log-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1793,7 +1764,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-event"></a>
-
 ### View Workload Events { #view-workload-event }
 
 Retrieves the events of a workload.
@@ -1804,7 +1774,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-event-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1861,7 +1830,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-a-list-of-workload-run-history"></a>
-
 ### View a List of Workload Run History { #view-a-list-of-workload-run-history }
 
 Retrieves a list of workload run history.
@@ -1872,7 +1840,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-a-list-of-workload-run-history-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1928,7 +1895,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-run-history"></a>
-
 ### View Workload Run History { #view-workload-run-history }
 
 Retrieves the run history of an individual workload.
@@ -1939,7 +1905,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-run-history-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -1951,7 +1916,6 @@ This API does not require a request body.
 | historyId | URL | Integer | O | History ID |
 | token | Header | String | O | NHN Cloud Token |
 <a id="view-workload-run-history-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2112,7 +2076,6 @@ This API does not require a request body.
 </details>
 
 <a id="view-workload-scheduled-run-history"></a>
-
 ### View workload scheduled run history { #view-workload-scheduled-run-history }
 
 Views the history of a scheduled run.
@@ -2123,7 +2086,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-workload-scheduled-run-history-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -2172,7 +2134,6 @@ This API does not require a request body.
 </details>
 
 <a id="create-workload"></a>
-
 ### Create a Workload { #create-workload }
 
 Creates a workload.
@@ -2184,7 +2145,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="create-workload-request"></a>
-
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -2275,7 +2235,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="create-workload-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2379,7 +2338,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="change-workload"></a>
-
 ### Change Workload { #change-workload }
 
 Changes a workload.
@@ -2391,7 +2349,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="change-workload-request"></a>
-
 #### Request
 
 | Name | Type | Format | Required | Description |
@@ -2478,7 +2435,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="change-workload-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2588,13 +2544,11 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="changing-workload-parts"></a>
-
 ### Change Workload Parts { #changing-workload-parts }
 
 You can modify only part of a workload.
 
 <a id="changing-workload-parts-request"></a>
-
 #### Request
 
 * When using this API, the Content-Type must be set to application/json-patch+json.
@@ -2631,7 +2585,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="changing-workload-parts-response"></a>
-
 #### Response
 
 | Name | Type | Format | Required | Description |
@@ -2741,7 +2694,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="stop-workload"></a>
-
 ### Stop Workload { #stop-workload }
 Stops a workload.
 
@@ -2751,7 +2703,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="stop-workload-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -2766,7 +2717,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="restart-workload"></a>
-
 ### Restart Workload { #restart-workload }
 Restarts a workload that is stopped.
 
@@ -2776,7 +2726,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="restart-workload-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -2791,7 +2740,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="delete-workload"></a>
-
 ### Restart Workload Task { #delete-workload }
 Restarts a task in the workload.
 
@@ -2801,7 +2749,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="delete-workload-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -2817,7 +2764,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="workload-1"></a>
-
 ### Delete Workload { #workload-1 }
 
 Deletes a workload.
@@ -2828,7 +2774,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="workload-1-1"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -2844,7 +2789,6 @@ This API does not require a request body.
 This API responds with common information.
 
 <a id="view-malware-scan-settings"></a>
-
 ### View Malware Scan Settings { #view-malware-scan-settings }
 Retrieves the configured malware scan settings.
 
@@ -2854,7 +2798,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-malware-scan-settings-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -2886,7 +2829,6 @@ This API does not require a request body.
 </details>
 
 <a id="configure-malware-scan"></a>
-
 ### Configure Malware Scan { #configure-malware-scan }
 Configures the malware scan settings.
 
@@ -2896,7 +2838,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="configure-malware-scan-request"></a>
-
 #### Request
 | Name | Type | Format | Required | Description |
 | --- | --- | --- | --- | --- |
@@ -2937,7 +2878,6 @@ x-nhn-authorization: Bearer {accessToken}
 </details>
 
 <a id="view-malware-scan-result"></a>
-
 ### View Malware Scan Result { #view-malware-scan-result }
 
 Retrieves the malware scan result.
@@ -2948,7 +2888,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="view-malware-scan-result-request"></a>
-
 #### Request
 
 This API does not require a request body.
@@ -3047,7 +2986,6 @@ This API does not require a request body.
 </details>
 
 <a id="response-code"></a>
-
 ## Response Codes { #response-code }
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
