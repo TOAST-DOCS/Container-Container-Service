@@ -1,7 +1,13 @@
-<!-- pre-align:aligned sig=d29522461c5f -->
+<!-- pre-align:aligned sig=a64bf08e342e -->
 
 <a id="container-nhn-container-servicencs-release-notes"></a>
 ## Container > NHN Container Service(NCS) > 릴리스 노트 { #container-nhn-container-servicencs-release-notes }
+<a id="august-25-2026"></a>
+### 2026. 08. 25. { #august-25-2026 }
+<a id="august-25-2026-added-features"></a>
+#### 기능 추가
+* 컨테이너 공유 메모리 크기 설정 기능이 추가되었습니다.
+
 <a id="october-28-2025"></a>
 ### 2025. 10. 28. { #october-28-2025 }
 <a id="october-28-2025-added-features"></a>
