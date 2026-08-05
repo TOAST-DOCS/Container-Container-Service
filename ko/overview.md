@@ -1,8 +1,3 @@
-{%- set gov_or_ncgn = (
-      "gov"  if "gov"  in build_flags
- else "ncgn" if "ncgn" in build_flags
- else ""
-) -%}
 <!-- pre-align:aligned sig=80730cbca944 -->
 
 <a id="container-nhn-container-service-ncs-overview"></a>
@@ -17,7 +12,7 @@ VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지
 * 퍼블릭/프라이빗 컨테이너 레지스트리에 보관된 컨테이너 이미지를 구동시킬 수 있습니다.
 * 컨테이너는 사용자 VPC에 연결되므로 VPC를 통해 통신 가능한 인스턴스, 로드 밸런서, Online NAS 등 모든 IaaS 자원과 통신할 수 있고, VPC가 제공하는 네트워킹 기능을 활용할 수 있습니다.
 * 컨테이너는 Online NAS 또는 VPC에서 접근 가능한 NFSv3 마운트 포인트를 볼륨으로 사용할 수 있습니다.
-{% if not gov_or_ncgn -%}
+{% if "gov" not in build_flags and "ncgn" not in build_flags -%}
 * GPU를 사용하는 컨테이너를 구성할 수 있습니다.
 {% endif -%}
 * 컨테이너에 로드 밸런서를 연결할 수 있습니다. 생성된 플로팅 IP와 도메인을 통해 컨테이너 서비스를 외부에 노출시킬 수 있습니다.
@@ -26,7 +21,7 @@ VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지
 * 시간 기반 스케줄을 설정하여 컨테이너 실행을 예약할 수 있습니다.
 * Object Storage에 업로드한 파일이나 Secure Key Manager에 저장한 기밀 데이터 파일을 컨테이너 디렉터리에 마운트하여 사용할 수 있습니다.
 * NCS에서만 사용 가능한 내부 로드 밸런서를 제공합니다.
-{% if gov_or_ncgn != "ncgn" -%}
+{% if "ncgn" not in build_flags -%}
 * 컨테이너 IP를 Private DNS에 자동 등록할 수 있습니다.
 {% endif -%}
 * 컨테이너의 종료 시간을 예약할 수 있습니다.
@@ -45,7 +40,7 @@ VM 인스턴스, Kubernetes와 같은 컨테이너 실행 환경을 구성하지
 
 어떤 사양의 컨테이너를 구성할 것인지 `템플릿`에 정의합니다.
 `템플릿`에는 템플릿 이름, 설명, 연결할 VPC, 한 개 이상의 컨테이너 사양을 기술합니다.
-컨테이너 사양에는 구동시킬 컨테이너 이미지가 보관된 레지스트리 URL, 사용할 CPU, {% if not gov_or_ncgn %}GPU, {% endif %}Memory 등 자원 사양, 컨테이너가 사용하는 포트, 연결할 NAS 스토리지 등을 기술합니다.
+컨테이너 사양에는 구동시킬 컨테이너 이미지가 보관된 레지스트리 URL, 사용할 CPU, {% if "gov" not in build_flags and "ncgn" not in build_flags %}GPU, {% endif %}Memory 등 자원 사양, 컨테이너가 사용하는 포트, 연결할 NAS 스토리지 등을 기술합니다.
 
 ```
 템플릿을 생성해도 컨테이너는 생성되지 않습니다. 템플릿은 워크로드를 만들기 위한 틀이며, 템플릿을 활용해 워크로드를 생성한 경우에 컨테이너가 생성됩니다.
