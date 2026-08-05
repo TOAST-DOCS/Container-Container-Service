@@ -393,7 +393,6 @@ If you use a load balancer to make changes to the template while the workload is
 > If the workload change fails (for example, an image error), the change attempt is terminated and no job replacement occurs.
 
 <a id="workload-stop-restart"></a>
-
 ### Stop/Restart Workload { #workload-stop-restart }
 If you stop a workload, all tasks in the workload will be terminated.
 
@@ -526,9 +525,8 @@ Infrastructure NCS ADMIN permissions alone are only for viewing.
 | Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
 | Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
-<a id="problem-solving"></a>
-
-### Assign a Workload Load Balancer IP
+<a id="loadbalancer-static-ip"></a>
+### Assign a Workload Load Balancer IP { #loadbalancer-static-ip }
 * You can assign a load balancer IP for a workload via API.
 * If you do not assign a load balancer IP, the IP may change when the load balancer is recreated.
 * If you assign a load balancer IP, that IP is retained even if the load balancer is recreated. The assigned IP is retained until you change it separately or delete the workload.
@@ -552,7 +550,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="problem-solving"></a>
-
 ## Guide to Problem Solving { #problem-solving }
 
 Explain how to solve various problems that may occur while using the NCS service
