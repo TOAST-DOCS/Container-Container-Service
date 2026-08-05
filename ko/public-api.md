@@ -15,17 +15,13 @@
 
 {% if not variant -%}
 <a id="ncs-api-common-information"></a>
+{% endif -%}
 ## NCS API 공통 정보 { #ncs-api-common-information }
-{%- else -%}
-## NCS API 공통 정보
-{%- endif %}
 
 {% if not variant -%}
 <a id="api-endpoint"></a>
+{% endif -%}
 ### API 엔드포인트 { #api-endpoint }
-{%- else -%}
-### API 엔드포인트
-{%- endif %}
 
 | 리전 | 도메인 |
 | --- | --- |
@@ -36,19 +32,15 @@
 
 {% if not variant -%}
 <a id="authentication-and-permission"></a>
+{% endif -%}
 ### 인증 및 권한 { #authentication-and-permission }
-{%- else -%}
-### 인증 및 권한
-{%- endif %}
 
 NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용합니다. User Access Key 토큰은 User Access Key를 기반으로 발급되는 Bearer 타입의 일시적 액세스 토큰입니다. User Access Key 토큰 발급 및 사용에 대한 자세한 내용은 [User Access Key 토큰](/nhncloud/ko/public-api/user-access-key-token)을 참고하세요.
 
 {% if not variant -%}
 <a id="common-response-information"></a>
+{% endif -%}
 ### 응답 공통 정보 { #common-response-information }
-{%- else -%}
-### 응답 공통 정보
-{%- endif %}
 
 모든 API 요청에 <strong>200 OK</strong>로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
 
@@ -97,17 +89,13 @@ NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용�
 
 {% if not variant -%}
 <a id="template"></a>
+{% endif -%}
 ## 템플릿 { #template }
-{%- else -%}
-## 템플릿
-{%- endif %}
 
 {% if not variant -%}
 <a id="view-template-list"></a>
+{% endif -%}
 ### 템플릿 목록 보기 { #view-template-list }
-{%- else -%}
-### 템플릿 목록 보기
-{%- endif %}
 
 템플릿 목록을 조회합니다.
 
@@ -301,10 +289,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-template"></a>
+{% endif -%}
 ### 템플릿 보기 { #view-template }
-{%- else -%}
-### 템플릿 보기
-{%- endif %}
 
 개별 템플릿 정보를 조회합니다.
 
@@ -453,10 +439,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="create-template"></a>
+{% endif -%}
 ### 템플릿 생성하기 { #create-template }
-{%- else -%}
-### 템플릿 생성하기
-{%- endif %}
 
 템플릿을 생성합니다.
 
@@ -695,10 +679,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="delete-template"></a>
+{% endif -%}
 ### 템플릿 삭제하기 { #delete-template }
-{%- else -%}
-### 템플릿 삭제하기
-{%- endif %}
 
 템플릿을 삭제합니다.
 
@@ -729,10 +711,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-a-list-of-template-versions"></a>
+{% endif -%}
 ### 템플릿 버전 목록 보기 { #view-a-list-of-template-versions }
-{%- else -%}
-### 템플릿 버전 목록 보기
-{%- endif %}
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
@@ -953,10 +933,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-template-versions"></a>
+{% endif -%}
 ### 템플릿 버전 보기 { #view-template-versions }
-{%- else -%}
-### 템플릿 버전 보기
-{%- endif %}
 
 개별 템플릿 버전 정보를 조회합니다.
 
@@ -1133,10 +1111,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="create-template-version"></a>
+{% endif -%}
 ### 템플릿 버전 생성 { #create-template-version }
-{%- else -%}
-### 템플릿 버전 생성
-{%- endif %}
 
 템플릿 버전을 생성합니다.
 
@@ -1375,10 +1351,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="delete-template-version"></a>
+{% endif -%}
 ### 템플릿 버전 삭제 { #delete-template-version }
-{%- else -%}
-### 템플릿 버전 삭제
-{%- endif %}
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
@@ -1408,17 +1382,13 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="workload"></a>
+{% endif -%}
 ## 워크로드 { #workload }
-{%- else -%}
-## 워크로드
-{%- endif %}
 
 {% if not variant -%}
 <a id="list-workloads"></a>
+{% endif -%}
 ### 워크로드 목록 보기 { #list-workloads }
-{%- else -%}
-### 워크로드 목록 보기
-{%- endif %}
 
 워크로드 목록을 조회합니다.
 
@@ -1572,10 +1542,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-workload"></a>
+{% endif -%}
 ### 워크로드 보기 { #view-workload }
-{%- else -%}
-### 워크로드 보기
-{%- endif %}
 
 개별 워크로드를 조회합니다.
 
@@ -1838,10 +1806,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-workload-log"></a>
+{% endif -%}
 ### 워크로드 로그 보기 { #view-workload-log }
-{%- else -%}
-### 워크로드 로그 보기
-{%- endif %}
 
 워크로드의 컨테이너 로그를 조회합니다.
 
@@ -1907,10 +1873,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-workload-event"></a>
+{% endif -%}
 ### 워크로드 이벤트 보기 { #view-workload-event }
-{%- else -%}
-### 워크로드 이벤트 보기
-{%- endif %}
 
 워크로드의 이벤트를 조회합니다.
 
@@ -1981,10 +1945,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-a-list-of-workload-run-history"></a>
+{% endif -%}
 ### 워크로드 실행 히스토리 목록 보기 { #view-a-list-of-workload-run-history }
-{%- else -%}
-### 워크로드 실행 히스토리 목록 보기
-{%- endif %}
 
 워크로드 실행 히스토리 목록을 조회합니다.
 
@@ -2054,10 +2016,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-workload-run-history"></a>
+{% endif -%}
 ### 워크로드 실행 히스토리 보기 { #view-workload-run-history }
-{%- else -%}
-### 워크로드 실행 히스토리 보기
-{%- endif %}
 
 개별 워크로드 실행 히스토리를 조회합니다.
 
@@ -2246,10 +2206,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-workload-scheduled-run-history"></a>
+{% endif -%}
 ### 워크로드 예약 실행 히스토리 보기 { #view-workload-scheduled-run-history }
-{%- else -%}
-### 워크로드 예약 실행 히스토리 보기
-{%- endif %}
 
 예약 실행 히스토리를 조회합니다.
 
@@ -2312,10 +2270,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="create-workload"></a>
+{% endif -%}
 ### 워크로드 생성하기 { #create-workload }
-{%- else -%}
-### 워크로드 생성하기
-{%- endif %}
 
 워크로드를 생성합니다.
 
@@ -2524,10 +2480,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="change-workload"></a>
+{% endif -%}
 ### 워크로드 변경하기 { #change-workload }
-{%- else -%}
-### 워크로드 변경하기
-{%- endif %}
 
 워크로드를 변경합니다.
 
@@ -2738,10 +2692,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="changing-workload-parts"></a>
+{% endif -%}
 ### 워크로드 부분 변경하기 { #changing-workload-parts }
-{%- else -%}
-### 워크로드 부분 변경하기
-{%- endif %}
 
 워크로드의 일부만 수정할 수 있습니다.
 
@@ -2898,10 +2850,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="stop-workload"></a>
+{% endif -%}
 ### 워크로드 중지 { #stop-workload }
-{%- else -%}
-### 워크로드 중지
-{%- endif %}
 워크로드를 중지합니다.
 
 ```bash
@@ -2930,10 +2880,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="restart-workload"></a>
+{% endif -%}
 ### 워크로드 재시작 { #restart-workload }
-{%- else -%}
-### 워크로드 재시작
-{%- endif %}
 중지 상태의 워크로드를 재시작합니다.
 
 ```bash
@@ -2962,10 +2910,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="delete-workload"></a>
+{% endif -%}
 ### 워크로드 작업 재시작 { #delete-workload }
-{%- else -%}
-### 워크로드 작업 재시작
-{%- endif %}
 워크로드의 작업을 재시작합니다.
 
 ```bash
@@ -2995,10 +2941,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="workload-1"></a>
+{% endif -%}
 ### 워크로드 삭제하기 { #workload-1 }
-{%- else -%}
-### 워크로드 삭제하기
-{%- endif %}
 
 워크로드를 삭제합니다.
 
@@ -3029,10 +2973,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-malware-scan-settings"></a>
+{% endif -%}
 ### 악성 코드 검사 설정 조회 { #view-malware-scan-settings }
-{%- else -%}
-### 악성 코드 검사 설정 조회
-{%- endif %}
 설정되어 있는 악성 코드 검사 설정을 조회합니다.
 
 ```bash
@@ -3079,10 +3021,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="configure-malware-scan"></a>
+{% endif -%}
 ### 악성코드 검사 설정 { #configure-malware-scan }
-{%- else -%}
-### 악성코드 검사 설정
-{%- endif %}
 악성 코드 검사 설정을 합니다.
 
 ```bash
@@ -3136,10 +3076,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="view-malware-scan-result"></a>
+{% endif -%}
 ### 악성코드 검사 결과 조회 { #view-malware-scan-result }
-{%- else -%}
-### 악성코드 검사 결과 조회
-{%- endif %}
 
 악성 코드 검사 결과를 조회합니다.
 
@@ -3252,10 +3190,8 @@ x-nhn-authorization: Bearer {accessToken}
 
 {% if not variant -%}
 <a id="response-code"></a>
+{% endif -%}
 ## 응답 코드 { #response-code }
-{%- else -%}
-## 응답 코드
-{%- endif %}
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | 200 | SUCCESS | 요청 성공 |
