@@ -1,17 +1,33 @@
+{%- set variant = (
+      "gov"  if "gov"  in build_flags
+ else "ncgn" if "ncgn" in build_flags
+ else ""
+) -%}
+{#- 링크 suffix (커밋 1: byte-match 검증용. 커밋 2 에서 base 로 통일). -#}
+{%- set ncr_suffix        = {"": "",      "gov": "-gov", "ncgn": "-ngsc"}[variant] -%}
+{%- set nas_suffix        = {"": "",      "gov": "-gov", "ncgn": ""     }[variant] -%}
+{%- set console_suffix    = {"": "",      "gov": "-gov", "ncgn": "-ngsc"}[variant] -%}
+{%- set console_role_frag = {"": "#_22",  "gov": "#_23", "ncgn": "#_21" }[variant] -%}
+{%- set res_policy_suffix = {"": "",      "gov": "-gov", "ncgn": "-ngsc"}[variant] -%}
+{%- set lc_console_prefix = {"": "",      "gov": "gov-", "ncgn": ""     }[variant] %}
+{% if not variant -%}
 <!-- pre-align:aligned sig=53f25fa4d7f2 -->
 
 <a id="container-nhn-container-servicencs-user-guide"></a>
 ## Container > NHN Container Service(NCS) > 사용 가이드 { #container-nhn-container-servicencs-user-guide }
+{%- else -%}
+## Container > NHN Container Service(NCS) > 사용 가이드
+{%- endif %}
 
 <a id="template"></a>
-## 템플릿 { #template }
+## 템플릿{% if not variant %} { #template }{% endif %}
 
 템플릿은 워크로드 실행에 필요한 컨테이너, 네트워크 등의 리소스를 정의하는 서비스입니다.
 
 <a id="template-create"></a>
-### 템플릿 생성 { #template-create }
+### 템플릿 생성{% if not variant %} { #template-create }{% endif %}
 
-NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 합니다. **Container** > **NHN Container Service(NCS)** 페이지에서 **템플릿** 탭을 클릭한 뒤 **템플릿 생성**을 클릭합니다. 템플릿 생성에 필요한 항목은 다음과 같습니다.
+NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 합니다. **Container** > **NHN Container Service(NCS)** 페이지에서 **템플릿** 탭을 클릭한 뒤 **템플릿 생성**을 클릭합니다. 템플릿 생성에 필요한 항목은 다음과 같습니다.
 
 | 항목 | 설명 |
 | --- | --- |
@@ -19,7 +35,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 템플릿 설명 | 템플릿에 대한 설명. 255자 이내로 입력할 수 있습니다. |
 | 컨테이너 이름 | 컨테이너의 이름. 253자 이내의 영문 소문자와 숫자, 일부 기호(`-`)만 입력할 수 있습니다. |
 | 컨테이너 유형 | 컨테이너의 유형<br><ul><li>일반: 실행 상태가 유지되어야 하는 컨테이너</li><li>초기화: 일반 컨테이너 실행 전 완료되어야 하는 컨테이너</li></ul>|
-| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/user-guide/#user-access-keysecret-key)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
+| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/user-guide$[ ncr_suffix ]$/#user-access-keysecret-key)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
 | 레지스트리 유형 | 레지스트리의 유형. 퍼블릭 또는 프라이빗을 선택할 수 있습니다. |
 | 이미지 URL | 컨테이너 이미지의 정보. 255자 이내의 영문 소문자와 숫자, 일부 기호(`-`, `\_`, `.`, `,`, `/`, `@`, `:`)만 입력할 수 있습니다. |
 | 레지스트리 아이디 | 프라이빗 레지스트리 인증에 사용되는 아이디 |
@@ -27,16 +43,20 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 메모리 | 컨테이너에 할당하는 메모리 |
 | 포트 | 컨테이너에서 사용하는 포트 |
 | CPU | 컨테이너에 할당하는 CPU 개수. 0.25~16 사이의 수를 0.25개 단위로 입력할 수 있습니다. |
+{% if not variant -%}
 | GPU 사용 여부 | 컨테이너의 GPU 사용 여부를 결정합니다. |
 | GPU 타입 | 컨테이너에 할당할 GPU 타입을 결정합니다. |
-| 명령 | 컨테이너가 시작될 때 실행될 명령어. 이미지에 지정된 ENTRYPOINT보다 우선합니다. |
-| 인자 | 컨테이너가 시작될 때 전달될 인자. 이미지에 지정된 CMD보다 우선합니다. |
-| 작업 디렉터리 | 컨테이너의 작업 디렉터리. 이미지에 지정된 WORKDIR보다 우선합니다. |
+{% endif -%}
+| 명령 | 컨테이너가 시작될 때 실행될 명령어. 이미지에 지정된 ENTRYPOINT보다 우선합니다. |
+| 인자 | 컨테이너가 시작될 때 전달될 인자. 이미지에 지정된 CMD보다 우선합니다. |
+| 작업 디렉터리 | 컨테이너의 작업 디렉터리. 이미지에 지정된 WORKDIR보다 우선합니다. |
 | 환경 변수 | 컨테이너에 설정할 환경 변수 |
 | 수명 주기 훅 | 컨테이너의 생성, 종료 시점에 실행할 커맨드를 설정할 수 있습니다.<br>생성 직후에 입력한 커맨드가 실패한다면 컨테이너가 재시작됩니다.<br>커맨드 실행 전에 컨테이너가 종료되는 경우 커맨드가 실행되지 않을 수 있습니다.<ul><li>워크로드 작업의 GracePeriodSeconds는 30초입니다.</li></ul>생성 직후(postStart) 예) bash,-c,curl $URL/postStart <br>종료 직전(preStop) 예) bash,-c,curl $URL/preStop |
 | 컨피그맵 | Object Storage에 업로드한 파일을 컨테이너 디렉터리에 마운트하여 사용할 수 있습니다. <ul><li>Appkey: 파일 데이터를 사용할 프로젝트의 Object Storage 서비스의 Appkey를 입력합니다.</li><li>User Access Key: Object Storage 서비스에 접근하는 사용자의 User Access Key를 입력합니다. User Access Key는 NHN Cloud 콘솔의 계정 > **API 보안 설정** 페이지에서 생성 및 확인할 수 있습니다.</li><li>User Secret Key: Object Storage 서비스에 접근하는 사용자의 Secret Access Key를 입력합니다. Secret Access Key는 NHN Cloud 콘솔의 계정 > **API 보안 설정** 페이지에서 생성 및 확인할 수 있습니다.</li><li>오브젝트 URL: 오브젝트 다운로드 URL을 입력합니다. </li><li>컨테이너 마운트 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>입력한 경로에 파일이 마운트됩니다.</li></ul></li></ul> |
+{% if variant != "ncgn" -%}
 | 시크릿 | Secure Key Manager에 저장한 기밀 데이터 파일을 컨테이너 디렉터리에 마운트하여 사용할 수 있습니다. <ul><li>키 아이디: Secret Key Manager 서비스의 기밀 데이터 유형의 아이디를 입력합니다.</li><li>컨테이너 마운트 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>입력한 경로에 파일이 마운트됩니다.</li></ul></li></ul> |
-| NAS 스토리지 연결 | 컨테이너에 연결할 NAS 스토리지를 입력합니다.<ul><li>이름: 스토리지 이름. 63자 이내의 영문 소문자와 숫자, 일부 기호(-)만 입력할 수 있습니다.</li><li>NAS 연결 경로: NAS 스토리지의 연결 정보를 입력합니다. <ul><li>NAS 스토리지를 사용하는 경우 **Storage** \> **NAS** 페이지에서 연결할 NAS 스토리지의 연결 정보를 입력합니다. 사용 방법은 [NAS 사용 가이드](/Storage/NAS/ko/console-guide/)를 참고하세요.</li><li>별도 구축된 NFSv3 서버를 사용하는 경우 NFS 서버의 마운트 포인트를 입력합니다.</li></ul></li><li>컨테이너 연결 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>`$컨테이너 연결 경로`/`$스토리지 이름`에 마운트됩니다.</li></ul></li></ul>템플릿과 동일한 VPC를 사용하는 NAS 스토리지만 사용할 수 있습니다. |
+{% endif -%}
+| NAS 스토리지 연결 | 컨테이너에 연결할 NAS 스토리지를 입력합니다.<ul><li>이름: 스토리지 이름. 63자 이내의 영문 소문자와 숫자, 일부 기호(-)만 입력할 수 있습니다.</li><li>NAS 연결 경로: NAS 스토리지의 연결 정보를 입력합니다. <ul><li>NAS 스토리지를 사용하는 경우 **Storage** \> **NAS** 페이지에서 연결할 NAS 스토리지의 연결 정보를 입력합니다. 사용 방법은 [NAS 사용 가이드](/Storage/NAS/ko/console-guide$[ nas_suffix ]$/)를 참고하세요.</li><li>별도 구축된 NFSv3 서버를 사용하는 경우 NFS 서버의 마운트 포인트를 입력합니다.</li></ul></li><li>컨테이너 연결 경로: 컨테이너의 마운트 경로를 입력합니다.<ul><li>`$컨테이너 연결 경로`/`$스토리지 이름`에 마운트됩니다.</li></ul></li></ul>템플릿과 동일한 VPC를 사용하는 NAS 스토리지만 사용할 수 있습니다. |
 | 상태 점검 | 컨테이너의 상태를 점검하는 명령을 구성할 수 있습니다.<ul><li>활성 여부(LivenessProbe): 컨테이너가 동작 중인지 여부를 확인합니다.</li><li>시작 여부(startupProbe): 컨테이너 내의 애플리케이션이 시작되었는지 여부를 확인합니다.</li></ul>만약 상태 점검이 실패한다면 컨테이너가 재시작됩니다. |
 | 실행 제한 시간 | 초기화 컨테이너만 실행 제한을 설정할 수 있습니다.<br>설정하지 않는 경우 30초로 자동 설정됩니다.<br>실행 제한 시간을 초과하는 경우 워크로드는 Failed 상태로 변경됩니다. |
 | 네트워크 | VPC에 정의된 서브넷 중 워크로드에 연결할 서브넷 |
@@ -45,7 +65,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | DNS | 워크로드에서 사용하는 DNS 서버를 설정합니다.<br>Private DNS 연동이 필요하면 Private DNS Server IP를 입력합니다. |
 | HostAliases | IP 주소에 호스트명을 설정합니다. | 
 
-필요한 정보를 입력하고 **템플릿 생성**을 클릭하면 템플릿이 생성됩니다.
+필요한 정보를 입력하고 **템플릿 생성**을 클릭하면 템플릿이 생성됩니다.
 
 > [주의]
 > NCS 환경 점검 작업 또는 일시적인 오류로 인하여 컨테이너(task)가 재기동되는 경우 생성된 로그와 컨테이너 내부의 데이터는 초기화됩니다. 재기동되어도 유지가 필요한 데이터는 NAS 스토리지를 사용하세요.
@@ -62,9 +82,14 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 컨테이너당 임시 스토리지는 20GB가 제공됩니다. 제공된 사용량을 초과하는 경우 컨테이너가 재시작되어 임시 스토리지는 초기화됩니다.
 
 > [참고]
+{% if variant != "ncgn" -%}
 > 컨피그맵과 시크릿은 템플릿을 만들 때의 정보를 사용합니다. 원본 파일이나 비밀 데이터가 수정되더라도, 이미 만들어진 템플릿의 정보는 영향을 받지 않습니다.
 > 컨피그맵은 동일 조직 내의 프로젝트 Object Storage만 사용할 수 있습니다.
 > 시크릿은 같은 프로젝트의 Secure Key Manager를 활용합니다. 시크릿을 사용하려면 먼저 Secure Key Manager 서비스를 활성화해야 합니다.
+{%- else -%}
+> 컨피그맵은 템플릿을 만들 때의 정보를 사용합니다. 원본 파일이나 비밀 데이터가 수정되더라도, 이미 만들어진 템플릿의 정보는 영향을 받지 않습니다.
+> 컨피그맵은 동일 조직 내의 프로젝트 Object Storage만 사용할 수 있습니다.
+{%- endif %}
 
 > [참고]
 > 초기화 컨테이너는 TCP, UDP 프로토콜만 사용할 수 있습니다.
@@ -72,14 +97,14 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 초기화 컨테이너는 로드 밸런서에 포함되지 않습니다.
 
 <a id="template-retrieve"></a>
-### 템플릿 조회 { #template-retrieve }
+### 템플릿 조회{% if not variant %} { #template-retrieve }{% endif %}
 
-생성한 템플릿은 **Container** > **NHN Container Service(NCS)** 페이지의 **템플릿** 탭에서 확인할 수 있습니다. 템플릿 목록에는 사용 중인 워크로드 수, 최신 템플릿 버전, 템플릿 버전 개수가 표시됩니다.
+생성한 템플릿은 **Container** > **NHN Container Service(NCS)** 페이지의 **템플릿** 탭에서 확인할 수 있습니다. 템플릿 목록에는 사용 중인 워크로드 수, 최신 템플릿 버전, 템플릿 버전 개수가 표시됩니다.
 
 <a id="template-basic-information"></a>
 #### 기본 정보
 
-특정 템플릿을 클릭하여 **기본 정보** 탭에서 상세 정보를 확인할 수 있습니다.
+특정 템플릿을 클릭하여 **기본 정보** 탭에서 상세 정보를 확인할 수 있습니다.
 
 | 항목 | 설명 |
 | --- | --- |
@@ -87,7 +112,9 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 설명 | 템플릿의 설명 |
 | 컨테이너 | 템플릿의 최신 버전에 정의된 컨테이너 개수 |
 | CPU | 템플릿의 최신 버전에 정의된 컨테이너들의 CPU 수를 더한 수 |
+{% if not variant -%}
 | GPU | 템플릿의 최신 버전에 정의된 컨테이너들의 GPU 수를 더한 수 |
+{% endif -%}
 | 생성일 | 템플릿이 생성된 날짜 |
 | VPC | 템플릿에 설정된 VPC |
 | 서브넷 | 템플릿에 설정된 서브넷 |
@@ -103,15 +130,15 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 특정 템플릿을 클릭한 뒤 **사용 중인 워크로드** 탭으로 이동하여 템플릿을 사용 중인 워크로드 목록을 확인할 수 있습니다.
 
 <a id="template-delete"></a>
-### 템플릿 삭제 { #template-delete }
+### 템플릿 삭제{% if not variant %} { #template-delete }{% endif %}
 
-삭제할 템플릿을 선택하고 **템플릿 삭제**를 클릭하면 삭제됩니다.
+삭제할 템플릿을 선택하고 **템플릿 삭제**를 클릭하면 삭제됩니다.
 
 > [참고]
 > 해당 템플릿을 사용하는 워크로드가 존재하면 템플릿을 삭제할 수 없습니다.
 
 <a id="version-create"></a>
-### 버전 생성 { #version-create }
+### 버전 생성{% if not variant %} { #version-create }{% endif %}
 
 템플릿 목록에서 **버전 보기**를 클릭한 뒤 **버전 생성**을 클릭합니다. 템플릿 생성과 버전 생성의 다른 항목은 아래와 같습니다.
 
@@ -123,7 +150,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 네트워크 | 버전 생성에서는 워크로드에 연결할 서브넷을 선택할 수 없습니다. 템플릿 생성에서 선택한 서브넷을 사용합니다. |
 
 <a id="version-retrieve"></a>
-### 버전 조회 { #version-retrieve }
+### 버전 조회{% if not variant %} { #version-retrieve }{% endif %}
 
 템플릿 목록에서 **버전 보기**를 클릭하여 버전 목록을 확인할 수 있습니다. 버전 목록에는 컨테이너 리소스의 총합이 표시됩니다.
 
@@ -135,7 +162,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 <a id="version-container"></a>
 #### 컨테이너
 
-특정 버전을 클릭한 후 **컨테이너** 탭으로 이동하여 버전에 추가한 컨테이너 목록을 확인할 수 있습니다. 컨테이너 목록에서 특정 컨테이너를 선택하여 상세 정보를 확인할 수 있습니다.
+특정 버전을 클릭한 후 **컨테이너** 탭으로 이동하여 버전에 추가한 컨테이너 목록을 확인할 수 있습니다. 컨테이너 목록에서 특정 컨테이너를 선택하여 상세 정보를 확인할 수 있습니다.
 
 | 항목 | 설명 |
 | --- | --- |
@@ -144,7 +171,9 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 이미지 URL | 컨테이너 이미지의 정보 |
 | 메모리 | 컨테이너에 할당된 메모리 |
 | CPU | 컨테이너에 할당된 CPU 수 |
+{% if not variant -%}
 | GPU | 컨테이너에 할당된 GPU 정보 |
+{% endif -%}
 | 포트 | 컨테이너에서 사용하는 포트 |
 | 명령 | 컨테이너가 시작될 때 실행될 명령어 |
 | 인자 | 컨테이너가 시작될 때 전달될 인자 |
@@ -153,7 +182,9 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 스토리지 | 컨테이너에 연결된 스토리지 |
 | 수명 주기 훅 | 컨테이너에 설정된 수명 주기 훅 |
 | 컨피그맵 | 컨테이너에 연결된 오브젝트 파일과 마운트 경로 |
+{% if variant != "ncgn" -%}
 | 시크릿 | 컨테이너에 연결된 기밀 데이터와 마운트 경로 |
+{% endif -%}
 | 상태 점검 | 컨테이너에 설정된 상태 점검 |
 
 <a id="version-workload-in-use"></a>
@@ -162,22 +193,22 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 특정 버전을 클릭한 뒤 **사용 중인 워크로드** 탭으로 이동하여 해당 버전을 사용 중인 워크로드 목록을 확인할 수 있습니다.
 
 <a id="version-delete"></a>
-### 버전 삭제 { #version-delete }
+### 버전 삭제{% if not variant %} { #version-delete }{% endif %}
 
-삭제할 버전을 선택하고 **버전 삭제**를 클릭하면 삭제됩니다.
+삭제할 버전을 선택하고 **버전 삭제**를 클릭하면 삭제됩니다.
 
 > [참고]
 > 해당 버전을 사용하는 워크로드가 존재하면 버전을 삭제할 수 없습니다.
 
 <a id="workload"></a>
-## 워크로드 { #workload }
+## 워크로드{% if not variant %} { #workload }{% endif %}
 
 정의한 템플릿을 이용하여 컨테이너를 실행하는 서비스입니다.
 
 <a id="workload-create"></a>
-### 워크로드 생성 { #workload-create }
+### 워크로드 생성{% if not variant %} { #workload-create }{% endif %}
 
-**Container** > **NHN Container Service(NCS)** 페이지에서 **워크로드** 탭을 클릭한 뒤 **워크로드 생성**을 클릭합니다. 워크로드 생성에 필요한 항목은 다음과 같습니다.
+**Container** > **NHN Container Service(NCS)** 페이지에서 **워크로드** 탭을 클릭한 뒤 **워크로드 생성**을 클릭합니다. 워크로드 생성에 필요한 항목은 다음과 같습니다.
 
 | 항목 | 설명 |
 | --- | --- |
@@ -192,10 +223,12 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 종료 예약 | 워크로드의 작업 종료 시간을 예약 설정할 수 있습니다. <ul><li>기준 시간: 작업 종료 예약 시간에 대한 타임존을 지정합니다.</li><li>종료 일시: 작업이 종료되는 시간을 입력할 수 있습니다.</li></ul>예약된 종료 시간이 되면 모든 작업이 종료되고 FIP, 도메인을 포함한 모든 리소스는 삭제됩니다. |
 | 로드 밸런서 | 템플릿의 컨테이너 정보에 포트가 지정된 경우에만 사용 버튼이 활성화됩니다.<ul><li>플로팅 IP: 플로팅 IP를 사용하기 위해서는 반드시 인터넷 게이트웨이가 설정된 서브넷에 연결되어 있어야 합니다.<ul><li>외부에서 컨테이너에 접근하기 위해서는 플로팅 IP를 사용해야 합니다. 플로팅 IP를 사용하면 domain URL이 추가됩니다.</li></ul></li><li>상태 확인: 로드 밸런서에서 워크로드의 상태 확인을 시도합니다.</li><li>IP 접근 제어 그룹: 접근 제어 그룹을 로드 밸런서에 적용할 수 있습니다.</li><li>컨테이너에서 TERMINATED\_HTTPS 프로토콜을 사용하는 경우 SSL 인증서를 등록해야 합니다.</li><li>로드 밸런서의 포트와 프로토콜은 템플릿의 컨테이너에 정의된 포트와 프로토콜을 사용합니다.</li></ul>레거시 네트워크 환경에서는 로드 밸런서를 사용할 수 없습니다. |
 | 내부 로드 밸런서 | NCS 내의 동일한 서브넷에서만 통신 가능한 로드 밸런서를 사용할 수 있습니다. 템플릿의 컨테이너 정보에 포트가 지정된 경우에만 사용 버튼이 활성화됩니다.<br><ul><li>IP: 로드 밸런서의 IP를 지정합니다.<br><ul><li>자동 할당: 워크로드의 서브넷에서 할당받은 IP를 사용합니다.</li><li>지정: 특정 IP를 사용합니다. 다른 리소스에서 사용 중인 IP를 입력할 경우 워크로드에서는 해당 IP로 다른 리소스와 연동할 수 없습니다.</li></ul><li>내부 로드 밸런서는 TCP, UDP 프로토콜만 지원합니다. HTTP, HTTPS, TERMINATED_HTTPS가 지정된 경우 TCP로 변경되어 생성됩니다.</li></li></ul>|
+{% if variant != "ncgn" -%}
 | Private DNS | VPC 내에서 접근 가능한 도메인을 사용할 수 있습니다.<ul><li>Private DNS Zone: 레코드 세트를 생성할 Zone을 선택합니다.</li><li>TTL: 레코드 세트 정보의 갱신 주기를 초 단위로 입력합니다.</li></ul>|
+{% endif -%}
 | 보안 그룹 | 워크로드의 보안 그룹을 지정할 수 있습니다.<br>워크로드 보안 그룹을 선택한 경우 컨테이너 포트의 보안 규칙을 생성해야 합니다.<br>워크로드 보안 그룹을 선택하지 않는 경우 NCS에서 생성한 보안 그룹이 적용되며 컨테이너 포트의 보안 규칙이 자동으로 생성됩니다. |
 
-필요한 정보를 입력하고 **워크로드 생성**을 클릭하면 워크로드가 생성됩니다.
+필요한 정보를 입력하고 **워크로드 생성**을 클릭하면 워크로드가 생성됩니다.
 
 > [참고]
 > 예약 실행의 Cron 표현식(\* \* \* \* \*)의 각 필드의 의미는 아래와 같습니다.
@@ -211,22 +244,27 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > [참고]
 > 내부 로드 밸런서 IP로 로컬 통신은 할 수 없습니다.
 
+{% if variant != "ncgn" -%}
 > [주의]
 > 워크로드에서 사용 중인 Private DNS Zone 또는 Private DNS 레코드 세트를 삭제하면 VPC 내에서 도메인 연동이 되지 않습니다.
 
+{% endif -%}
 <a id="workload-retrieve"></a>
-### 워크로드 조회 { #workload-retrieve }
+### 워크로드 조회{% if not variant %} { #workload-retrieve }{% endif %}
 
-생성한 워크로드는 **Container** > **NHN Container Service(NCS)** 페이지의 **워크로드** 탭에서 확인할 수 있습니다.
+생성한 워크로드는 **Container** > **NHN Container Service(NCS)** 페이지의 **워크로드** 탭에서 확인할 수 있습니다.
 
 <a id="workload-basic-information"></a>
 #### 기본 정보
 
-특정 워크로드를 클릭하여 **기본 정보** 탭에서 상세 정보를 확인할 수 있습니다.
+특정 워크로드를 클릭하여 **기본 정보** 탭에서 상세 정보를 확인할 수 있습니다.
 
 | 항목 | 설명 |
 | --- | --- |
 | 이름 | 워크로드의 이름과 ID |
+{% if variant == "ncgn" -%}
+| 유형 | 컨테이너 유형 |
+{% endif -%}
 | 설명 | 워크로드에 대한 설명 |
 | 템플릿 | 사용된 템플릿의 이름 |
 | 배포 컨트롤러 | 워크로드의 배포 컨트롤러 |
@@ -234,32 +272,38 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 작업 실행 수 | 실행된 템플릿 수 |
 | 오토 스케일러 | 워크로드에 설정된 오토 스케일러 정보 |
 | 생성일 | 워크로드가 생성된 날짜 |
-| VPC | 워크로드에 설정된 VPC 들|
+| VPC | 워크로드에 설정된 VPC{% if not variant %} 들{% endif %}|
 | 서브넷 | 워크로드에 설정된 서브넷 |
 | 보안 그룹 | 워크로드에 설정된 보안 그룹의 이름 |
+{% if variant != "ncgn" -%}
 | Private DNS | 워크로드에 설정된 Private DNS 정보 |
+{% endif -%}
 | 로드 밸런서 | 로드 밸런서 정보 |
 | 내부 로드 밸런서 | 내부 로드 밸런서 정보 |
 
 > [참고]
-> 워크로드 상태는 포함된 모든 컨테이너와 로드 밸런서의 상태를 고려하여 결정됩니다. 개별 컨테이너의 상태는 **실행 컨테이너** 탭에서 확인할 수 있습니다.
+> 워크로드 상태는 포함된 모든 컨테이너와 로드 밸런서의 상태를 고려하여 결정됩니다. 개별 컨테이너의 상태는 **실행 컨테이너** 탭에서 확인할 수 있습니다.
 
 <a id="workload-running-container"></a>
 #### 실행 컨테이너
 
-특정 워크로드를 클릭한 후 **실행 컨테이너** 탭에서 **상세 보기**를 클릭하여 컨테이너 상세 정보를 확인할 수 있습니다.
+특정 워크로드를 클릭한 후 **실행 컨테이너** 탭에서 **상세 보기**를 클릭하여 컨테이너 상세 정보를 확인할 수 있습니다.
 
 | 항목 | 설명 |
 | --- | --- |
 | 컨테이너 이름 | 컨테이너의 이름 |
+{% if variant != "ncgn" -%}
 | 유형 | 컨테이너 유형 |
+{% endif -%}
 | 이미지 URL | 컨테이너 이미지의 정보 |
 | IP | 컨테이너에 할당된 IP 주소 |
 | 상태 | 컨테이너의 상태 |
 | 재시작 횟수 | 컨테이너가 재시작된 횟수 |
 | 메모리 | 컨테이너에 할당된 메모리 |
 | CPU | 컨테이너에 할당된 CPU 수 |
+{% if not variant -%}
 | GPU | 컨테이너에 할당된 GPU 정보 |
+{% endif -%}
 | 포트 | 컨테이너에서 사용하는 포트 |
 | 명령 | 컨테이너가 시작될 때 실행될 명령어 |
 | 인자 | 컨테이너가 시작될 때 전달될 인자 |
@@ -268,7 +312,9 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 스토리지 | 컨테이너에 연결된 스토리지 |
 | 수명 주기 훅 | 컨테이너에 설정된 수명 주기 훅 |
 | 컨피그맵 | 컨테이너에 연결된 오브젝트 파일과 마운트 경로 |
+{% if variant != "ncgn" -%}
 | 시크릿 | 컨테이너에 연결된 기밀 데이터와 마운트 경로 |
+{% endif -%}
 | 상태 점검 | 컨테이너에 설정된 상태 점검 |
 | 시작일 | 컨테이너가 시작된 날짜 |
 
@@ -308,15 +354,16 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 네트워크 데이터 수신 | bps | 워크로드의 작업 기준으로 네트워크 데이터 수신 정보가 제공됩니다. |
 | 디스크 사용률 | % | 컨테이너에 추가된 NAS 스토리지의 사용률이 제공됩니다. |
 | 임시 스토리지 사용률 | % | 워크로드의 작업 기준으로 임시 스토리지 사용률이 제공됩니다. |
+{% if not variant -%}
 | GPU 사용률 | % | 컨테이너에 할당된 GPU 사용률이 제공됩니다. |
 | GPU 메모리 사용률 | % | 컨테이너에 할당된 GPU 메모리 사용률이 제공됩니다. |
 | GPU 전력 사용량 | mW | 컨테이너에 할당된 GPU 전력 사용량이 제공됩니다. |
 | GPU 온도 | ℃ | 컨테이너에 할당된 GPU 온도가 제공됩니다. |
-
+{% endif %}
 <a id="workload-event"></a>
 #### 이벤트
 
-특정 워크로드를 클릭한 후 **이벤트** 탭에서 컨테이너에서 발생한 이벤트 정보를 확인할 수 있습니다. **이벤트 상태 선택**을 클릭하여 이벤트의 상태별로 이벤트를 확인할 수 있습니다.
+특정 워크로드를 클릭한 후 **이벤트** 탭에서 컨테이너에서 발생한 이벤트 정보를 확인할 수 있습니다. **이벤트 상태 선택**을 클릭하여 이벤트의 상태별로 이벤트를 확인할 수 있습니다.
 
 | 항목 | 설명 |
 | --- | --- |
@@ -334,7 +381,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 <a id="workload-log"></a>
 #### 로그
 
-특정 워크로드를 클릭한 후 **로그** 탭에서 컨테이너의 로그를 확인할 수 있습니다.
+특정 워크로드를 클릭한 후 **로그** 탭에서 컨테이너의 로그를 확인할 수 있습니다.
 조회하고자 하는 시간에 로그가 많이 발생한 경우 일부 로그만 조회될 수 있습니다. 모든 로그가 조회되지 않는 경우 시간 범위를 줄여서 다시 시도하세요.
 
 > [참고]
@@ -371,7 +418,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 상태 | 예약 작업 상태<br>waiting: 예약 실행 준비 중<br>running: 예약 작업 실행 중<br>completed: 예약 작업 정상 종료<br>error: 예약 작업 비정상 종료 |
 
 <a id="workload-change"></a>
-### 워크로드 변경 { #workload-change }
+### 워크로드 변경{% if not variant %} { #workload-change }{% endif %}
 
 변경할 워크로드를 선택한 뒤 **기본 정보** 탭에서 **변경**을 클릭해 실행 중인 워크로드를 변경할 수 있습니다.
 
@@ -380,7 +427,9 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 설명 | 워크로드의 설명 |
 | 템플릿 | 실행 중인 워크로드의 템플릿 변경<br>템플릿 변경 시 롤링 업데이트 방식으로 워크로드가 무중단 배포됩니다.<br>작업이 하나씩 순차적으로 교체되어 배포 중에 기존 작업과 새로운 작업이 동시에 실행된 상태일 수 있습니다.<br>**워크로드 실행 히스토리**탭에서 변경 결과를 확인할 수 있습니다. |
 | 작업 요청 수 | 실행 중인 워크로드의 작업 수 변경<br>작업 요청 수 증가: 기존 작업은 유지하며 새로운 작업이 생성됩니다.<br>작업 요청 수 감소: 감소된 작업 개수만큼 작업이 종료됩니다. |
+{% if not variant -%}
 | 오토 스케일러 | 실행 중인 워크로드의 오토 스케일러 설정 변경 |
+{% endif -%}
 | 종료 예약 | 워크로드 작업의 종료 예약 설정을 변경 |
 | 예약 실행 | 예약 실행 정보를 변경<br>예약 실행 히스토리 보관 수는 변경 시간부터 설정되어 변경 전 실행된 작업이 전부 삭제되기 전까지 히스토리 개수와 설정 값이 일치하지 않을 수 있습니다. |
 | 로드 밸런서 | 워크로드의 로드 밸런서, 플로팅 IP, 상태 확인, SSL 인증서 사용 여부 변경 |
@@ -394,10 +443,10 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 워크로드 변경에 실패할 경우(예, 이미지 오류) 변경 시도가 종료되며, 작업 교체가 발생하지 않습니다.
 
 <a id="workload-stop-restart"></a>
-### 워크로드 중지/재시작 { #workload-stop-restart }
+### 워크로드 중지/재시작{% if not variant %} { #workload-stop-restart }{% endif %}
 워크로드 중지를 실행하면 플로팅 IP와 URL은 유지되며 워크로드의 모든 작업이 종료됩니다.
 
-워크로드 재시작을 실행하면 로드 밸런서 IP는 변경됩니다. IP를 변경하지 않으려면 API로 로드 밸런서 IP를 지정하세요.
+워크로드 재시작을 실행하면 로드 밸런서 IP는 변경됩니다.{% if variant != "ncgn" %} IP를 변경하지 않으려면 API로 로드 밸런서 IP를 지정하세요.{% endif %}
 
 > [참고]
 > 배포 컨트롤러에 따라서 워크로드 중지/재시작을 실행하면 컨테이너 IP가 변경될 수 있습니다.
@@ -407,12 +456,13 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > 워크로드를 중지하여도 작업 반복 주기가 되면 예약 실행 히스토리는 삭제됩니다.
 
 <a id="workload-delete"></a>
-### 워크로드 삭제 { #workload-delete }
+### 워크로드 삭제{% if not variant %} { #workload-delete }{% endif %}
 
-삭제할 워크로드를 선택하고 **워크로드 삭제**를 클릭하면 삭제됩니다.
+삭제할 워크로드를 선택하고 **워크로드 삭제**를 클릭하면 삭제됩니다.
 
+{% if variant != "ncgn" -%}
 <a id="workload-malware-scan"></a>
-### 악성 코드 검사 { #workload-malware-scan }
+### 악성 코드 검사{% if not variant %} { #workload-malware-scan }{% endif %}
 **악성 코드 검사**를 클릭하여 워크로드에서 사용하는 컨테이너 이미지에 대해 악성 코드 검사를 수행합니다.
 악성 코드 검사는 워크로드 생성, 워크로드 템플릿 변경, 워크로드 재시작할 때 수행되며 악성 코드가 검출되면 워크로드 생성 중단 또는 이전 템플릿으로 복원됩니다.
 악성 코드 검사 결과는 **실행 히스토리** 탭의 **악성코드 검사 결과** 버튼을 클릭하여 확인할 수 있습니다.
@@ -428,12 +478,13 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 > [주의]
 > 악성코드 검사 기능은 무료로 제공되며, 미 탐지 또는 후속 조치 미이행으로 인한 보안 사고는 NHN Cloud의 책임 범위에 포함되지 않습니다.
 
+{% endif -%}
 <a id="role"></a>
-## NCS 서비스 이용 역할 { #role }
+## NCS 서비스 이용 역할{% if not variant %} { #role }{% endif %}
 역할을 설정하여 NCS 서비스 및 리소스에 액세스할 수 있는 역할을 제어할 수 있습니다.
 
 <a id="role-assign"></a>
-### NCS 서비스 이용 역할 수정 { #role-assign }
+### NCS 서비스 이용 역할 수정{% if not variant %} { #role-assign }{% endif %}
 NCS에 대한 실행 역할은 NHN Cloud Console 화면에서 설정합니다.
 1. **프로젝트** 화면에서 **멤버 관리** 탭을 클릭합니다.
 2. 역할을 변경할 멤버를 선택합니다.
@@ -441,10 +492,10 @@ NCS에 대한 실행 역할은 NHN Cloud Console 화면에서 설정합니다.
     * 왼쪽 영역에서 기본 인프라 서비스를 선택한 후, 오른쪽 영역에서 역할을 선택합니다.
 4. **완료**를 클릭하여 프로젝트 멤버에 변경된 역할을 적용합니다.
 
-역할에 대한 자세한 내용은 [멤버 관리](/nhncloud/ko/console-guide/#_22)를 참고하세요.
+역할에 대한 자세한 내용은 [멤버 관리](/nhncloud/ko/console-guide$[ console_suffix ]$/$[ console_role_frag ]$)를 참고하세요.
 
 <a id="role-details"></a>
-### 역할 세부 정리 { #role-details }
+### 역할 세부 정리{% if not variant %} { #role-details }{% endif %}
 NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 
 | 역할 | 권한 |
@@ -459,7 +510,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 > Infrastructure ADMIN은 기본 인프라 서비스의 모든 역할을 포함합니다. 
 
 <a id="role-minimum"></a>
-### NCS 최소 역할 부여 { #role-minimum }
+### NCS 최소 역할 부여{% if not variant %} { #role-minimum }{% endif %}
 프로덕션 환경에서는 필요한 역할만 추가하는 것이 좋습니다. NCS 기능을 이용하기 위한 **최소 역할들**은 다음과 같습니다.
 
 | 기능 | Infrastructure MEMBER | Infrastructure NCS ADMIN | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
@@ -476,19 +527,28 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 > Infrastructure NCS ADMIN 권한만으로는 조회만 가능합니다.
 
 <a id="considerations"></a>
-## 참고 사항 { #considerations }
+## 참고 사항{% if not variant %} { #considerations }{% endif %}
 
+{% if variant != "ncgn" -%}
 <a id="considerations-region"></a>
-### 리전 { #considerations-region }
+### 리전{% if not variant %} { #considerations-region }{% endif %}
 
+{% if variant == "gov" -%}
+* NCS 서비스는 한국(판교) 리전에서만 사용할 수 있습니다.
+{%- else -%}
 * NCS는 한국(판교), 한국(광주) 리전에서만 사용할 수 있습니다.
+{%- endif %}
 
 <a id="considerations-resource-provision-policy"></a>
-### 리소스 제공 정책 { #considerations-resource-provision-policy }
-* [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요.
+### 리소스 제공 정책{% if not variant %} { #considerations-resource-provision-policy }{% endif %}
+{% else -%}
+<a id="considerations-resource-provision-policy"></a>
+### 리소스 제공 정책
+{% endif -%}
+* [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy$[ res_policy_suffix ]$/#nhn-container-servicencs)을 참고하세요.
 
 <a id="considerations-template-container"></a>
-### 템플릿/컨테이너 { #considerations-template-container }
+### 템플릿/컨테이너{% if not variant %} { #considerations-template-container }{% endif %}
 
 * 템플릿에 기술되는 컨테이너들은 각각 서로 다른 컨테이너 포트를 사용하도록 설정해야 합니다.
 * 컨테이너 포트에 직접 연결하는 경우, 보안 그룹이 잘 설정되어 있는지 확인해야 합니다.
@@ -506,9 +566,15 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 
 * 컨테이너 이미지 내에서 컨테이너가 서비스를 위해 사용하기로 결정한 포트와 템플릿의 컨테이너 포트는 일치해야 합니다.
     * 80 포트를 서비스하기로 지정된 기본 nginx 컨테이너 이미지를 이용하는 경우 컨테이너 포트에 80을 지정해야 합니다. 컨테이너 이미지의 내용을 변경하여 다른 포트를 서비스하도록 설정한 경우 해당 포트 번호를 지정해야 합니다.
+{% if variant != "ncgn" -%}
 * 컨피그맵과 시크릿은 템플릿을 만들 때의 정보를 사용합니다. 원본 파일이나 비밀 데이터가 수정되더라도, 이미 만들어진 템플릿의 정보는 영향을 받지 않습니다.
     * 컨피그맵 또는 시크릿의 내용을 업데이트하고 해당 변경 사항을 반영하려면 새로운 템플릿 또는 버전을 생성하고 워크로드를 실행해야 합니다.
+{%- else -%}
+* 컨피그맵은 템플릿을 만들 때의 정보를 사용합니다. 원본 파일이 수정되더라도, 이미 만들어진 템플릿의 정보는 영향을 받지 않습니다.
+    * 컨피그맵의 내용을 업데이트하고 해당 변경 사항을 반영하려면 새로운 템플릿을 생성하고 워크로드를 실행해야 합니다.
+{%- endif %}
 
+{% if not variant -%}
 <a id="considerations-gpu"></a>
 ### GPU { #considerations-gpu }
 
@@ -550,13 +616,14 @@ x-nhn-authorization: Bearer {accessToken}
 ]
 ```
 
+{% endif -%}
 <a id="problem-solving"></a>
-## 문제 해결 가이드 { #problem-solving }
+## 문제 해결 가이드{% if not variant %} { #problem-solving }{% endif %}
 
 NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결하는 방법을 설명합니다.
 
 <a id="problem-solving-workload"></a>
-### 워크로드 { #problem-solving-workload }
+### 워크로드{% if not variant %} { #problem-solving-workload }{% endif %}
 
 * 워크로드가 정상적으로 생성되었고, 컨테이너도 정상적으로 실행 중일 때 **FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs** 타입의 컨테이너 이벤트가 발생하는 현상
     * 해당 이벤트는 NCS에서 사용하기 위한 Network Interface가 생성 완료되지 않은 경우 발생합니다. 템플릿 생성 직후 워크로드를 생성하거나 워크로드를 대량 생성하는 경우 일시적으로 발생하는 이벤트로 일정 시간이 경과하면 해당 이벤트는 발생하지 않습니다.
@@ -569,13 +636,14 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 | 에러 메시지 | 설명 |
 | --- | --- |
 | {{.Resource}} 리소스가 부족하여 워크로드를 생성할 수 없습니다. | NCS 환경의 리소스가 부족하여 워크로드를 생성할 수 없습니다.<br>잠시 후 다시 시도하거나 고객 센터에 문의하세요. |
-| 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요. |
+| 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy$[ res_policy_suffix ]$/#nhn-container-servicencs)을 참고하세요. |
 
+{% if variant != "ncgn" -%}
 <a id="integrate-with-nhncloud-service"></a>
-## NHN Cloud 서비스 연동 { #integrate-with-nhncloud-service }
+## NHN Cloud 서비스 연동{% if not variant %} { #integrate-with-nhncloud-service }{% endif %}
 
 <a id="integrate-with-logandcrash"></a>
-### Log & Crash Search 서비스 연동 { #integrate-with-logandcrash }
+### Log & Crash Search 서비스 연동{% if not variant %} { #integrate-with-logandcrash }{% endif %}
 
 워크로드가 삭제 또는 재시작되면 로그는 삭제되어 조회할 수 없습니다. 중요한 로그를 백업하거나 특정 로그를 검색하고 조회하기 위해서 Log & Crash Search(L&C) 서비스와 연동할 수 있습니다.
 
@@ -583,7 +651,7 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 
 FluentBit에 대한 자세한 내용은 [Fluent Bit: Official Manual](https://docs.fluentbit.io/manual/)을 참고하세요.
 Logstash에 대한 자세한 내용은 [Logstash Reference](https://www.elastic.co/guide/en/logstash/current/index.html)를 참고하세요.
-Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/console-guide/)를 참고하세요.
+Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드](/Data%20&%20Analytics/Log%20&%20Crash%20Search/ko/$[ lc_console_prefix ]$console-guide/)를 참고하세요.
 
 > [참고]
 > 컨테이너 간 임시 공유 스토리지에 로그를 파일로 생성하는 방법으로 기술하였습니다.
@@ -633,11 +701,11 @@ Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드]
 
 * 템플릿에 아래와 같이 컨테이너를 추가하여 생성합니다.
 
-| 항목 | alpine(로그 생성) | fluentbit(로그 전송) |
+| 항목 | alpine(로그 생성) | fluentbit(로그 전송) |
 | --- | -------------- | ----------------- |
 | 컨테이너 이름 | alpine | fluentbit |
 | 이미지 URL | alpine:latest | fluent/fluent-bit:2.2.1 |
-| 명령 | 로그를 파일에 남기기 위해서 아래와 같이 입력합니다.<ul><li>sh,-c,while true; do echo "hello world" >> /var/{워크로드 이름}/{로그 파일명}; sleep 1; done</li></ul> |  |
+| 명령 | 로그를 파일에 남기기 위해서 아래와 같이 입력합니다.<ul><li>sh,-c,while true; do echo "hello world" >> /var/{워크로드 이름}/{로그 파일명}; sleep 1; done</li></ul> |  |
 | 컨피그맵 |  | Object Storage에 업로드한 fluentbit 설정 파일을 가져올 수 있는 정보를 추가합니다.<br>컨테이너 마운트 경로는 아래와 같이 입력합니다.<ul><li>/fluent-bit/etc/fluent-bit.conf</li></ul> |
 
 * 해당 템플릿으로 워크로드를 생성하면 alpine에서 생성한 로그를 L&C에서 검색하고 조회할 수 있습니다.
@@ -650,7 +718,7 @@ Log & Crash Search 사용 방법은 [Log & Crash Search 콘솔 사용 가이드]
 ```ini
 input {
   file {
-    path => "/var/{워크로드 이름}/{로그 파일명}
+    path => "/var/{워크로드 이름}/{로그 파일명}
     start_position => "beginning"
     ignore_older => 0
   }
@@ -686,13 +754,14 @@ output {
 
 * 템플릿에 아래와 같이 컨테이너를 추가하여 생성합니다.
 
-| 항목 | alpine(로그 생성) | logstash(로그 전송) |
+| 항목 | alpine(로그 생성) | logstash(로그 전송) |
 | --- | -------------- | ---------------- |
 | 컨테이너 이름 | alpine | logstash |
 | 이미지 URL | alpine:latest | logstash:8.11.0 |
 | 메모리 | 256 | 1024 |
-| 명령 | 로그를 파일에 남기기 위해서 아래와 같이 입력합니다.<ul><li>sh,-c,while true; do echo "hello world" >> /var/{워크로드 이름}/{로그 파일명}; sleep 1; done</li></ul> |  |
-| 환경 변수 |  | XPACK\_MONITORING\_ENABLED : false |
+| 명령 | 로그를 파일에 남기기 위해서 아래와 같이 입력합니다.<ul><li>sh,-c,while true; do echo "hello world" >> /var/{워크로드 이름}/{로그 파일명}; sleep 1; done</li></ul> |  |
+| 환경 변수 |  | XPACK\_MONITORING\_ENABLED : false |
 | 컨피그맵 |  | Object Storage에 업로드한 logstash 설정 파일을 가져올 수 있는 정보를 추가합니다.<br>컨테이너 마운트 경로는 아래와 같이 입력합니다.<ul><li>/usr/share/logstash/pipeline/logstash.conf</li></ul> |
 
 * 해당 템플릿으로 워크로드를 생성하면 alpine에서 생성한 로그를 L&C에서 검색하고 조회할 수 있습니다.
+{%- endif %}
