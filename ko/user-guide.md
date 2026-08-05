@@ -6,11 +6,9 @@
 {#- 통합 후 in-repo · cross-file 링크는 variant suffix 를 붙이지 않음.
     다른 문서/repo 도 같은 방식으로 통합되므로 링크 대상은 항상 base 파일 하나이고
     build_flags 는 그 base 파일이 자기 안에서 알아서 해석함. -#}
-{% if not variant -%}
 <!-- pre-align:aligned sig=53f25fa4d7f2 -->
 
 <a id="container-nhn-container-servicencs-user-guide"></a>
-{% endif -%}
 ## Container > NHN Container Service(NCS) > 사용 가이드 { #container-nhn-container-servicencs-user-guide }
 
 <a id="template"></a>
