@@ -398,7 +398,6 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > ワークロード変更に失敗した場合(例：イメージエラー)変更試行が終了し、作業交換が発生しません。
 
 <a id="workload-stop-restart"></a>
-
 ### ワークロード停止/再起動 { #workload-stop-restart }
 ワークロード停止を実行すると、ワークロードのすべての作業が終了します。
 
@@ -531,9 +530,8 @@ NCSサービスを利用するためには、次のロールが必要です。
 | Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
 | Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
-<a id="problem-solving"></a>
-
-### ワークロードロードバランサー IP の指定
+<a id="loadbalancer-static-ip"></a>
+### ワークロードロードバランサー IP の指定 { #loadbalancer-static-ip }
 * API でワークロードのロードバランサー IP を指定できます。
 * ロードバランサー IP を指定しない場合、ロードバランサーが再作成されると IP が変更される可能性があります。
 * ロードバランサー IP を指定すると、ロードバランサーが再作成されても指定した IP が維持されます。指定した IP は、別途変更するかワークロードを削除するまで維持されます。
@@ -557,7 +555,6 @@ x-nhn-authorization: Bearer {accessToken}
 ```
 
 <a id="problem-solving"></a>
-
 ## トラブルシューティング { #problem-solving }
 
 NCSサービスを使用しながら経験する可能性があるさまざまな問題を解決する方法を説明します。
