@@ -1,7 +1,13 @@
-<!-- pre-align:aligned sig=d29522461c5f -->
+<!-- pre-align:aligned sig=a64bf08e342e -->
 
 <a id="container-nhn-container-servicencs-release-notes"></a>
 ## Container > NHN Container Service(NCS)  > リリースノート { #container-nhn-container-servicencs-release-notes }
+<a id="august-25-2026"></a>
+### 2026. 08. 25. { #august-25-2026 }
+<a id="august-25-2026-added-features"></a>
+#### 機能追加
+* コンテナの共有メモリサイズを設定する機能が追加されました。
+
 <a id="october-28-2025"></a>
 ### 2025. 10. 28. { #october-28-2025 }
 <a id="october-28-2025-added-features"></a>
