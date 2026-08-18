@@ -1,12 +1,15 @@
-## Container > NHN Container Service(NCS) > 使用ガイド
+<!-- pre-align:aligned sig=02186abe0ed4 -->
+
+<a id="container-nhn-container-servicencs-user-guide"></a>
+## Container > NHN Container Service(NCS) > 使用ガイド { #container-nhn-container-servicencs-user-guide }
 
 <a id="template"></a>
-## テンプレート
+## テンプレート { #template }
 
 テンプレートは、ワークロードの実行に必要なコンテナ、ネットワークなどのリソースを定義するサービスです。
 
 <a id="template-create"></a>
-### テンプレートの作成
+### テンプレートの作成 { #template-create }
 
 NHN Container Service(NCS)を使用するには、先にテンプレートを作成する必要があります。**Container** > **NHN Container Service(NCS)**ページで**テンプレート**タブをクリックし、**テンプレートの作成**をクリックします。テンプレートの作成に必要な項目は次のとおりです。
 
@@ -15,6 +18,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | テンプレート名 | テンプレートの名前。32文字以内の英字小文字と数字、一部記号(`-`)のみ入力できます。|
 | テンプレートの説明 | テンプレートの説明。255文字以内で入力できます。|
 | コンテナ名 | コンテナの名前。253文字以内の英字小文字と数字、一部記号(`-`)のみ入力できます。|
+| コンテナタイプ | コンテナのタイプ<br><ul><li>一般：実行状態が維持される必要があるコンテナ</li><li>初期化：一般コンテナの実行前に完了する必要があるコンテナ</li></ul>|
 | コンテナレジストリ | コンテナイメージのレジストリ<br><ul><li>NHN Container Registry(NCR)使い方は[NCR使用ガイド](/Container/NCR/ja/user-guide/#user-access-keysecret-key)をご覧ください。</li><li>Docker Hubまたはその他レジストリ使用時レジストリタイプを選択する必要があります。</li></ul> |
 | レジストリタイプ | レジストリのタイプ。パブリックまたはプライベートを選択できます。 |
 | イメージURL | コンテナイメージの情報。255文字以内の英字小文字と数字、一部記号(`-`, `\_`, `.`, `,`, `/`, `@`, `:`)のみ入力できます。|
@@ -39,7 +43,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | テンプレートバージョン名 | テンプレートのバージョン名。16文字以内の英小文字、数字、一部記号(`-`)のみ入力できます。| 
 | テンプレートバージョン説明 | テンプレートバージョンの説明、255文字以内で入力できます。| 
 | DNS | ワークロードで使用するDNSサーバーを設定します。<br>Private DNS連動が必要な場合はPrivate DNS Server IPを入力します。 |
-| HostAliases | IPアドレスにホスト名を設定します。 | 
+| HostAliases | IPアドレスにホスト名を設定します。 |
 
 必要な情報を入力し、**テンプレートの作成**をクリックするとテンプレートが作成されます。
 
@@ -67,7 +71,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > 初期化コンテナはロードバランサーに含まれません。
 
 <a id="template-retrieve"></a>
-### テンプレートの照会
+### テンプレートの照会 { #template-retrieve }
 
 作成したテンプレートは**Container** > **NHN Container Service(NCS)**ページの**テンプレート**タブで確認できます。テンプレートリストには使用中のワークロード数、最新テンプレートバージョン、テンプレートバージョン数が表示されます。
 
@@ -93,12 +97,12 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | 使用中のワークロード数 |テンプレートを使用しているワークロードの数 |
 
 <a id="template-workload-in-use"></a>
-####使用中のワークロード
+#### 使用中のワークロード
 
 特定テンプレートをクリックした後、**使用中のワークロード** タブに移動してテンプレートを使用中のワークロードリストを確認できます。
 
 <a id="template-delete"></a>
-### テンプレートの削除
+### テンプレートの削除 { #template-delete }
 
 削除するテンプレートを選択し、**テンプレートの削除**をクリックすると削除されます。
 
@@ -106,7 +110,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > 該当テンプレートを使用しているワークロードが存在する場合、テンプレートを削除できません。
 
 <a id="version-create"></a>
-### バージョンの作成
+### バージョンの作成 { #version-create }
 
 テンプレートリストで**バージョン表示**をクリックし、**バージョンの作成**をクリックします。テンプレート作成とバージョン作成の他の項目は次のとおりです。
 
@@ -118,7 +122,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | ネットワーク | バージョン作成ではワークロードに接続するサブネットを選択できません。テンプレート作成で選択したサブネットを使用します。 |
 
 <a id="version-retrieve"></a>
-### バージョン照会
+### バージョン照会 { #version-retrieve }
 
 テンプレートリストで**バージョン表示**をクリックしてバージョンリストを確認できます。バージョンリストにはコンテナリソースの合計が表示されます。
 
@@ -152,12 +156,12 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | 状態点検 | コンテナに設定された状態点検 |
 
 <a id="version-workload-in-use"></a>
-### テンプレートの削除
+#### テンプレートの削除
 
 特定のバージョンをクリックした後、**使用中のワークロード**タブに移動して、そのバージョンを使用しているワークロードのリストを確認できます。
 
 <a id="version-delete"></a>
-### バージョンの削除
+### バージョンの削除 { #version-delete }
 
 削除するバージョンを選択し、**バージョンの削除**をクリックすると削除されます。
 
@@ -165,12 +169,12 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > 該当バージョンを使用するワークロードが存在する場合はバージョンを削除できません。
 
 <a id="workload"></a>
-## ワークロード
+## ワークロード { #workload }
 
 定義したテンプレートを利用してコンテナを実行するサービスです。
 
 <a id="workload-create"></a>
-### ワークロードの作成
+### ワークロードの作成 { #workload-create }
 
 **Container** > **NHN Container Service(NCS)** ページで**ワークロード**タブをクリックし、**ワークロードの作成**をクリックします。ワークロードの作成に必要な項目は次のとおりです。
 
@@ -215,7 +219,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > ワークロードで使用中のPrivate DNS ZoneまたはPrivate DNSレコードセットを削除すると、VPC内でドメイン連動ができなくなります。
 
 <a id="workload-retrieve"></a>
-### ワークロードの照会
+### ワークロードの照会 { #workload-retrieve }
 
 作成したワークロードは**Container** > **NHN Container Service(NCS)**ページの**ワークロード**タブで確認できます。
 
@@ -371,7 +375,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | 状態 | 予約タスク状態<br>waiting:予約実行準備中<br>running:予約タスク実行中<br>completed:予約タスク正常終了<br>error:予約タスク異常終了 |
 
 <a id="workload-change"></a>
-### ワークロードの変更
+### ワークロードの変更 { #workload-change }
 
 変更するワークロードを選択した後、**基本情報**タブで**変更**をクリックして実行中のワークロードを変更できます。
 
@@ -384,6 +388,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | 終了予約 | ワークロード作業の終了予約設定を変更 |
 | 予約実行 | 予約実行情報を変更<br>予約実行ヒストリー保管数は、変更時間から設定され、変更前に実行された作業がすべて削除されるまで、ヒストリー数と設定値が一致しない場合があります。 |
 | ロードバランサー | ワークロードのロードバランサー, Floating IP, ヘルスチェック, SSL証明書を使用するかどうかを変更 |
+| 内部ロードバランサー | ワークロードの内部ロードバランサーの使用有無、IP変更 |
 
 > [注意]
 > ロードバランサーを使用してワークロードサービスを利用中にテンプレートを変更する場合、瞬断が発生する可能性があります。
@@ -393,10 +398,10 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > ワークロード変更に失敗した場合(例：イメージエラー)変更試行が終了し、作業交換が発生しません。
 
 <a id="workload-stop-restart"></a>
-### ワークロード停止/再起動
+### ワークロード停止/再起動 { #workload-stop-restart }
 ワークロード停止を実行すると、ワークロードのすべての作業が終了します。
 
-ワークロードの再起動を実行すると、ロードバランサーIPは変更されます。
+ワークロードを再起動すると、ロードバランサーの IP が変更されます。IP を変更したくない場合は、API でロードバランサーの IP を指定してください。
 
 > [参考]
 > 配布コントローラーによっては、ワークロードの停止/再起動を実行すると、コンテナIPが変更される場合があります。
@@ -406,12 +411,12 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > ワークロードを停止しても作業繰り返し周期になると予約実行ヒストリーは削除されます。
 
 <a id="workload-delete"></a>
-### ワークロードの削除
+### ワークロードの削除 { #workload-delete }
 
 削除するワークロードを選択し、**ワークロードの削除**をクリックすると削除されます。
 
 <a id="workload-malware-scan"></a>
-### マルウェア検査
+### マルウェア検査 { #workload-malware-scan }
 **マルウェア検査**をクリックして、ワークロードで使用するコンテナイメージに対してマルウェア検査を実行します。
 マルウェア検査は、ワークロードの作成、ワークロードテンプレートの変更、ワークロードの再起動時に実行され、マルウェアが検出されるとワークロードの作成が中断されるか、以前のテンプレートに復元されます。
 マルウェア検査の結果は、**実行履歴**タブの**マルウェア検査結果**ボタンをクリックして確認できます。
@@ -428,11 +433,11 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 > マルウェア検査機能は無料で提供され、未検出または事後対応の未実施によるセキュリティ事故は、NHN Cloudの責任範囲に含まれません。
 
 <a id="role"></a>
-## NCSサービス利用ロール
+## NCSサービス利用ロール { #role }
 ロールを設定することで、NCSサービスおよびリソースにアクセスできるロールを制御できます。
 
 <a id="role-assign"></a>
-### NCS サービス利用ロールの修正
+### NCS サービス利用ロールの修正 { #role-assign }
 NCSの実行ロールはNHN Cloud Console画面で設定します。
 1. **プロジェクト** 画面で**メンバー管理**タブをクリックします。
 2. ロールを変更するメンバーを選択します。
@@ -443,7 +448,7 @@ NCSの実行ロールはNHN Cloud Console画面で設定します。
 ロールの詳細については、[メンバー管理](/nhncloud/ja/console-guide/#_22)を参照してください。
 
 <a id="role-details"></a>
-### ロールの詳細まとめ
+### ロールの詳細まとめ { #role-details }
 NCSサービスを利用するためには、次のロールが必要です。
 
 | ロール | 権限 |
@@ -458,7 +463,7 @@ NCSサービスを利用するためには、次のロールが必要です。
 > Infrastructure ADMINは基本インフラサービスの全てのロールを含みます。
 
 <a id="role-minimum"></a>
-### NCS最小ロール付与
+### NCS最小ロール付与 { #role-minimum }
 本番環境では必要なロールのみ追加することを推奨します。NCS機能を利用するための**最低限のロール**は以下の通りです。
 
 | 機能 | Infrastructure MEMBER | Infrastructure NCS ADMIN | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
@@ -475,19 +480,19 @@ NCSサービスを利用するためには、次のロールが必要です。
 > Infrastructure NCS ADMIN権限だけでは、照会のみ可能です。
 
 <a id="considerations"></a>
-## 参考事項
+## 参考事項 { #considerations }
 
 <a id="considerations-region"></a>
-### リージョン
+### リージョン { #considerations-region }
 
 * NCSサービスは韓国(パンギョ)、韓国(光州)リージョンでのみ使用できます。
 
 <a id="considerations-resource-provision-policy"></a>
-### リソース提供ポリシー
+### リソース提供ポリシー { #considerations-resource-provision-policy }
 * [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#nhn-container-servicencs)を参照してください。
 
 <a id="considerations-template-container"></a>
-### テンプレート/コンテナ
+### テンプレート/コンテナ { #considerations-template-container }
 
 * テンプレートに記述されているコンテナは、それぞれ異なるコンテナポートを使用するように設定する必要があります。
 * コンテナポートに直接接続する場合は、セキュリティグループが正しく設定されていることを確認する必要があります。
@@ -509,7 +514,7 @@ NCSサービスを利用するためには、次のロールが必要です。
     * コンフィグマップまたはシークレットの内容を更新し、その変更を反映するには、新しいテンプレートまたはバージョンを作成し、ワークロードを実行する必要があります。
 
 <a id="considerations-gpu"></a>
-### GPU
+### GPU { #considerations-gpu }
 
 * A100 40GBカードのMIG (multi instance GPU)を提供します。
 * 詳細については、下記のリンクをご覧ください。
@@ -525,13 +530,37 @@ NCSサービスを利用するためには、次のロールが必要です。
 | Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
 | Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
+<a id="loadbalancer-static-ip"></a>
+### ワークロードロードバランサー IP の指定 { #loadbalancer-static-ip }
+* API でワークロードのロードバランサー IP を指定できます。
+* ロードバランサー IP を指定しない場合、ロードバランサーが再作成されると IP が変更される可能性があります。
+* ロードバランサー IP を指定すると、ロードバランサーが再作成されても該当 IP が維持されます。指定した IP は別途変更するか、ワークロードを削除するまで維持されます。
+* 次のような状況でも、指定したロードバランサー IP は維持されます。
+   * ワークロードの停止または再起動によりロードバランサーが再作成される場合
+   * サービス運用中の障害またはメンテナンスによりロードバランサーが再作成される場合
+   * ロードバランサーを無効にした後、再度有効にしてロードバランサーが作成される場合
+
+```json
+PATCH /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
+Content-Type: application/json-patch+json
+x-nhn-authorization: Bearer {accessToken}
+
+[
+  {
+    "op": "replace",
+    "path": "/workload/loadBalancing/vipAddress",
+    "value": "$IP"
+  }
+]
+```
+
 <a id="problem-solving"></a>
-## トラブルシューティング
+## トラブルシューティング { #problem-solving }
 
 NCSサービスを使用しながら経験する可能性があるさまざまな問題を解決する方法を説明します。
 
 <a id="problem-solving-workload"></a>
-### ワークロード
+### ワークロード { #problem-solving-workload }
 
 * ワークロードが正常に作成され、コンテナも正常に実行中の時に**FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs**タイプのコンテナイベントが発生する現象
     * 当該イベントはNCSで使用するためのNetwork Interfaceが作成完了していない場合に発生します。テンプレート作成直後にワークロードを作成したり、ワークロードを大量作成したりする場合に一時的に発生するイベントで、一定時間が経過すると当該イベントは発生しません。
@@ -547,10 +576,10 @@ NCSサービスを使用しながら経験する可能性があるさまざま�
 | 作成可能な{{.Resource}}を超えました。限度を上げるにはサポートにお問い合わせください。 | プロジェクトのNCS Quotaが超過しました。<br>詳細については、 [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#nhn-container-servicencs)を参考してください。 |
 
 <a id="integrate-with-nhncloud-service"></a>
-## NHN Cloudサービス連動
+## NHN Cloudサービス連動 { #integrate-with-nhncloud-service }
 
 <a id="integrate-with-logandcrash"></a>
-### Log & Crash Searchサービス連動
+### Log & Crash Searchサービス連動 { #integrate-with-logandcrash }
 
 ワークロードが削除または再起動されるとログは削除され、照会できません。 重要なログをバックアップしたり、特定のログを検索して照会するためにLog & Crash Search(L&C)サービスと連動できます。
 

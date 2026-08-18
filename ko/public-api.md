@@ -1,21 +1,27 @@
+<!-- pre-align:aligned sig=08050b417a83 -->
+
 # NCS API 가이드
 
 **Container > NHN Container Service(NCS) > API 가이드**
 
-## NCS API 공통 정보
+<a id="ncs-api-common-information"></a>
+## NCS API 공통 정보 { #ncs-api-common-information }
 
-### API 엔드포인트
+<a id="api-endpoint"></a>
+### API 엔드포인트 { #api-endpoint }
 
 | 리전 | 도메인 |
 | --- | --- |
 | 한국(판교) 리전 | https://kr1-ncs.api.nhncloudservice.com |
 | 한국(광주) 리전 | https://kr3-ncs.api.nhncloudservice.com |
 
-### 인증 및 권한
+<a id="authentication-and-permission"></a>
+### 인증 및 권한 { #authentication-and-permission }
 
 NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용합니다. User Access Key 토큰은 User Access Key를 기반으로 발급되는 Bearer 타입의 일시적 액세스 토큰입니다. User Access Key 토큰 발급 및 사용에 대한 자세한 내용은 [User Access Key 토큰](/nhncloud/ko/public-api/user-access-key-token)을 참고하세요.
 
-### 응답 공통 정보
+<a id="common-response-information"></a>
+### 응답 공통 정보 { #common-response-information }
 
 모든 API 요청에 <strong>200 OK</strong>로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
 
@@ -62,17 +68,20 @@ NCS는 API 호출 시 인증/인가를 위해 User Access Key 토큰을 사용�
 > [주의]
 > API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
-## 템플릿
+<a id="template"></a>
+## 템플릿 { #template }
 
-### 템플릿 목록 보기
+<a id="view-template-list"></a>
+### 템플릿 목록 보기 { #view-template-list }
 
 템플릿 목록을 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-template-list-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -80,11 +89,12 @@ x-nhn-authorization: {token}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 | disable\_containers | Query | Boolean | X | <li>true: 컨테이너는 제외하여 조회</li><li>false: 컨테이너도 포함하여 조회(default)</li> |
 
+<a id="view-template-list-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -146,6 +156,9 @@ x-nhn-authorization: {token}
 | templates.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | templates.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | templates.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| templates.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| templates.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| templates.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -245,15 +258,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 템플릿 보기
+<a id="view-template"></a>
+### 템플릿 보기 { #view-template }
 
 개별 템플릿 정보를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-template-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -262,8 +277,9 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="view-template-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -324,6 +340,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -381,20 +400,21 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 템플릿 생성하기
+<a id="create-template"></a>
+### 템플릿 생성하기 { #create-template }
 
 템플릿을 생성합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates
 Content-Type: application/json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | template | Body | Array | O | 템플릿 정보 |
 | template.name | Body | String | O | 템플릿 이름 |
 | template.version | Body | String | X | 템플릿 버전 |
@@ -453,7 +473,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간<li>periodSeconds보다 큰 값이 설정되어야 합니다.</li> |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초)<ul><li>30 ~ 120 (default: 30)</li></ul>|
-
+| template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -492,6 +514,7 @@ x-nhn-authorization: {token}
 
 </details>
 
+<a id="create-template-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -550,6 +573,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -606,15 +632,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 템플릿 삭제하기
+<a id="delete-template"></a>
+### 템플릿 삭제하기 { #delete-template }
 
 템플릿을 삭제합니다.
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appKey}/templates/{templateId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="delete-template-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -623,19 +651,22 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="delete-template-response"></a>
 #### 응답
 
 이 API는 공통 정보만 응답합니다.
 
-### 템플릿 버전 목록 보기
+<a id="view-a-list-of-template-versions"></a>
+### 템플릿 버전 목록 보기 { #view-a-list-of-template-versions }
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-a-list-of-template-versions-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -644,12 +675,13 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | Path | String | O | 템플릿 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | q | Query | String | X | 검색 매개변수 |
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 | sort | Query | String | X | 정렬 기준이 될 필드명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예: `sort=-name` |
 
+<a id="view-a-list-of-template-versions-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -711,6 +743,9 @@ x-nhn-authorization: {token}
 | templates.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | templates.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | templates.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| templates.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| templates.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| templates.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -837,15 +872,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 템플릿 버전 보기
+<a id="view-template-versions"></a>
+### 템플릿 버전 보기 { #view-template-versions }
 
 개별 템플릿 버전 정보를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions/{version}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-template-versions-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -855,8 +892,9 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
 | version | URL | String | O | 템플릿 버전 |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="view-template-versions-response"></a>
 #### 응답
 
 * 템플릿 상세 조회와 동일
@@ -919,6 +957,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -1001,20 +1042,21 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 템플릿 버전 생성
+<a id="create-template-version"></a>
+### 템플릿 버전 생성 { #create-template-version }
 
 템플릿 버전을 생성합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/templates/{templateId}/versions
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | template | Body | Object | O | 템플릿 버전 정보 |
 | template.version | Body | String | O | 템플릿 버전 |
 | template.sourceVersion | Body | String | O | 템플릿 기준 버전 |
@@ -1075,6 +1117,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -1111,6 +1156,7 @@ x-nhn-authorization: {token}
 
 </details>
 
+<a id="create-template-version-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1169,6 +1215,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -1225,13 +1274,15 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 템플릿 버전 삭제
+<a id="delete-template-version"></a>
+### 템플릿 버전 삭제 { #delete-template-version }
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appkey}/templates/{templateId}/versions/{version}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="delete-template-version-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1241,23 +1292,27 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | templateId | URL | String | O | 템플릿 ID |
 | version | URL | String | O | 템플릿 버전 |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="delete-template-version-response"></a>
 #### 응답
 
 이 API는 공통 정보만 응답합니다.
 
-## 워크로드
+<a id="workload"></a>
+## 워크로드 { #workload }
 
-### 워크로드 목록 보기
+<a id="list-workloads"></a>
+### 워크로드 목록 보기 { #list-workloads }
 
 워크로드 목록을 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="list-workloads-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1265,11 +1320,12 @@ x-nhn-authorization: {token}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | q | Query | String | X | 워크로드 이름과 템플릿 ID, 템플릿 버전으로 필터링<ul>예:<li>q=templateId=${템플릿 ID}</li><li>q=${워크로드 이름)</li><li>q=templateId=${템플릿 ID}\&version=${템플릿 버전}</li></ul> |
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
+<a id="list-workloads-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1290,6 +1346,8 @@ x-nhn-authorization: {token}
 | workloads.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workloads.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workloads.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
+| workloads.loadBalancing.ipAddress | Body | String | O | 워크로드 로드 밸런서 IP 정보(vip, floating ip) |
+| workloads.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workloads.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workloads.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workloads.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -1393,15 +1451,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 보기
+<a id="view-workload"></a>
+### 워크로드 보기 { #view-workload }
 
 개별 워크로드를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-workload-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1410,8 +1470,9 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="view-workload-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1431,6 +1492,8 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing.ipAddress | Body | String | O | 워크로드 로드 밸런서 IP 정보(vip, floating ip) |
+| workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -1524,6 +1587,9 @@ x-nhn-authorization: {token}
 | workload.tasks.containers.probe.timeoutSeconds | Body | String | O | Probe 실행 제한 시간 |
 | workload.tasks.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | workload.tasks.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| workload.tasks.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| workload.tasks.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| workload.tasks.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 | workload.tasks.containers.state | Body | String | O | 컨테이너 상태 |
 | workload.tasks.containers.startedAt | Body | String | O | 컨테이너 시작 시간 |
 | workload.tasks.containers.finishedAt | Body | String | X | 초기화 컨테이너 완료 시간 |
@@ -1641,15 +1707,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 로그 보기
+<a id="view-workload-log"></a>
+### 워크로드 로그 보기 { #view-workload-log }
 
 워크로드의 컨테이너 로그를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/logs?container={ContainerName}&from={YYYY-MM-DDThh:mm:ssZ}&to={YYYY-MM-DDThh:mm:ssZ}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-workload-log-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1659,13 +1727,14 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | taskId | URL | String | O | 작업 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | containerName | Query | String | O | 컨테이너 이름 |
 | from | Query | String | X | 로그 시작 시간(default: 현재로부터 5분 전) |
 | to | Query | String | X | 로그 종료 시간(default: 현재 시간) |
 | page | Query | String | X | 조회할 페이지 |
 | size | Query | String | X | 조회할 페이지 크기(default: 100) |
 
+<a id="view-workload-log-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1699,15 +1768,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 이벤트 보기
+<a id="view-workload-event"></a>
+### 워크로드 이벤트 보기 { #view-workload-event }
 
 워크로드의 이벤트를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/events
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-workload-event-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1717,7 +1788,7 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | taskId | URL | String | O | 작업 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | type | Query | Integer | X | 이벤트 타입<ul><li>Normal</li><li>Warning</li></ul> |
 | q | Query | String | X | 이벤트 내용 필터링 |
 | page | Query | String | X | 조회할 페이지 |
@@ -1725,6 +1796,7 @@ x-nhn-authorization: {token}
 | from | Query | String | X | 이벤트 마지막 발생 일시 시작 시간(default: 현재로부터 1시간 전) |
 | to | Query | String | X | 이벤트 마지막 발생 일시 종료 시간(default: 현재 시간) |
 
+<a id="view-workload-event-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1762,15 +1834,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 실행 히스토리 목록 보기
+<a id="view-a-list-of-workload-run-history"></a>
+### 워크로드 실행 히스토리 목록 보기 { #view-a-list-of-workload-run-history }
 
 워크로드 실행 히스토리 목록을 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-a-list-of-workload-run-history-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1779,11 +1853,12 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 | sort | Query | String | X | 정렬 기준이 될 필드명<br>역순 정렬일 경우 필드명 앞에 `-`를 붙임<br>예: `sort=-id` |
 
+<a id="view-a-list-of-workload-run-history-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1824,15 +1899,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 실행 히스토리 보기
+<a id="view-workload-run-history"></a>
+### 워크로드 실행 히스토리 보기 { #view-workload-run-history }
 
 개별 워크로드 실행 히스토리를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-workload-run-history-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -1842,8 +1919,9 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | historyId | URL | Integer | O | 히스토리 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="view-workload-run-history-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -1909,6 +1987,9 @@ x-nhn-authorization: {token}
 | template.containers.probe.timeoutSeconds | Body | Integer | O | Probe 실행 제한 시간 |
 | template.containers.probe.exec | Body | String List | O | Probe 실행 명령어 |
 | template.containers.stopTimeout | Body | Integer | X | 초기화 컨테이너 실행 제한 시간(초) |
+| template.containers.sharedMemory | Body | Object | X | 컨테이너 공유 메모리 설정 정보 |
+| template.containers.sharedMemory.changed | Body | Boolean | O | 컨테이너 공유 메모리 설정 변경 여부<ul><li>true: 변경</li><li>false: 변경 안 함</li></ul> |
+| template.containers.sharedMemory.sizeLimit | Body | Boolean | O | 컨테이너에 설정하는 공유 메모리(MiB) |
 
 <details>
   <summary>예시</summary>
@@ -2000,15 +2081,17 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 예약 실행 히스토리 보기
+<a id="view-workload-scheduled-run-history"></a>
+### 워크로드 예약 실행 히스토리 보기 { #view-workload-scheduled-run-history }
 
 예약 실행 히스토리를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/schedulehistory
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-workload-scheduled-run-history-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2017,10 +2100,11 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | page | Query | Integer | X | 조회할 페이지 번호 |
 | size | Query | Integer | X | 조회할 페이지 크기(default: 10) |
 
+<a id="view-workload-scheduled-run-history-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2055,22 +2139,24 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 생성하기
+<a id="create-workload"></a>
+### 워크로드 생성하기 { #create-workload }
 
 워크로드를 생성합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads
 Content-Type: application/json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="create-workload-request"></a>
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | workload | Body | Object | O | 워크로드 정보 |
 | workload.name | Body | String | O | 워크로드 이름 |
 | workload.type | Body | String | X | 배포 컨트롤러(default:deployment)<ul><li>deployment</li><li>statefulset</li></ul> |
@@ -2081,6 +2167,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2153,6 +2240,7 @@ x-nhn-authorization: {token}
 
 </details>
 
+<a id="create-workload-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2169,6 +2257,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2254,23 +2343,25 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 변경하기
+<a id="change-workload"></a>
+### 워크로드 변경하기 { #change-workload }
 
 워크로드를 변경합니다.
 
 ```bash
 PUT /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="change-workload-request"></a>
 #### 요청
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | workload | Body | Object | O | 워크로드 정보 |
 | workload.name | Body | String | O | 워크로드 이름 |
 | workload.templateId | Body | String | O | 워크로드의 템플릿 ID |
@@ -2280,6 +2371,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2348,6 +2440,7 @@ x-nhn-authorization: {token}
 
 </details>
 
+<a id="change-workload-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2364,6 +2457,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | O | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | O | 최대 응답 대기 시간 |
@@ -2455,10 +2549,12 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 부분 변경하기
+<a id="changing-workload-parts"></a>
+### 워크로드 부분 변경하기 { #changing-workload-parts }
 
 워크로드의 일부만 수정할 수 있습니다.
 
+<a id="changing-workload-parts-request"></a>
 #### 요청
 
 * 이 API를 사용하는 경우 Content-Type은 application/json-patch+json으로 설정해야 합니다.
@@ -2466,14 +2562,14 @@ x-nhn-authorization: {token}
 ```bash
 PATCH /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
 Content-Type: application/json-patch+json
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | op | Body | String | O | Operation<ul><li>Add</li><li>Remove</li><li>Replace</li><li>Copy</li><li>Move</li><li>Test</li></ul> |
 | path | Body | String | O | 변경하는 데이터 경로 |
 | value | Body | String | X | 변경 값 |
@@ -2494,6 +2590,7 @@ x-nhn-authorization: {token}
 
 </details>
 
+<a id="changing-workload-parts-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2510,6 +2607,7 @@ x-nhn-authorization: {token}
 | workload.loadBalancing | Body | Object | O | 워크로드 로드 밸런서 정보 |
 | workload.loadBalancing.enabled | Body | Boolean | O | 워크로드 로드 밸런서 사용 여부 |
 | workload.loadBalancing.floatingIp | Body | Boolean | O | 워크로드 로드 밸런서 플로팅 IP 사용 여부 |
+| workload.loadBalancing.vipAddress | Body | String | X | 워크로드 로드 밸런서 지정 IP |
 | workload.loadBalancing.healthMonitor | Body | Object | X | 로드 밸런서의 상태 확인 정보 |
 | workload.loadBalancing.healthMonitor.delay | Body | Integer | X | 상태 확인 주기 |
 | workload.loadBalancing.healthMonitor.timeout | Body | Integer | X | 최대 응답 대기 시간 |
@@ -2601,14 +2699,16 @@ x-nhn-authorization: {token}
 
 </details>
 
-### 워크로드 중지
+<a id="stop-workload"></a>
+### 워크로드 중지 { #stop-workload }
 워크로드를 중지합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/pause
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="stop-workload-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2617,19 +2717,22 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 템플릿 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="stop-workload-response"></a>
 #### 응답
 이 API는 공통 정보만 응답합니다.
 
-### 워크로드 재시작
+<a id="restart-workload"></a>
+### 워크로드 재시작 { #restart-workload }
 중지 상태의 워크로드를 재시작합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/resume
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="restart-workload-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2638,19 +2741,22 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="restart-workload-response"></a>
 #### 응답
 이 API는 공통 정보만 응답합니다.
 
-### 워크로드 작업 재시작
+<a id="delete-workload"></a>
+### 워크로드 작업 재시작 { #delete-workload }
 워크로드의 작업을 재시작합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/tasks/{taskId}/restart
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="delete-workload-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2660,20 +2766,23 @@ x-nhn-authorization: {token}
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
 | taskId | URL | String | O | 작업 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="delete-workload-response"></a>
 #### 응답
 이 API는 공통 정보만 응답합니다.
 
-### 워크로드 삭제하기
+<a id="workload-1"></a>
+### 워크로드 삭제하기 { #workload-1 }
 
 워크로드를 삭제합니다.
 
 ```bash
 DELETE /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="workload-1-1"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2682,20 +2791,23 @@ x-nhn-authorization: {token}
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
 | workloadId | URL | String | O | 워크로드 ID |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
+<a id="workload-1-2"></a>
 #### 응답
 
 이 API는 공통 정보만 응답합니다.
 
-### 악성 코드 검사 설정 조회
+<a id="view-malware-scan-settings"></a>
+### 악성 코드 검사 설정 조회 { #view-malware-scan-settings }
 설정되어 있는 악성 코드 검사 설정을 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/malware/config
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-malware-scan-settings-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2703,9 +2815,10 @@ x-nhn-authorization: {token}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 
 
+<a id="view-malware-scan-settings-respose"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2727,19 +2840,21 @@ x-nhn-authorization: {token}
 ```
 </details>
 
-### 악성코드 검사 설정
+<a id="configure-malware-scan"></a>
+### 악성코드 검사 설정 { #configure-malware-scan }
 악성 코드 검사 설정을 합니다.
 
 ```bash
 POST /ncs/v1.0/appkeys/{appKey}/malware/config
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="configure-malware-scan-request"></a>
 #### 요청
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | enabled | Body | String | O | 악성 코드 검사 설정<ul><li>true: 사용</li><li>false: 사용 안 함</li></ul>|
 
 <details>
@@ -2752,6 +2867,7 @@ x-nhn-authorization: {token}
 ```
 </details>
 
+<a id="configure-malware-scan-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2773,15 +2889,17 @@ x-nhn-authorization: {token}
 ```
 </details>
 
-### 악성코드 검사 결과 조회
+<a id="view-malware-scan-result"></a>
+### 악성코드 검사 결과 조회 { #view-malware-scan-result }
 
 악성 코드 검사 결과를 조회합니다.
 
 ```bash
 GET /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}/history/{historyId}/malware
-x-nhn-authorization: {token}
+x-nhn-authorization: Bearer {accessToken}
 ```
 
+<a id="view-malware-scan-result-request"></a>
 #### 요청
 
 이 API는 요청 본문을 요구하지 않습니다.
@@ -2789,10 +2907,11 @@ x-nhn-authorization: {token}
 | 이름 | 종류 | 형식 | 필수 | 설명 |
 | --- | --- | --- | --- | --- |
 | appKey | URL | String | O | 서비스 Appkey |
-| token | Header | String | O | NHN Cloud Token ({token_type} {access_token})|
+| token | Header | String | O | NHN Cloud Token |
 | workloadId | URL | String | O | 워크로드 ID |
 
 
+<a id="view-malware-scan-result-response"></a>
 #### 응답
 
 | 이름 | 종류 | 형식 | 필수 | 설명 |
@@ -2878,7 +2997,8 @@ x-nhn-authorization: {token}
 ```
 </details>
 
-## 응답 코드
+<a id="response-code"></a>
+## 응답 코드 { #response-code }
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 | 200 | SUCCESS | 요청 성공 |
