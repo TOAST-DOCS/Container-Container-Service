@@ -1,12 +1,15 @@
-## Container > NHN Container Service(NCS) > User Guide
+<!-- pre-align:aligned sig=02186abe0ed4 -->
+
+<a id="container-nhn-container-servicencs-user-guide"></a>
+## Container > NHN Container Service(NCS) > User Guide { #container-nhn-container-servicencs-user-guide }
 
 <a id="template"></a>
-## Template
+## Template { #template }
 
 Template is a service that defines resources, such as Containers, Networks, etc., which needed to run Workload.
 
 <a id="template-create"></a>
-### Create Template
+### Create Template { #template-create }
 
 You have to create Template before you can use NHN Container Service (NCS). Go to **Container > NHN Container Service (NCS)** page, click **Template** tab, and then click **Create Template** button. The following items are required to create Template.
 
@@ -69,7 +72,7 @@ Temporary shared storage between containers is provided` in the path /var/${work
 > Init containers are not included in load balancers.
 
 <a id="template-retrieve"></a>
-### Retrieve Template
+### Retrieve Template { #template-retrieve }
 
 You can retrieve Templates you created on **Template** tab of page **Container > NHN Container Service (NCS)**. List of Templates displays the number of workloads in use, the latest template version, and the number of template versions.
 
@@ -100,7 +103,7 @@ You can check specific Template to view details from **Basic Information** tab.
 You can see a list of workloads that are using the template by clicking a specific template and then going to the **Workload in use** tab.
 
 <a id="template-delete"></a>
-### Delete Template
+### Delete Template { #template-delete }
 
 Select the template you want to delete and click **Delete Template** button to delete it.
 
@@ -108,7 +111,7 @@ Select the template you want to delete and click **Delete Template** button to d
 You cannot delete Template if there is a workload using the template.
 
 <a id="version-create"></a>
-### Create Version
+### Create Version { #version-create }
 
 In the list of templates, click **View Version**, and then click **Create Version**. The differences between creating a template and creating a version are shown below.
 
@@ -120,7 +123,7 @@ In the list of templates, click **View Version**, and then click **Create Versio
 | Network | You can't select the subnet to connect to your workload in Create Version; it uses the subnet you selected in Create Template. |
 
 <a id="version-retrieve"></a>
-### View Version
+### View Version { #version-retrieve }
 
 You can view the version list by clicking **View Version**in the template list. The version list shows the total number of container resources.
 
@@ -158,7 +161,7 @@ After clicking a specific version, you can go to **Container** tab to check the 
 You can click a specific version and then go to the **Workload in Use** tab to see a list of workloads that are using that version.
 
 <a id="version-delete"></a>
-### Delete Version
+### Delete Version { #version-delete }
 
 Select the version you want to delete and click **Delete Version** button to delete it.
 
@@ -166,12 +169,12 @@ Select the version you want to delete and click **Delete Version** button to del
 > You cannot delete a version if there is a workload using the version.
 
 <a id="workload"></a>
-## Workload
+## Workload { #workload }
 
 Service that executes containers using the Template that you defined.
 
 <a id="workload-create"></a>
-### Create Workload
+### Create Workload { #workload-create }
 
 Go to **Container > NHN Container Service (NCS)** page, click **Workload** tab, and then click **Create Workload** button. The following items are required to create workloads.
 
@@ -211,7 +214,7 @@ Local communication to the internal load balancer IP is not possible.
 If you delete a Private DNS Zone or Private DNS record set that is being used by a workload, domain association will not work within the VPC.
 
 <a id="workload-retrieve"></a>
-### Retrieve Workload
+### Retrieve Workload { #workload-retrieve }
 
 You can check Workloads you create on **Workloads** tab on **Container > NHN Container Service (NCS)**.
 
@@ -367,7 +370,7 @@ You can check the list of executed tasks in the **Scheduled Execution History** 
 | Status | Scheduled task status<br>waiting: Preparing schedule<br>running: Scheduled task running<br>completed: Scheduled task normally terminated<br>error: Scheduled task abnormally terminated |
 
 <a id="workload-change"></a>
-### Change Workload
+### Change Workload { #workload-change }
 
 You can change the running workload by selecting a workload to change and clicking **Change** at the **Basic Information** tab.
 
@@ -390,10 +393,10 @@ If you use a load balancer to make changes to the template while the workload is
 > If the workload change fails (for example, an image error), the change attempt is terminated and no job replacement occurs.
 
 <a id="workload-stop-restart"></a>
-### Stop/Restart Workload
+### Stop/Restart Workload { #workload-stop-restart }
 If you stop a workload, all tasks in the workload will be terminated.
 
-If you restart a workload, load balancer IP is changed.
+If you restart a workload, load balancer IP is changed. To keep the IP unchanged, specify the load balancer IP via the API.
 
 > [Note]
 > Depending on your deployment controller, running a workload stop/restart might cause the container IP to change.
@@ -403,12 +406,12 @@ If you restart a workload, load balancer IP is changed.
 > Even if you stop the workload, the scheduled execution history is deleted during the task repeat cycle.
 
 <a id="workload-delete"></a>
-### Delete Workload
+### Delete Workload { #workload-delete }
 
 Select a workload you want to delete and click **Delete Workload** button to proceed with the deletion.
 
 <a id="workload-malware-scan"></a>
-### Malware Scan
+### Malware Scan { #workload-malware-scan }
 Click **Malware Scan** to perform a malware scan on the container images used by workloads.
 Malware scans are performed when creating a workload, changing a workload template, or restarting a workload. If malware is detected, workload creation is halted or the previous template is restored.
 You can check the malware scan results by clicking the **Malware Scan Results** button in the **Run History** tab.
@@ -425,11 +428,11 @@ You can check the malware scan results by clicking the **Malware Scan Results** 
 > The malware scan feature is provided free of charge, and NHN Cloud is not responsible for security incidents resulting from failure to detect or take follow-up measures.
 
 <a id="role"></a>
-## Roles for NCS
+## Roles for NCS { #role }
 You can set roles to control which roles can access NCS service and resources.
 
 <a id="role-assign"></a>
-### Modify NCS Roles
+### Modify NCS Roles { #role-assign }
 Set the role to execute NCS in the NHN Cloud Console screen.
 1. Select **Manage Member** in the **Project** screen.
 2. Select the member whose role you want to change.
@@ -440,7 +443,7 @@ Set the role to execute NCS in the NHN Cloud Console screen.
 For more information about roles, see [Manage members](/nhncloud/en/console-guide/#_22).
 
 <a id="role-details"></a>
-### Details of Roles
+### Details of Roles { #role-details }
 To use NCS, you need the following roles.
 
 | Role | Permission |
@@ -455,7 +458,7 @@ The Infrastructure NCS ADMIN, Infrastructure Load Balancer ADMIN, and Infrastruc
 Infrastructure ADMIN includes all roles in the underlying infrastructure services. 
 
 <a id="role-minimum"></a>
-### Assign Minimum Roles for NCS
+### Assign Minimum Roles for NCS { #role-minimum }
 In a production environment, it is recommended to add only the roles you need. **The minimum roles** to use the NCS service are as follows.
 
 | Features | Infrastructure MEMBER | Infrastructure NCS ADMIN | Infrastructure Security Group ADMIN | Infrastructure Load Balancer ADMIN |
@@ -472,19 +475,19 @@ Infrastructure NCS ADMIN and Infrastructure Security Group ADMIN permissions are
 Infrastructure NCS ADMIN permissions alone are only for viewing.
 
 <a id="considerations"></a>
-## Other considerations
+## Other considerations { #considerations }
 
 <a id="considerations-region"></a>
-### Region
+### Region { #considerations-region }
 
 * NCS service is only available in Korea (Pangyo) and Korea (Gwangju) region.
 
 <a id="considerations-resource-provision-policy"></a>
-### Resource Provision Policy
+### Resource Provision Policy { #considerations-resource-provision-policy }
 * Refer to [ NHN Container Service Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs).
 
 <a id="considerations-template-container"></a>
-### Template/Container
+### Template/Container { #considerations-template-container }
 
 * Containers described in Template must be configured to use different container ports.
 * If you connect directly to Container Port, make sure that Security Group is well set up.
@@ -506,7 +509,7 @@ Infrastructure NCS ADMIN permissions alone are only for viewing.
     * To update the contents of Configmaps and secrets and reflect those changes, you need to create a new template or version and run the workload.
 
 <a id="considerations-gpu"></a>
-### GPU
+### GPU { #considerations-gpu }
 
 * Provides MIG(Multi Instance GPU of A100 40GB Card.
 * For details, refer to the following links.
@@ -522,13 +525,37 @@ Infrastructure NCS ADMIN permissions alone are only for viewing.
 | Graphics Optimized | ncs1 | ncs1.g1m5 | 5GB | 1 | MIG 1g.5gb |
 | Graphics Optimized | ncs1 | ncs1.g2m10 | 10GB | 2 | MIG 2g.10gb |
 
+<a id="loadbalancer-static-ip"></a>
+### Assign a Workload Load Balancer IP { #loadbalancer-static-ip }
+* You can assign a load balancer IP for a workload via API.
+* If you do not assign a load balancer IP, the IP may change when the load balancer is recreated.
+* If you assign a load balancer IP, that IP is retained even if the load balancer is recreated. The assigned IP is retained until you change it separately or delete the workload.
+* The assigned load balancer IP is also retained in the following situations:
+   * When the load balancer is recreated due to a workload stop or restart
+   * When the load balancer is recreated due to a failure or maintenance during service operation
+   * When the load balancer is created by disabling and then re-enabling it
+
+```json
+PATCH /ncs/v1.0/appkeys/{appKey}/workloads/{workloadId}
+Content-Type: application/json-patch+json
+x-nhn-authorization: Bearer {accessToken}
+
+[
+  {
+    "op": "replace",
+    "path": "/workload/loadBalancing/vipAddress",
+    "value": "$IP"
+  }
+]
+```
+
 <a id="problem-solving"></a>
-## Guide to Problem Solving
+## Guide to Problem Solving { #problem-solving }
 
 Explain how to solve various problems that may occur while using the NCS service
 
 <a id="problem-solving-workload"></a>
-### Workload
+### Workload { #problem-solving-workload }
 
 * A container event with **FailedCreatePodSandBox**/**CNITimedOutWaitingForVIFs** type occurs when the workload is created normally, and the container is running properly
     * This event occurs when Network Interface for use in NCS is not created. This is a temporary event that occurs when a workload is created immediately after template creation or when a workload is created in bulk. The event does not occur after a certain amount of time has elapsed.
@@ -544,10 +571,10 @@ Explain how to solve various problems that may occur while using the NCS service
 | Exceeded the number of {{.Resource}} that can be created. Please contact the Customer Center to increase the limit. | Exceeded the NCS quota for the project.<br>For more details, refer to [NHN Container Service(NCS) Resource Provision Policy](/nhncloud/en/resource-policy/#nhn-container-servicencs). |
 
 <a id="integrate-with-nhncloud-service"></a>
-## Integrate with NHN Cloud Service
+## Integrate with NHN Cloud Service { #integrate-with-nhncloud-service }
 
 <a id="integrate-with-logandcrash"></a>
-### Integrate with Log & Crash Search Service
+### Integrate with Log & Crash Search Service { #integrate-with-logandcrash }
 
 When workloads are deleted or restarted, logs are deleted and cannot be viewed. To back up important logs or to search and view specific logs, you can integrate with the Log & Crash Search (L&C) service.
 
