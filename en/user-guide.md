@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=02186abe0ed4 -->
 
 <a id="container-nhn-container-servicencs-user-guide"></a>
@@ -440,7 +442,7 @@ Set the role to execute NCS in the NHN Cloud Console screen.
     * Select the basic infrastructure service in the left area, then select the role in the right area.
 4. Click **Complete** to apply the changed roles to the project members.
 
-For more information about roles, see [Manage members](/nhncloud/en/console-guide/#_22).
+For more information about roles, see [Manage members](/nhncloud/en/console-guide/#member-management).
 
 <a id="role-details"></a>
 ### Details of Roles { #role-details }
