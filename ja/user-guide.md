@@ -1,3 +1,5 @@
+<!-- machine_translated: true -->
+
 <!-- pre-align:aligned sig=02186abe0ed4 -->
 
 <a id="container-nhn-container-servicencs-user-guide"></a>
@@ -445,7 +447,7 @@ NCSの実行ロールはNHN Cloud Console画面で設定します。
     * 左側の領域で基本インフラサービスを選択した後、右側の領域でロールを選択します。
 4. **完了**をクリックしてプロジェクトメンバーに変更されたロールを適用します。
 
-ロールの詳細については、[メンバー管理](/nhncloud/ja/console-guide/#_22)を参照してください。
+役割の詳細については、[メンバー管理](/nhncloud/ja/console-guide/#member-management)を参照してください。
 
 <a id="role-details"></a>
 ### ロールの詳細まとめ { #role-details }
