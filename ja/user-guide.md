@@ -21,7 +21,7 @@ NHN Container Service(NCS)を使用するには、先にテンプレートを作
 | テンプレートの説明 | テンプレートの説明。255文字以内で入力できます。|
 | コンテナ名 | コンテナの名前。253文字以内の英字小文字と数字、一部記号(`-`)のみ入力できます。|
 | コンテナタイプ | コンテナのタイプ<br><ul><li>一般：実行状態が維持される必要があるコンテナ</li><li>初期化：一般コンテナの実行前に完了する必要があるコンテナ</li></ul>|
-| コンテナレジストリ | コンテナイメージのレジストリ<br><ul><li>NHN Container Registry(NCR)使い方は[NCR使用ガイド](/Container/NCR/ja/user-guide/#user-access-keysecret-key)をご覧ください。</li><li>Docker Hubまたはその他レジストリ使用時レジストリタイプを選択する必要があります。</li></ul> |
+| コンテナレジストリ | コンテナイメージのレジストリ<br><ul><li>NHN Container Registry(NCR)使い方は[NCR使用ガイド](/Container/NCR/ja/user-guide/#container-nhn-container-registry-ncr-user-guide)をご覧ください。</li><li>Docker Hubまたはその他レジストリ使用時レジストリタイプを選択する必要があります。</li></ul> |
 | レジストリタイプ | レジストリのタイプ。パブリックまたはプライベートを選択できます。 |
 | イメージURL | コンテナイメージの情報。255文字以内の英字小文字と数字、一部記号(`-`, `\_`, `.`, `,`, `/`, `@`, `:`)のみ入力できます。|
 | レジストリID | プライベートレジストリ認証に使用されるID |
@@ -491,7 +491,7 @@ NCSサービスを利用するためには、次のロールが必要です。
 
 <a id="considerations-resource-provision-policy"></a>
 ### リソース提供ポリシー { #considerations-resource-provision-policy }
-* [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#nhn-container-servicencs)を参照してください。
+* [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#resource-provision-policy-for-nhn-container-servicencs)を参照してください。
 
 <a id="considerations-template-container"></a>
 ### テンプレート/コンテナ { #considerations-template-container }
@@ -575,7 +575,7 @@ NCSサービスを使用しながら経験する可能性があるさまざま�
 | エラーメッセージ | 説明 |
 | --- | --- |
 | {{.Resource}}リソースが不足しているためワークロードを作成できません。 | NCS環境のリソースが不足しているためワークロードを作成できません。<br>しばらくしてから再試行するか、サポートにお問い合わせください。 |
-| 作成可能な{{.Resource}}を超えました。限度を上げるにはサポートにお問い合わせください。 | プロジェクトのNCS Quotaが超過しました。<br>詳細については、 [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#nhn-container-servicencs)を参考してください。 |
+| 作成可能な{{.Resource}}を超えました。限度を上げるにはサポートにお問い合わせください。 | プロジェクトのNCS Quotaが超過しました。<br>詳細については、 [NHN Container Service(NCS)リソース提供ポリシー](/nhncloud/ja/resource-policy/#resource-provision-policy-for-nhn-container-servicencs)を参考してください。 |
 
 <a id="integrate-with-nhncloud-service"></a>
 ## NHN Cloudサービス連動 { #integrate-with-nhncloud-service }

@@ -19,7 +19,7 @@ NHN Container Service(NCS)를 사용하려면 먼저 템플릿을 생성해야 �
 | 템플릿 설명 | 템플릿에 대한 설명. 255자 이내로 입력할 수 있습니다. |
 | 컨테이너 이름 | 컨테이너의 이름. 253자 이내의 영문 소문자와 숫자, 일부 기호(`-`)만 입력할 수 있습니다. |
 | 컨테이너 유형 | 컨테이너의 유형<br><ul><li>일반: 실행 상태가 유지되어야 하는 컨테이너</li><li>초기화: 일반 컨테이너 실행 전 완료되어야 하는 컨테이너</li></ul>|
-| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/user-guide/#user-access-keysecret-key)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
+| 컨테이너 레지스트리 | 컨테이너 이미지의 레지스트리<br><ul><li>NHN Container Registry(NCR) 사용 방법은 [NCR 사용 가이드](/Container/NCR/ko/user-guide/#container-nhn-container-registry-ncr-user-guide)를 참고하세요.</li><li>Docker Hub 또는 기타 레지스트리 사용 시 레지스트리 유형을 선택해야 합니다.</li></ul> |
 | 레지스트리 유형 | 레지스트리의 유형. 퍼블릭 또는 프라이빗을 선택할 수 있습니다. |
 | 이미지 URL | 컨테이너 이미지의 정보. 255자 이내의 영문 소문자와 숫자, 일부 기호(`-`, `\_`, `.`, `,`, `/`, `@`, `:`)만 입력할 수 있습니다. |
 | 레지스트리 아이디 | 프라이빗 레지스트리 인증에 사용되는 아이디 |
@@ -485,7 +485,7 @@ NCS 서비스를 이용하기 위해서는 다음 역할이 필요합니다.
 
 <a id="considerations-resource-provision-policy"></a>
 ### 리소스 제공 정책 { #considerations-resource-provision-policy }
-* [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요.
+* [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#resource-provision-policy-for-nhn-container-servicencs)을 참고하세요.
 
 <a id="considerations-template-container"></a>
 ### 템플릿/컨테이너 { #considerations-template-container }
@@ -569,7 +569,7 @@ NCS 서비스를 사용하면서 겪을 수 있는 다양한 문제들을 해결
 | 에러 메시지 | 설명 |
 | --- | --- |
 | {{.Resource}} 리소스가 부족하여 워크로드를 생성할 수 없습니다. | NCS 환경의 리소스가 부족하여 워크로드를 생성할 수 없습니다.<br>잠시 후 다시 시도하거나 고객 센터에 문의하세요. |
-| 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#nhn-container-servicencs)을 참고하세요. |
+| 생성 가능한 {{.Resource}} 를 초과하였습니다. 한도를 높이려면 고객 센터에 문의하세요. | 프로젝트의 NCS Quota가 초과되었습니다.<br>자세한 사항은 [NHN Container Service(NCS) 리소스 제공 정책](/nhncloud/ko/resource-policy/#resource-provision-policy-for-nhn-container-servicencs)을 참고하세요. |
 
 <a id="integrate-with-nhncloud-service"></a>
 ## NHN Cloud 서비스 연동 { #integrate-with-nhncloud-service }
