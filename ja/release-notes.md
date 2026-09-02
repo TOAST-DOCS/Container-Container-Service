@@ -28,7 +28,7 @@
 * ワークロードのオートスケーリング機能が追加されました。
 * ワークロードの作業別再起動機能が追加されました。
 * NCS用のPublic APIが公開されました。
-    * Public APIについては、[APIガイド](/Container/NCS/ja/public-api/)を参照してください。
+    * Public APIについては、[APIガイド](./public-api/)を参照してください。
 
 <a id="august-27-2024"></a>
 ### 2024. 08. 27. { #august-27-2024 }
