@@ -1,45 +1,8 @@
 <a id="container-nhn-container-servicencs-release-notes"></a>
 ## Container > NHN Container Service(NCS) > 릴리스 노트
-<a id="september-1-2026"></a>
-### 2026. 09. 01.
-<a id="september-1-2026-added-features"></a>
-#### 기능 추가
-* 컨테이너 공유 메모리 크기 설정 기능이 추가되었습니다.
 
-<a id="march-4-2025"></a>
-### 2025. 03. 04.
-<a id="march-4-2025-added-features"></a>
-#### 기능 추가
-* 워크로드 생성 시 내부 요청 응답 대기 시간 항목이 추가되었습니다. 내부 요청 응답 대기 시간 설정을 통해 다른 워크로드의 내부 로드 밸런서 VIP로 통신 요청 시 타임 아웃을 적용할 수 있습니다.
+{% include-markdown './release-notes-ncgn/2026.md' %}
 
-<a id="december-3-2024"></a>
-### 2024. 12. 03.
-<a id="december-3-2024-added-features"></a>
-#### 기능 추가
-* 컨테이너에 접근할 수 있는 웹 터미널 기능이 추가되었습니다.
-* 워크로드 오토스케일링 기능이 추가되었습니다.
-* 워크로드 작업별 재시작 기능이 추가되었습니다.
-* NCS를 위한 Public API가 공개되었습니다.
-   * Public API에 대한 내용은 [API 가이드](/Container/NCS/ko/public-api/)를 참고하세요.
+{% include-markdown './release-notes-ncgn/2025.md' %}
 
-<a id="september-5-2024"></a>
-### 2024. 09. 05.
-<a id="september-5-2024-added-features"></a>
-#### 기능 추가
-* NCS에서 발생한 이벤트를 Resource Watcher에서 확인할 수 있습니다.
-
-<a id="june-4-2024"></a>
-### 2024. 06. 04.
-<a id="june-4-2024-added-features"></a>
-#### 기능 추가
-* 워크로드 작업 종료 시간을 예약 설정할 수 있습니다.
-* 템플릿 버전 관리 기능이 추가되었습니다.
-* 초기화 컨테이너 기능이 추가되었습니다.
-* 이벤트 조회 기간이 30일로 상향되었습니다.
-* HostAliases를 설정할 수 있습니다.
-
-<a id="march-5-2024"></a>
-### 2024. 03. 05.
-<a id="march-5-2024-release-of-a-new-service"></a>
-#### 신규 서비스 출시
-* 콘솔에서 컨테이너를 생성하고 관리할 수 있습니다.
+{% include-markdown './release-notes-ncgn/2024.md' %}
